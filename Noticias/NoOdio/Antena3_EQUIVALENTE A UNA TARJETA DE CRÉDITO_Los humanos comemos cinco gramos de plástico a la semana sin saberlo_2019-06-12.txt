@@ -1,0 +1,25 @@
+EQUIVALENTE A UNA TARJETA DE CRÉDITO
+############
+Los humanos comemos cinco gramos de plástico a la semana sin saberlo
+############
+<b>Está en el agua del grifo, en el marisco y en otros muchos productos de nuestra vida diaria. </b>El plástico que contamina los océanos y la vida marina también lo podemos encontrar en nuestros cuerpos.
+############
+" El plástico que se acumula en el océano es un problema cada vez mayor que afecta a los ecosistemas e impide la vida de muchas especies. Esto no es ningún secreto, pero lo que muchos desconocíamos era que los humanos somos una de las especies directamente afectadas.   
+        <atres-player class=""modVideo a3mod_player"" data-model=""/json/video/41/2019/06/15/5d0512da7ed1a8a95b38c4bd.json"" data-scope='{""playondraw"": false}'>
+        
+             
+                 
+                     
+                        <!--[if IE 9]><video style=""display: none;""><![endif]-->
+                        <source media=""(max-width:520px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2019/06/15/E72E19A0-772F-4E87-8FD4-739A0109901B/64.jpg?crop=720,404,x0,y0&width=360&height=202&optimize=high&format=webply"" />
+                        <source media=""(max-width:1023px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2019/06/15/E72E19A0-772F-4E87-8FD4-739A0109901B/60.jpg?crop=718,404,x1,y0&width=640&height=360&optimize=high&format=webply"" />
+                        <source media=""(min-width:1024px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2019/06/15/E72E19A0-772F-4E87-8FD4-739A0109901B/58.jpg?crop=713,404,x4,y0&width=1000&height=567&optimize=high&format=webply"" />
+                        <!--[if IE 9]></video><![endif]-->
+                         
+                    </picture>"
+############
+Antena 3 Noticias
+############
+2019-06-12
+############
+https://www.antena3.com/noticias/ciencia/un-estudio-concluye-que-comemos-cinco-gramos-de-plastico-a-la-semana_201906125d010d910cf216f9f695532f.html

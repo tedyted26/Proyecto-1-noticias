@@ -1,0 +1,13 @@
+Cirugía cardíaca
+############
+El Hospital Germans Trias de Barcelona implanta el primer microordenador intracardiaco de España
+############
+El Hospital German Trias implanta el primer microordenador intracardiaco en España, que permite adelantarse a problemas de insuficiencia cardiaca, la primera causa de mortalidad en el mundo.
+############
+" Un equipo de cardiólogos del Hospital German Trias i Pujol, de Barcelona, ha implantado con éxito un nuevo dispositivo de monitorización remota del corazón.   Este sensor, llamado 'V-LAP', permite que los médicos puedan hacer un seguimiento diario y a distancia de la actividad del corazón de los pacientes con insuficiencia cardíaca. Por lo que de esta manera, se puede detectar a tiempo real los cambios en la presión del flujo sanguíneo las 24 horas del día.  Este dispositivo implantado por primera vez en España en este hospital barcelonés, lo que lo sitúa también como uno de los primeros en el mundo: ""Es un mini cerebro que colocamos en el corazón que nos transmite en forma directa y continuada la situación hemodinámica de nuestro paciente, de manera que cuando contactamos con la persona no solo tenemos aspectos subjetivos, sino que tenemos datos concretos de la presión y frecuencia cardíaca"", explica Toni Vallés, Director clínico del Instituto del Corazón de dicho hospital.   Esta tecnología pionera permite, según el doctor Omar Abdul-Jaward, ""prevenir una hospitalización por insuficiencia cardiaca"", ya que ""el paciente se mide cada día sus parámetros con una especie de cinturón"" y de esta forma, ""estos datos permiten revelar problemas en el corazón, incluso una semana antes de lo que lo notaría el paciente"".   La situación generada por la Covid-19 ha acelerado la puesta en marcha de este estudio, que pretende que en un futuro todas las personas con problemas en el corazón puedan llevar este sensor, y de esta forma reducir los posibles reingresos hospitalarios. "
+############
+Ana Errejón
+############
+2021-08-27
+############
+https://www.antena3.com/noticias/salud/hospital-germans-trias-barcelona-implanta-primer-microordenador-intracardiaco-espana_20210827612912684a4cff0001b1fc81.html

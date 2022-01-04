@@ -1,0 +1,25 @@
+FUNCIONA EN 11 PROVINCIAS
+############
+Una aplicación permite a los usuarios comprar comida barata ya cocinada que le sobra a los restaurantes
+############
+La aplicación móvil <b>Too Good To Go</b> busca reducir a cero los alimentos que acaban en la basura en los restaurantes y combatir sus consecuencias para el medioambiente.
+############
+" Uno de cada tres alimentos acaba en la basura en el mundo. Sólo en España se tiran casi 8 millones de toneladas de comida cada año y somos el séptimo país de la Unión Europea que más alimentos desperdicia.  Además de ser una pérdida de dinero, tirar la comida a la basura es perjudicial para el medioambiente, debido a la emisión de CO2.  Para reducir el desperdicio de comida, Too Good To Go permite a muchos restaurantes vender la comida que les sobra a un precio más bajo. Es una aplicación móvil en la que los locales ofertan la comida de su carta que les sobra a un precio mucho menor.  Publican su oferta justo antes de cerrar el local y los consumidores recogen su paquete sin saber cuál será el menú.  La iniciativa ha arrasado en Europa y ya ha llegado a España. Funciona ya en once provincias.  También te puede interesar...  Aplicaciones 'made in Spain' para hacernos la vida más fácil   
+        <atres-player class=""modVideo a3mod_player"" data-model=""/json/video/41/2018/10/07/5bba2d987ed1a802c02dfef4.json"" data-scope='{""playondraw"": false}'>
+        
+             
+                 
+                     
+                        <!--[if IE 9]><video style=""display: none;""><![endif]-->
+                        <source media=""(max-width:520px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2018/10/07/E29FA46C-745E-46F3-90A7-804A3C436A8E/64.jpg?crop=854,479,x0,y0&width=360&height=202&optimize=high&format=webply"" />
+                        <source media=""(max-width:1023px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2018/10/07/E29FA46C-745E-46F3-90A7-804A3C436A8E/60.jpg?crop=853,480,x0,y0&width=640&height=360&optimize=high&format=webply"" />
+                        <source media=""(min-width:1024px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2018/10/07/E29FA46C-745E-46F3-90A7-804A3C436A8E/58.jpg?crop=847,480,x4,y0&width=1000&height=567&optimize=high&format=webply"" />
+                        <!--[if IE 9]></video><![endif]-->
+                         
+                    </picture>"
+############
+Antena 3 Noticias
+############
+2019-04-20
+############
+https://www.antena3.com/noticias/tecnologia/too-good-to-go-la-app-para-comprar-la-comida-que-sobra-en-los-restaurantes-mas-barata-llega-a-espana_201904205cbb7e150cf2e1366955ad7a.html

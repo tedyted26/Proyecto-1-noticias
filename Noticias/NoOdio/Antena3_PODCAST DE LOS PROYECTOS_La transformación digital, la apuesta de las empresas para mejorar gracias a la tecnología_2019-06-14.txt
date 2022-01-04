@@ -1,0 +1,48 @@
+PODCAST DE LOS PROYECTOS
+############
+La transformación digital, la apuesta de las empresas para mejorar gracias a la tecnología
+############
+Desde nuestro puesto de trabajo a un estadio de fútbol, la transformación digital llega ya a todos los sectores. Mejores comunicaciones, mayor seguridad de la información o la conectividad de los empleados son solo algunos de los beneficios que la innovación y la tecnología aportan en el día a día de las empresas.
+############
+" La ‘ultramovilidad’ de los empleados es ya una realidad   Con solo un dispositivo móvil, la tecnología de Telefónica Empresas permite trasladar la oficina a cualquier lugar y en cualquier momento. El objetivo: decir adiós a los puestos de trabajo fijos y acercarse cada vez más a los clientes para ofrecerles un asesoramiento totalmente personalizado.   
+{
+  ""@context"": ""http://schema.org"",
+  ""@type"": ""AudioObject"",
+  ""name"": ""La ‘ultramovilidad’ de los empleados es ya una realidad "",
+  ""description"": ""La ‘ultramovilidad’ de los empleados es ya una realidad "",
+  ""thumbnailUrl"": ""https:\/\/image.ondacero.es\/clipping\/cmsimages02\/2015\/09\/19\/96E8179A-00AD-4713-B795-AEDCC07F3F87\/69.jpg"",
+  ""uploadDate"": ""2019-06-14T21:02:55+02:00"",
+  ""duration"": ""PT189.840000S"",
+  ""publisher"": {
+    ""@type"": ""Organization"",
+    ""name"": ""OndaCero"",
+    ""logo"": {
+      ""@type"": ""ImageObject"",
+      ""url"": ""https:\/\/static.ondacero.es\/img\/ondacero-amp.png"",
+      ""width"": 600,
+      ""height"": 60
+    }
+  },
+  ""contentUrl"": ""https:\/\/dpvclip.antena3.com\/mp_audios4\/\/2019\/06\/14\/4991ECB4-A162-4CB8-822F-F6C8675AB496\/4991ECB4-A162-4CB8-822F-F6C8675AB496.mp3"",
+  ""embedUrl"": ""https:\/\/www.ondacero.es\/embed\/la-ultramovilidad-de-los-empleados-es-ya-una-realidad\/audio\/2\/2019\/06\/14\/5d03ef5f7ed1a8a95c3d10a8""
+}
+
+	 
+		 
+			
+				 
+					 
+						 
+							<!--[if IE 9]><video style=""display: none;""><![endif]-->
+							<source media=""(max-width:520px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2015/09/19/96E8179A-00AD-4713-B795-AEDCC07F3F87//64.jpg"" />
+	                       	<source media=""(max-width:1023px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2015/09/19/96E8179A-00AD-4713-B795-AEDCC07F3F87//60.jpg"" />
+	                       	<source media=""(min-width:1024px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages02/2015/09/19/96E8179A-00AD-4713-B795-AEDCC07F3F87//58.jpg"" />
+							<!--[if IE 9]></video><![endif]-->
+								 
+						</picture>"
+############
+Antena 3 Noticias
+############
+2019-06-14
+############
+https://www.antena3.com/noticias/especiales/digitalizacion/transformacion-digital-apuesta-empresas-mejorar-gracias-tecnologia_201906145d03f9570cf20905ddf98227.html

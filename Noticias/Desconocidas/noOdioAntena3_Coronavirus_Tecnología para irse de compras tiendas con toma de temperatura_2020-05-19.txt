@@ -1,0 +1,13 @@
+Coronavirus
+############
+Tecnología para irse de compras: tiendas con toma de temperatura, vestuarios virtuales y señales de control de aforo
+############
+La desescalada del coronavirus comienza a permitir que abran sus puertas los comercios, incluso algunos de los grandes. Faltan los centros comerciales pero las empresas tratan de adaptarse a la seguridad con tecnología que permita comprar sin tocar y sin correr riesgos de contagiarse.
+############
+ La desescalada del coronavirus permite ir reabriendo comercios aunque siempre con controles que garanticen la seguridad de trabajadores y empleados.  La tecnología va a ser una gran aliada en esta nueva forma de comprar. Hay desarrolladores trabajando en fórmulas de control.    Dispositivos que harán más fácil comprar sin tocar   Para la puerta del establecimiento un dispositivo que permite tomar la temperatura simplemente mirando una pantalla que es capaz de detectar nuestro calor corporal, para verificar si hay fiebre, uno de los síntomas del coronavirus.   Dentro ya del comercio un detector de aforo que avisa de si hemos traspasado el número de clientes óptimo para que no haya riesgo de infectarse con el coronavirus. Si no queremos tocar los productos simuladores o probadores virtuales que garantizan que podamos tomar la mejor decisión como compradores.   Y entre el vendedor y el cliente mamparas si fueran necesarias. En algunas tiendas de móviles el concepto de mampara va mucho más allá y casi son cabinas futuristas   Medidas que ya se han adoptado en los comercios   A pie de calle ya podemos encontrar dispensadores de gel, guantes, mascarillas o calzas si queremos probarnos unos zapatos.  Si buscamos ropa y es necesario probarla hay productos especiales que permiten desinfectarlas entre cliente y cliente sin que la calidad se vea deteriorada.   Si el aforo está en riesgo será necesario esperar turno en la calle o con cita previa si así se pacta con el comercio. Una vez dentro habrá también límite para que la espera del resto no sea exagerada.   Y en las ópticas, nada de probarse todas las monturas que nos apetezcan. El protocolo obliga a desinfectar antes de probar y desinfectar de nuevo una vez que hemos terminado. 
+############
+Antena 3 Noticias
+############
+2020-05-19
+############
+https://www.antena3.com/noticias/sociedad/tecnologia-para-irse-de-compras-tiendas-con-toma-de-temperatura-vestuarios-virtuales-y-senales-de-control-de-aforo_202005195ec3f8ea1b88dd0001fb4de7.html

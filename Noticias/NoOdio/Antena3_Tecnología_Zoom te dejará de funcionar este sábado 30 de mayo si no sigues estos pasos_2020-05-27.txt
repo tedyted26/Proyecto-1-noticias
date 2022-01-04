@@ -1,0 +1,13 @@
+Tecnología
+############
+Zoom te dejará de funcionar este sábado 30 de mayo si no sigues estos pasos
+############
+La plataforma de videollamadas Zoom dejará de estar operativo en cuatro días si no se actualiza.
+############
+ Todas las videoconferencias necesitarán de una actualización de Zoom a partir del 30 de mayo para poder disfrutar de los servicios de esta plataforma. Será un requisito contar con la nueva encriptación GCM.  Esta versión 5.0 de Zoom introducirá este nuevo protocolo de encriptación que reforzará la protección de los datos de todas las reuniones virtuales que se produzcan y ofrecerán una mayor resistencia a las manipulaciones de terceros.  El objeto de esta actualización es garantizar la seguridad de los usuarios, por lo que la compañía establece esta medida como obligatoria entre todos los consumidores de Zoom, tal y como afirmó la empresa con sede en San José, California (EEUU).  No solo los usuarios se ven abocados de forma obligatoria actualizar, también dejarán de estar operativas las funciones de los controladores de sala si no se lleva acabo dicha renovación del sistema.  Estos nuevos requisitos no afectarán aquellos consumidores que empleen salas H.323/SIP  y usen el conector de sala en la nube (CRC). Sin embargo, los que usen un conector de sala virtual (VRC) deberán también actualizar a la última versión, tal y como a asegurado la propia compañía. 
+############
+Antena 3 Noticias
+############
+2020-05-27
+############
+https://www.antena3.com/noticias/tecnologia/zoom-dejara-funcionar-este-sabado-mayo-sigues-estos-pasos_202005275ece98bbd84fea000151b96d.html

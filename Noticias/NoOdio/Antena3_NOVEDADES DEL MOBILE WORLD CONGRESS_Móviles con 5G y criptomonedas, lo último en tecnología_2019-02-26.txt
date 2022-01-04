@@ -1,0 +1,36 @@
+NOVEDADES DEL MOBILE WORLD CONGRESS
+############
+Móviles con 5G y criptomonedas, lo último en tecnología
+############
+<span>Inteligencia artificial, <b>teléfonos móviles plegables</b> y el 5G son algunas de las últimas tendencias que se están incorporado al sector tecnológico. Así se está presentando esta semana en el </span>Mobile World Congress (MWC)<span>.</span>
+############
+"  El 5G, que en
+la feria del año pasado era tan solo un proyecto, en esta ya es una realidad.
+La empresa china One Plus ha presentado su  primer teléfono móvil con 5G con mayor
+velocidad y que supone toda una revolución. 
+
+ Pero esto no
+es todo. Ahora también desde nuestro Smartphone podremos minar Ethereum, la
+segunda criptomoneda más importante del mundo. La idea la ha lanzado la
+compañía Wings
+Mobile a través de su terminal Wings X.<o:p></o:p> 
+
+  
+        <atres-player class=""modVideo a3mod_player"" data-model=""/json/video/41/2019/02/26/5c7541417ed1a86246704cc2.json"" data-scope='{""playondraw"": false}'>
+        
+             
+                 
+                     
+                        <!--[if IE 9]><video style=""display: none;""><![endif]-->
+                        <source media=""(max-width:520px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/02/26/DC6B1B60-A61E-492C-9726-F6A5306DB853/64.jpg?crop=854,479,x0,y0&width=360&height=202&optimize=high&format=webply"" />
+                        <source media=""(max-width:1023px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/02/26/DC6B1B60-A61E-492C-9726-F6A5306DB853/60.jpg?crop=853,480,x0,y0&width=640&height=360&optimize=high&format=webply"" />
+                        <source media=""(min-width:1024px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/02/26/DC6B1B60-A61E-492C-9726-F6A5306DB853/58.jpg?crop=847,480,x4,y0&width=1000&height=567&optimize=high&format=webply"" />
+                        <!--[if IE 9]></video><![endif]-->
+                         
+                    </picture>"
+############
+Antena 3 Noticias
+############
+2019-02-26
+############
+https://www.antena3.com/noticias/economia/moviles-con-5g-y-criptomonedas-lo-ultimo-en-tecnologia_201902265c75439c0cf2032a6a32bc17.html

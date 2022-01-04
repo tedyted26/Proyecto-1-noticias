@@ -1,0 +1,13 @@
+Levanta la cabeza
+############
+El sencillo test para ayudar a elegir qué carrera estudiar según nuestras características y el mercado laboral
+############
+Ante los datos que arrojan que el 34% de los universitarios no acaban sus estudios, un sencillo test ayuda a acertar con la decisión de qué carrera estudiar. 
+############
+" En España, 3 de cada 10 jóvenes universitarios no terminan la carrera. Uno de los factores que más influye es la falta de información y orientación. Hay herramientas digitales que, junto a profesores y familiares, pueden ayudarles a descubrir sus mejores capacidades y los puestos de trabajo que ofrecen las empresas.    Ayuda para decidir qué carrera estudiar   Aunque muchos jóvenes ya han decidido lo que quieren estudiar, para muchos es complicado llegar hasta ese punto e incluso los hay que se cambian de carrera a mitad de camino porque se dan cuenta de que no es lo que realmente querían.   En estos tiempos de pandemia, las herramientas digitales ayudan y, por ejemplo, elaborando el test 'Talent Scanner' del Banco Santander los más indecisos tienen la posibilidad de inclinar la balanza.   Está basado en preguntas elaboradas por expertos en recursos humanos. ""En tan solo unos minutos te da un informe muy completo de cuáles son tus competencias, cuáles son aquellos empleos para los que eres más afín y también cuáles son aquellos empleos más demandados"", explica Susana García Espinel, directora de Santander Universidades España.   Esto es así porque la idea es estudiar para después trabajar, por lo que es importante dar en la diana a la hora de tomar la decisión.   Esta herramienta es muy útil teniendo en cuenta que España es uno de los países con más abandono universitario, casi 34% no termina la carrera y 12 de cada 100 cambian de especialidad por falta de información al elegir la primera opción. "
+############
+Ana Estévez
+############
+2021-10-17
+############
+https://www.antena3.com/noticias/economia/sencillo-test-ayudar-elegir-que-carrera-estudiar-segun-nuestras-caracteristicas-mercado-laboral_20211017616c80b046689800013d70b2.html

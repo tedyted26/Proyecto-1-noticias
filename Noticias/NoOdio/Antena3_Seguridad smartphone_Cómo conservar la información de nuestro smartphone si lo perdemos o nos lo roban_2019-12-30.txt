@@ -1,0 +1,13 @@
+Seguridad 'smartphone'
+############
+Cómo conservar la información de nuestro 'smartphone' si lo perdemos o nos lo roban
+############
+El almacenamiento de la nube, emplear un disco duro externo o 'rootear' nuestro móvil evitarán que perdamos toda la información de nuestro dispositivo.
+############
+ Cuando perdemos o nos roban nuestro móvil, la molestia no proviene únicamente por el valor económico de este, sino también de la gran cantidad de información que nuestro 'smartphone' alberga y que podemos perder. Desde miles de fotografías o vídeos hasta mensajes y contactos pueden desaparecer para siempre si no tomamos las precauciones convenientes.   Almacenar información en la nube   Tanto los teléfonos Android como iPhone disponen de almacenamiento de información en la nube. Los usuarios de Android podrán acceder a todos sus documentos y archivos multimedia desde cualquier dispositivo con tan solo introducir su usuario y contraseña de la cuenta de Google. Mientras que los dispositivos de iPhone disponen de iCloud donde se realizan copias de seguridad diariamente por lo que los usuarios podrán recuperar todo sus archivos en su nuevo dispositivo.   Almacenar la información en un discoduro externo   Si la nube no llega a convencer a los más tradicionales, una forma sencilla de guardar toda la información del móvil es empleando un disco duro externo. Se trata de una tarea que debemos llevar a cabo de forma periódica, para no perder la información que acumula nuestro 'smartphone' cada día.   'Apps' de almacenamiento   Otra de las opciones es descargar aplicaciones de almacenamiento. Es recomendable utilizar 'backups' (copias de reserva) complementarias que almacenan automáticamente todas las imágenes y documentos. Para asegurar que toda la información de las distintas aplicaciones se guarde en la nube es imprescindible iniciar sesión con la cuenta de Google Play o iCloud siempre que el usuario se registre en una nueva 'app'.      'Rootear' el móvil   Por último, y siendo esta opción recomendable solo para expertos, como apuntan desde Librephonía.com, los usuarios pueden 'rootear' su 'smartphone'. Esto significa que pueden acceder a todo el sistema operativo de su dispositivo, por lo que podrán manipular todos los archivos y realizar copias de seguridad en profundidad.  Sin embargo al 'rootear' el dispositivo se podría perder la garantía del teléfono al modificar el sistema operativo, por lo que es no es la acción recomenda si el usuario no sabe lo que está haciendo. 
+############
+Antena 3 Noticias
+############
+2019-12-30
+############
+https://www.antena3.com/noticias/tecnologia/como-conservar-informacion-nuestro-smartphone-perdemos-nos-roban_201912305e0a3eb90cf238684968e2f3.html

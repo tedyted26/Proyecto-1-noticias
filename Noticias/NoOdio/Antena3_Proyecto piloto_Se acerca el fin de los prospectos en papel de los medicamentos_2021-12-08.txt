@@ -1,0 +1,13 @@
+Proyecto piloto
+############
+Se acerca el fin de los prospectos en papel de los medicamentos
+############
+El próximo 2022 arranca un proyecto piloto de dos años que evaluará el impacto de suprimir el prospecto en papel de los medicamentos y que por el momento afectará a 46 fármacos hospitalarios.
+############
+ Un proyecto piloto sobre el acceso a la información electrónica de medicamentos de ámbito hospitalario impulsado por la Agencia Española de Medicamentos y Productos Sanitarios (Aemps) evaluará el impacto de la supresión de prospectos de medicamentos en papel.  Por el momento se retirará el prospecto físico de más de 40 medicamentos, entre los que se encuentran Adiro, de más de 20 laboratorios, tanto de la industria genérica como innovadora.  El objetivo es ofrecer fármacos más sostenibles y hacer uso del avance de las nuevas tecnologías en el sector farmacéutico. Para consultar la información de los medicamentos los servicios de farmacia de los hospitales podrán acceder al prospecto disponible en el Centro de Información online de Medicamentos Autorizados (CIMA), a través de un código Datamatrix no serializado ubicado en los envases.  El primer año del proyecto se realizará un cuestionario de satisfacción a los servicios farmacológicos de los hospitales. En función de estos resultados se valorará ampliar el número de medicamentos a los que se les retire el prospecto físico.  La tendencia europea que defiende la EMA es la implantación de un estándar electrónico que sustituya a los prospectos físicos. Se trata de una herramienta que transformaría en un lenguaje electrónico los prospectos tanto para profesionales sanitarios como para pacientes. 
+############
+Laura Simon Martin
+############
+2021-12-08
+############
+https://www.antena3.com/noticias/salud/acerca-fin-prospectos-papel-medicamentos_2021120861b0b6381034750001b718bb.html

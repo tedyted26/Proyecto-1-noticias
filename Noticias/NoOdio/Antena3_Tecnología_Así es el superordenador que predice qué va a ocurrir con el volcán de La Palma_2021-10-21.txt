@@ -1,0 +1,14 @@
+Tecnología
+############
+Así es el superordenador que predice qué va a ocurrir con el volcán de La Palma
+############
+Esta herramienta, ubicada en Barcelona, ayuda a los servicios de emergencia para tomar decisiones sobre hechos que pueden ocurrir en las próximas 48 horas
+############
+ Saber cómo va a evolucionar la erupción del volcán de La Palma es una de las grandes cuestiones que querrían resolver todos los palmeños. Y en parte es posible. El causante es el super ordenador Marenostrum 4, un aparato de última tecnología y ubicado en Barcelona que es el encargado de predecir cada mañana qué escenarios se pueden producir en la isla canaria.   El objetivo de esta herramienta es ayudar a los servicios de emergencia a tomar la decisión adecuada en cada momento. Y es que, tras más de un mes expulsando lava y obligando a evacuar a miles de familias, cualquier apoyo tecnológico capaz de detectar una información futura será bienvenido.   Pero, ¿cómo funciona? Este ordenador, el más potente de España, desarrolla un modelo matemático que cruza las previsiones meteorológicas con los datos de emisión del volcán. Así, a partir de los resultados, los expertos pueden conocer qué gases y materiales ha emitido la ceniza volcánica.   No solo esto. También es capaz de detectar cómo se va a desplazar dicho material, lo cual es vital para que los servicios de emergencias desarrollen las acciones oportunas en caso de evacuación inminente o de cierre del aeropuerto del lugar.    48 horas de anticipo    Así lo ha explicado Arnau Folch, vulcanólogo, al equipo de Espejo Público, a quienes ha detallado que este ordenador “permite anticiparnos 48 horas y tomar decisiones en el cierre del aeropuerto o sobre cortes de carreteras”, entre otros aspectos.    La cuestión es si es necesario emplear una maquinaria que reúne a 150.000 ordenadores en uno para esta cuestión o se podría derivar a otro más pequeño. Él tiene claro que “se podría hacer con ordenadores más pequeños”, pero hacerlo con éste dispone de dos ventajas entre las que destaca que esta máquina “hace los pronósticos con muchas más realidades y contempla muchos posibles escenarios”.    ¿También las coladas de lava? Ahí Folch dubita. “Se puede modernizar, pero es difícil porque hay muchas variables y dependen del aporte del flujo de magma que va saliendo. Esto es muy difícil de saber cómo va a evolucionar en las próximas horas”. No obstante, toda ayuda es poca para poder saber más sobre esta situación que mantiene en vilo desde hace más de un mes a La Palma. 
+ 
+############
+Miriam Puelles
+############
+2021-10-21
+############
+https://www.antena3.com/noticias/tecnologia/asi-ordenador-que-predice-que-ocurrir-volcan-palma_2021102161716003888b690001167246.html

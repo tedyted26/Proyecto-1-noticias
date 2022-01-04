@@ -1,0 +1,13 @@
+ANDROID 10
+############
+Android lanza su nuevo sistema operativo abandonando los nombres de dulces 
+############
+La última versión disponible del sistema operativo móvil Android, presente en 2.500 millones de dispositivos activos desde smartphones y tabletas hasta vehículos, es la 9 Oreo. Google seguía el orden alfabético para denominar cada nueva versión de su sistema, eligiendo un postre que empezase por cada nueva letra.
+############
+" Google ha anunciado un cambio en la nomenclatura de su sistema operativo Android, abandonando los nombres que hacían referencia a postres y dulces, y a su nueva versión, que hasta el momento se conocía bajo el nombre de desarrollo Android Q pasará a conocerse como Android 10.       La última versión disponible del sistema operativo móvil Android, presente en 2.500 millones de dispositivos activos desde smartphones y tabletas hasta vehículos, es la 9 Oreo. Google seguía el orden alfabético para denominar cada nueva versión de su sistema, eligiendo un postre que empezase por cada nueva letra.       Ahora, Google ha cambiado de rumbo con el lanzamiento de la versión de este año, Android Q -conocida así por ser sucesora de Android O- y abandonará la nomenclatura alfabética y los nombres de postres apostando solamente por el número de la versión, en este caso, Android 10, como ha informado Google en un comunicado.       La compañía estadounidense busca con esta decisión que la nomenclatura de Android sea ""lo más inclusiva y accesible posible"", ya que los nombres anteriores ""no siempre han sido correctamente entendidos por la comunidad internacional"", ya que en algunos idiomas por ejemplo la L y la R no se diferencian y algunos dulces no se conocían en todo el mundo.       Asimismo, Google ha actualizado el logotipo de Android y el color de su marca, con el objetivo de lograr un ""aspecto más moderno y accesible"", que comenzará a utilizarse oficialmente con el lanzamiento de Android 10. "
+############
+Antena 3 Noticias
+############
+2019-08-22
+############
+https://www.antena3.com/noticias/tecnologia/android-lanza-nuevo-sistema-operativo-abandonando-nombres-dulces_201908225d5eda460cf260b748089c2d.html

@@ -1,0 +1,13 @@
+VEHÍCULO TRANSPORTE
+############
+Volocopter prueba su prototipo de taxi volador en una zona urbana de Alemania
+############
+El vehículo es completamente eléctrico y, en comparación con otros aparatos voladores, produce poco ruido. Los responsables del proyecto consideran en el curso de los próximos dos o tres años se podrá salir al mercado.
+############
+ El Volocopter, el taxi volador desarrollado por la empresa alemana del mismo nombre, hizo su primera demostración de vuelo en una zona urbana europea en Stuttgart (suroeste de Alemania).   El vuelo, acompañado de explicaciones, duró pocos minutos y se realizó sin pasajeros. El proyecto para desarrollar el Volocopter se inició en 2011 y desde 2017 el consorcio automovilístico Daimler se sumó como inversor.   Recientemente el fabricante de automóviles chino Geely también se sumo al proyecto con el propósito de lograr que los taxis voladores salgan al mercado en China. La tecnología que usa el Volocopter es la misma de los drones, por lo que puede volar de manera autónoma.   Además, el vehículo es completamente eléctrico y, en comparación con otros aparatos voladores, produce poco ruido. Los responsables del proyecto consideran en el curso de los próximos dos o tres años se podrá salir al mercado. En una fase inicial, se contempla que los volocopteros tengan un piloto pero posteriormente se eliminará éste para que el sistema funcione de manera autónoma.   La idea en el futuro es que el usuario solicite el servicio a través de una aplicación de teléfono móvil, especificando su destino, y el sistema deberá escoger la ruta más adecuada. 
+############
+Antena 3 Noticias
+############
+2019-09-14
+############
+https://www.antena3.com/noticias/mundo/volocopter-prueba-prototipo-taxi-volador-zona-urbana-alemania_201909145d7d5d3e0cf2c4ff8b262769.html

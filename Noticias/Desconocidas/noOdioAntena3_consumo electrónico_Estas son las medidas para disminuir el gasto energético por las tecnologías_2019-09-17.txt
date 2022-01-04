@@ -1,0 +1,13 @@
+consumo electrónico
+############
+Estas son las medidas para disminuir el gasto energético asociado a las tecnologías
+############
+El gasto energético asociado al consumo de las nuevas tecnologías y dispositivos electrónicos ha aumentado considerablemente. Un apuesta ahora por la sobriedad digital
+############
+" Actualmente nos encontramos en la era de las tecnologías y vivimos inmersos en lo digital, lo que no sabíamos es el consumo energético que produce la reproducción de un vídeo. No consta en nuestra factura eléctrica pero según el informe LEAN ICT - Towards digital sobriety ""hacia la sobriedad digital"".  El visionado de productos audiovisuales supone más del 80% del crecimiento del tráfico en Internet, según los datos de este estudio visionar un vídeo de diez minutos supone el consumo de un móvil durante diez días. Además, al consumo de estas imágenes hay que sumarle el generado para su fabricación.  Para reducir el impacto de la digitalización el estudio propone una serie de medidas encaminadas hacia ""la sobriedad digital"":  <ul><li>Una utilización moderada</li><li>Evitar el consumo indiscriminado de material audiovisual</li><li>Recargar los dispositivos electrónicos cuando sea necesario</li></ul>  También a las empresas tecnológicas les sugiere estas simples medidas:   <ul><li>La mejora de equipos de refrigeración de los complejos de datos</li><li>La mejora de la localización de los mismos para situarlos en espacios más fríos </li><li>Distribuir la carga de los servidores para tener uno al 90% en lugar de tres al 30%</li></ul> "
+############
+Antena 3 Noticias
+############
+2019-09-17
+############
+https://www.antena3.com/noticias/tecnologia/estas-son-medidas-disminuir-gasto-energetico-asociado-tecnologias_201909175d80affb0cf2875941fc19c8.html

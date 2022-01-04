@@ -1,0 +1,25 @@
+LA DIGITALIZACIÓN DE LAS EMPRESAS
+############
+La nueva ‘tienda inteligente’ que se adapta a ti
+############
+"La digitalización desembarca en el comercio ""retail"" para complementar al producto físico. El trato al cliente de forma individualizada ya es una realidad gracias a la última tecnología desarrollada por Telefónica Empresas al servicio de las tiendas Duty Free."
+############
+" Pasamos horas y horas en los aeropuertos esperando a que salga nuestro vuelo. Y, por eso, cada vez existen más opciones para aprovechar todo ese tiempo que tenemos antes de subirnos a un avión.  Las tiendas Dufry son un claro ejemplo, se han convertido en espacios inmersivos donde, gracias a la transformación digital llevada a cabo por Telefónica Empresas, han conseguido que los pasajeros no solo compren sino que vivan una experiencia única.  “Lo primero es escuchar en su negocio qué es importante, qué está buscando, qué quiere cambiar, qué significa la transformación para ellos. Con esta información nosotros decimos: ¡Oye! La tecnología te va a ayudar y va a conseguir que todos esos elementos que estás buscando se puedan ejecutar como tú quieres y te den el resultado que buscas”, cuenta el Director de Transformación Negocio en &gt;Telefónica Empresas, Agustín Cárdenas.  Ofrecen una gran selección de los productos más exclusivos del mercado pero la experiencia de compra va mucho más allá. En sus tiendas Duty Free el cliente puede hacer prácticamente de todo: darse un masaje, maquillarse o, incluso, tomarse un cóctel como si estuviera en un sofisticado club de Manhattan.  “El espacio se adapta al perfil del cliente que pase en cada momento, dependiendo de su destino y dependiendo del idioma que hable, ofreciéndole siempre los productos que busca”, explica Antonio Simón, director de Madrid/Norte de España Dufry.  Su digitalización les permite analizar los datos de cada compra y de cada pasajero. Cruzando esa información con los horarios de los vuelos son capaces de personalizar todavía más sus mensajes.   
+        <atres-player class=""modVideo a3mod_player"" data-model=""/json/video/41/2019/05/31/5cf1633a7ed1a8fbdf95aaf9.json"" data-scope='{""playondraw"": false}'>
+        
+             
+                 
+                     
+                        <!--[if IE 9]><video style=""display: none;""><![endif]-->
+                        <source media=""(max-width:520px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/05/31/CB3CA44A-10F4-4E3C-8213-7A3C928CDA9D/64.jpg?crop=854,479,x0,y0&width=360&height=202&optimize=high&format=webply"" />
+                        <source media=""(max-width:1023px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/05/31/CB3CA44A-10F4-4E3C-8213-7A3C928CDA9D/60.jpg?crop=853,480,x0,y0&width=640&height=360&optimize=high&format=webply"" />
+                        <source media=""(min-width:1024px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/05/31/CB3CA44A-10F4-4E3C-8213-7A3C928CDA9D/58.jpg?crop=847,480,x4,y0&width=1000&height=567&optimize=high&format=webply"" />
+                        <!--[if IE 9]></video><![endif]-->
+                         
+                    </picture>"
+############
+Antena 3 Noticias
+############
+2019-06-03
+############
+https://www.antena3.com/noticias/especiales/digitalizacion/video-tienda-inteligente-aeropuerto_201905245cf4ee2d0cf231ae39dedec9.html

@@ -1,0 +1,25 @@
+LAS AUTORIDADES LLAMAN A LA CALMA
+############
+Convocan protestas tras la muerte de un joven en el este de Alemania
+############
+"Las autoridades aseguran que los hechos se produjeron en la noche del sábado al domingo y que la autopsia constata que el joven murió de un fallo cardíaco y que ""no tiene relación causal con las heridas sufridas""."
+############
+" La muerte de un joven de 22 años en una ciudad del este de Alemania en circunstancias que investiga la policía ha generado este domingo la convocatoria de una protesta callejera que las autoridades locales han pedido no secundar.  El alcalde de Köthen, Bernd Hauschild, ha indicado que tiene constancia de la convocatoria de una marcha de protesta por parte de grupos de fuera de la localidad ""dispuestos a la violencia"". La marcha está prevista para las 19:00 hora local (17:00 GMT) en protesta por la muerte del joven, un suceso por el que la policía informó que se ha detenido a dos ciudadanos afganos.   En un comunicado recogido por EFE, la policía de Sajonia-Anhalt indicó primero que los hechos se produjeron en la noche del sábado al domingo y luego puntualizó en otra nota que la autopsia ha permitido constatar que el joven murió de un fallo cardíaco. Agregó que el fallo cardíaco ""no tiene relación causal con las heridas sufridas"" por el joven, pero agregó que a uno de los detenidos se le investiga por causar ""heridas con consecuencias mortales"".   La ciudad de Köthen está situada al noroeste de Leipzig y cerca de la localidad de Dessau-Rosslau, donde este fin de semana se celebra el congreso regional de la ultraderechista Alternativa para Alemania (AfD). Por su parte, el responsable de Interior del 'Land' (estado federado) de Sajonia-Anhalt, Holger Stahlknecht, pidió también que ""a la violencia no se responda con violencia"".   La convocatoria de la marcha de protesta se conoce cuando se cumplen dos semanas de una similar en Chemnitz, también en el este del país, que siguió a la muerte de un ciudadano alemán de madre cubana, Daniel H.; el suceso, por el que fueron enviados a prisión preventiva un sirio y un iraquí mientras se busca a una tercera persona, supuestamente también iraquí, desató protestas de carácter xenófobo en la ciudad con participación de grupos de ultraderecha y neonazis.    
+        <atres-player class=""modVideo a3mod_player"" data-model=""/json/video/41/2018/08/28/5b85ab6f7ed1a83d9cf2229d.json"" data-scope='{""playondraw"": false}'>
+        <button class=""icon link-content"" title="""" data-mod-elem=""icon"">
+             
+                 
+                     
+                        <!--[if IE 9]><video style=""display: none;""><![endif]-->
+                        <source media=""(max-width:520px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2018/08/28/50ECCAED-1F7B-4B08-BD6D-3B9CBD1CCE0E/64.jpg?crop=720,404,x0,y0&width=360&height=202&optimize=high&format=webply"" />
+                        <source media=""(max-width:1023px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2018/08/28/50ECCAED-1F7B-4B08-BD6D-3B9CBD1CCE0E/60.jpg?crop=718,404,x1,y0&width=640&height=360&optimize=high&format=webply"" />
+                        <source media=""(min-width:1024px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2018/08/28/50ECCAED-1F7B-4B08-BD6D-3B9CBD1CCE0E/58.jpg?crop=713,404,x4,y0&width=1000&height=567&optimize=high&format=webply"" />
+                        <!--[if IE 9]></video><![endif]-->
+                         
+                    </picture>"
+############
+Antena 3 Noticias
+############
+2018-09-09
+############
+https://www.antena3.com/noticias/mundo/convocan-protestas-muerte-joven-este-alemania_201809095b9568ff0cf2bf306b052979.html

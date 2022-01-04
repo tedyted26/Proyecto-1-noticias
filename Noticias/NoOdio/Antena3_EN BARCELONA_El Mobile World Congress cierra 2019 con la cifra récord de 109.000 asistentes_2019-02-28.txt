@@ -1,0 +1,25 @@
+EN BARCELONA
+############
+El Mobile World Congress cierra 2019 con la cifra récord de 109.000 asistentes
+############
+La cifra final para la edición de 2019, que también supera la de 2017, cuando fue de 107.000 congresistas. El salón internacional de móviles y tecnología ha cerrado sus puertas este jueves tras cuatro días de actividad y volverá a Barcelona en 2020 del 24 al 27 de febrero.
+############
+" El Mobile World Congress (MWC) ha cerrado la edición de 2019 con la cifra récord de 109.000 asistentes en su decimocuarta edición en Barcelona, superior a los 108.000 participantes de 2017, que era hasta el momento la afluencia registrada más alta.       En una entrevista en la Mobile World Live, recogida por Europa Press, el consejero delegado de la GSMA, John Hoffman, ha anunciado la cifra final para la edición de 2019, que también supera la de 2017, cuando fue de 107.000 congresistas.   El salón internacional de móviles y tecnología ha cerrado sus puertas este jueves tras cuatro días de actividad y volverá a Barcelona en 2020 del 24 al 27 de febrero.  <u>Te puede interesar:</u>  <u></u>  La llegada del 5G revoluciona el Mobile World Congress   
+        <atres-player class=""modVideo a3mod_player"" data-model=""/json/video/41/2019/02/27/5c76fd787ed1a86248c32f05.json"" data-scope='{""playondraw"": false}'>
+        
+             
+                 
+                     
+                        <!--[if IE 9]><video style=""display: none;""><![endif]-->
+                        <source media=""(max-width:520px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/02/27/CB7DFCD1-7851-4D6C-A757-7C9A07A9688E/64.jpg?crop=720,404,x0,y0&width=360&height=202&optimize=high&format=webply"" />
+                        <source media=""(max-width:1023px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/02/27/CB7DFCD1-7851-4D6C-A757-7C9A07A9688E/60.jpg?crop=718,404,x1,y0&width=640&height=360&optimize=high&format=webply"" />
+                        <source media=""(min-width:1024px)"" srcset=""https://fotografias.antena3.com/clipping/cmsimages01/2019/02/27/CB7DFCD1-7851-4D6C-A757-7C9A07A9688E/58.jpg?crop=713,404,x4,y0&width=1000&height=567&optimize=high&format=webply"" />
+                        <!--[if IE 9]></video><![endif]-->
+                         
+                    </picture>"
+############
+Desconocido
+############
+2019-02-28
+############
+https://www.antena3.com/noticias/tecnologia/mobile-world-congress-cierra-2019-cifra-record-109000-asistentes-video_201902285c7801cc0cf2acca9c30c250.html

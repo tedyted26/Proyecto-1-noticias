@@ -1,0 +1,13 @@
+Nuevas tecnologías
+############
+Sacar dinero o llamar al ascensor con la mirada, así podría cambiar nuestra forma de vida tras el coronavirus
+############
+Una empresa vasca ha ideado 'Hiru', un dispositivo capaz de interpretar cualquier gesto con los ojos como si de una orden se tratase.
+############
+ 'Hiru', como así se llama el dispositivo de seguimiento ocular ideado por la empresa vasca 'Irisbond', puede que, en unos años, cambie nuestra forma de vida y que la tengamos presente en nuestro día a día, en acciones tan sencillas como llamar al ascensor o sacar dinero del cajero. Y todo, para evitar utilizar las manos, lugar donde se acumulan gérmenes y que, a raíz de la pandemia del coronavirus, hemos tenido más presente que nunca.  'Hiru' se configura como una barra de pequeño tamaño donde se ubican los sensores ópticos. Situada cerca de una pantalla es capaz de reconocer el movimiento de los ojos y, con ello, un puntero que se desplazará en función del movimiento de la mirada del usuario. La forma más fácil de entender el funcionamiento de 'Hiru' es asimilarlo a un puntero que movemos con la mirada en lugar de con un ratón.  Se trata de un dispositivo capaz de funcionar sobre cualquier plataforma o sistemas, compatible con Windows (7 hasta 10),  iPadOS 13 (y superiores) o Android, por lo que se podría utilizar en distintos dispositivos, desde un tablet a un cajero automático, o buscar una película sin utilizar el mando, utilizar un ascensor, o manejar dispositivos para los que normalmente utilizamos las manos.  Aunque desde la empresa creadora aún no han concretado fechas ni precios, sí que han indicado que a partir de 2021 empezará a comercializarse a un precio que podría estar por debajo de los 2.000 euros. 
+############
+Antena 3 Noticias
+############
+2020-12-08
+############
+https://www.antena3.com/noticias/tecnologia/empresa-mirada-completar_202012075fcf9edf55a6d40001e89923.html
