@@ -3,6 +3,7 @@ import re
 import spacy
 import numpy
 from copy import deepcopy
+import TransformTFIDF as tfidf
 
 rutaListaParada = "listaParada.txt"
 rutaWordList = "diccionario.txt"
@@ -63,8 +64,8 @@ def leerNoticia(rutaFichero):
 def leerFichero(rutaFichero):
     f = open (rutaFichero,'r')
     texto = f.read()
-    fichero = texto.splitlines()
-    return fichero
+    f.close()
+    return texto
 
 def tratarTexto(t):
     tokens = tokenizacion(t)
@@ -83,7 +84,7 @@ def generarVectorDeTexto(t: str, saveWorlist: bool):
     wordlist = []
     vector = []
     if os.path.isfile(rutaWordList):  # Compruebo si existe el fichero
-        wordlist = leerFichero(rutaWordList)
+        wordlist = leerFichero(rutaWordList).splitlines()
         vector = [0 for i in range(len(wordlist))]
     # Por cada palabra de la noticia, añadimos las nuevas al diccionario y al vector
     # correspondiente a la matriz
@@ -131,14 +132,25 @@ def saveMatrizToFile(m, file):
             res = ";\n" + res
         f.write(res)
     f.close()
-# t = leerNoticia("Noticias/unlabeled/odio20Minutos-Homofobia-agoney-sobre-el-estreno-de-tu-cara-me-suena-vuelvo-a-la-tele-pero-no-useis-la-homofobia-como-arma-en-mi-contra.txt")
-# t = leerNoticia("Noticias/unlabeled/odioLaRazon_20211201_0_40.txt")
-t = "Hola que chuliguapi la caravana de la caravana, ojo que guay la caravana "
 
-v = generarVectorDeTexto(t, False)
+
+def getAllNewsUrlList(newsFolderPath):
+    r = os.getcwd() + newsFolderPath
+    return [r+"/"+i for i in os.listdir(r)]
+
 m1 = generarMatriz("matriz.txt")
-m2 = addVectorToMatriz(m1, v)
+m1_tf = tfidf.matrixToTFIDF(m1)
+print()
 
-saveMatrizToFile(m2,"matriz2.txt")
 
+
+# paths= getAllNewsUrlList("/Noticias/unlabeled")
+
+# textosNoticias = [leerFichero(i) for i in paths]
+# vectores = [generarVectorDeTexto(t, True) for t in textosNoticias]
+
+# for v in vectores:
+#     m1 = addVectorToMatriz(m1, v)
+# saveMatrizToFile(m1,"matriz.txt")
+print()
 
