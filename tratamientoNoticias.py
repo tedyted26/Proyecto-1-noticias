@@ -2,6 +2,7 @@ import os
 import re
 import spacy
 import numpy
+from copy import deepcopy
 
 rutaListaParada = "listaParada.txt"
 rutaWordList = "diccionario.txt"
@@ -101,28 +102,43 @@ def generarVectorDeTexto(t: str, saveWorlist: bool):
         f.close()
     return vector
 
-def generarMatriz():
-    rutaMatriz = "matriz.txt"
+def generarMatriz(fichero: str):
+    rutaMatriz = fichero
     matriz = []
     if os.path.isfile(rutaMatriz):  # Compruebo si existe el fichero
         f = open(rutaMatriz)
         filas = f.read().split(";\n")
-        matriz = [fila.split(" ") for fila in filas]
+        matriz = [[int(val) for val in fila.split(" ")] for fila in filas]
     return matriz
 
-def addVectorToMatriz(m, v):
+def addVectorToMatriz(matriz, v):
+    m = deepcopy(matriz)
+    idma=id(matriz)
+    idm = id(m)
     if len(m) > 0:
         diffMatrizVector = len(v) - len(m[0])
         for row in m:
             row += [0 for i in range(diffMatrizVector)]
 
     m.append(v)
+    return m
+def saveMatrizToFile(m, file):
+    f = open(file, "w")
+    for i,fila in enumerate(m):
+        str_fila = [str(ele) for ele in fila]
+        res = " ".join(str_fila)
+        if i > 0:
+            res = ";\n" + res
+        f.write(res)
+    f.close()
 # t = leerNoticia("Noticias/unlabeled/odio20Minutos-Homofobia-agoney-sobre-el-estreno-de-tu-cara-me-suena-vuelvo-a-la-tele-pero-no-useis-la-homofobia-como-arma-en-mi-contra.txt")
 # t = leerNoticia("Noticias/unlabeled/odioLaRazon_20211201_0_40.txt")
 t = "Hola que chuliguapi la caravana de la caravana, ojo que guay la caravana "
 
 v = generarVectorDeTexto(t, False)
-m = generarMatriz()
-addVectorToMatriz(m, v)
-print()
+m1 = generarMatriz("matriz.txt")
+m2 = addVectorToMatriz(m1, v)
+
+saveMatrizToFile(m2,"matriz2.txt")
+
 
