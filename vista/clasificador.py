@@ -139,12 +139,12 @@ class Clasificador_frame(ttk.Frame):
 
     def seleccionar_carpeta(self, origin):      
         carpeta = filedialog.askdirectory(initialdir=self.path_inicial)
-        if origin=="odio" and carpeta != "":
-            self.texto_noticias_odio.delete(1.0, "end")
-            self.texto_noticias_odio.insert(1.0, carpeta)
-        elif origin=="noodio" and carpeta != "":
-            self.texto_noticias_no_odio.delete(1.0, "end")
-            self.texto_noticias_no_odio.insert(1.0, carpeta)
+        if origin=="noticias" and carpeta != "":
+            self.texto_noticias.delete(1.0, "end")
+            self.texto_noticias.insert(1.0, carpeta)
+        elif origin=="modelo" and carpeta != "":
+            self.texto_modelo.delete(1.0, "end")
+            self.texto_modelo.insert(1.0, carpeta)
 
 
     def clasificar_noticias(self):
