@@ -78,14 +78,17 @@ def tratarTexto(t):
     print(f"LEMAS:{lemas}\n")
     return lemas
 
-def generarVectorDeTexto(t: str, saveWorlist: bool):
+def generarVectorDeTexto(t: str, saveWorlist: bool, file: str,odio: int = 0):
     t2 = tratarTexto(t)
 
     wordlist = []
     vector = []
+    '''Añade al vector si es de odio, no odio o desconocido y el nombre del archivo'''
+    vector += [odio, file]
+
     if os.path.isfile(rutaWordList):  # Compruebo si existe el fichero
         wordlist = leerFichero(rutaWordList).splitlines()
-        vector = [0 for i in range(len(wordlist))]
+        vector += [0 for i in range(len(wordlist))]
     # Por cada palabra de la noticia, añadimos las nuevas al diccionario y al vector
     # correspondiente a la matriz
     for token in t2:
@@ -95,12 +98,13 @@ def generarVectorDeTexto(t: str, saveWorlist: bool):
         else:
             for i, word in enumerate(wordlist):
                 if word == token:
-                    vector[i] += 1
+                    vector[i+2] += 1
     if saveWorlist:
         f = open(rutaWordList, "w")
         for elemento in wordlist:
             f.write(elemento + "\n")
         f.close()
+
     return vector
 
 def generarMatriz(fichero: str):
@@ -109,7 +113,12 @@ def generarMatriz(fichero: str):
     if os.path.isfile(rutaMatriz):  # Compruebo si existe el fichero
         f = open(rutaMatriz)
         filas = f.read().split(";\n")
-        matriz = [[int(val) for val in fila.split(" ")] for fila in filas]
+        matriz = []
+        for fila in filas:
+            filaSp = fila.split(" ")
+            matriz.append([val for val in filaSp[0:2]] + [int(val) for val in filaSp[2:]])
+
+        # matriz = [[int(val) for val in fila.split(" ")] for fila in filas]
     return matriz
 
 def addVectorToMatriz(matriz, v):
@@ -135,22 +144,27 @@ def saveMatrizToFile(m, file):
 
 
 def getAllNewsUrlList(newsFolderPath):
+    '''Devuelve una lista rellena de tuplas: (pathcompleto, nombre)'''
     r = os.getcwd() + newsFolderPath
-    return [r+"/"+i for i in os.listdir(r)]
+    return [(r+"/"+i, i) for i in os.listdir(r)]
 
-m1 = generarMatriz("matriz.txt")
-m1_tf = tfidf.matrixToTFIDF(m1)
-print()
-
-
-
-# paths= getAllNewsUrlList("/Noticias/unlabeled")
-
-# textosNoticias = [leerFichero(i) for i in paths]
-# vectores = [generarVectorDeTexto(t, True) for t in textosNoticias]
-
+#
+# m1 = generarMatriz("matriz.txt")
+# # m1_tf = tfidf.matrixToTFIDF(m1)
+# # print()
+#
+# paths = getAllNewsUrlList("/Noticias/NoOdio")[:10]
+#
+# # textosNoticias = [leerFichero(i) for i in paths]
+# # vectores = [generarVectorDeTexto(t, True) for t in textosNoticias]
+#
+# vectores = []
+# for i in paths:
+#     textoNoticia = leerFichero(i[0])
+#     vectores.append(generarVectorDeTexto(textoNoticia, True, i[1], odio= -1))
+#
 # for v in vectores:
 #     m1 = addVectorToMatriz(m1, v)
 # saveMatrizToFile(m1,"matriz.txt")
-print()
+# print()
 

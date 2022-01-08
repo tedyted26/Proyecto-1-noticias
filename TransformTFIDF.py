@@ -16,17 +16,17 @@ def matrixToTFIDF(matriz):
     return new_m
 #Para transformar una fila de una matriz en TFIDF
 def indexListToTFIDF(matriz, index: int):
-    new_list = [] # Lista a devolver
-
-    v = matriz[index]
-    if len(matriz[0]) == len(v):
+    v = matriz[index][2:]
+    new_list = matriz[index][:2]  # Lista a devolver, conteniendo odio y fichero de base
+    if len(matriz[0]) - 2 == len(v):
         n_words = sum(v)
         for i, w in enumerate(v):
             tf = w / n_words
 
             w_in_docs_counter = 0
             for row in matriz:
-                if row[i] > 0:
+                r = row[2:]
+                if r[i] > 0:
                     w_in_docs_counter += 1
 
             oper = len(matriz)/w_in_docs_counter
