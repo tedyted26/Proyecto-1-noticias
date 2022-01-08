@@ -2,6 +2,9 @@ from tkinter import *
 from tkinter import ttk
 import sys
 import os
+from tkinter import filedialog
+from pathlib import Path
+from functools import partial
 
 # código copiado de GeeksforGeeks.org para conseguir importar archivos fuera de la carpeta
   
@@ -21,6 +24,8 @@ class Clasificador_frame(ttk.Frame):
     def __init__(self, parent):
         Frame.__init__(self, parent)
         self.pack()
+        self.path_inicial = os.getcwd()
+        self.resultados = None
 
     def set_controller(self, controller):
         self.controller = controller     
@@ -28,41 +33,48 @@ class Clasificador_frame(ttk.Frame):
     def create_widgets(self):
 
         # titulos
-        label_configuracion = Label(self, text="Configuración:", font='bold')
-        label_configuracion.place(relx=0.05 , rely=0.035)
+        self.label_configuracion = Label(self, text="Configuración:", font='bold')
+        self.label_configuracion.place(relx=0.05 , rely=0.035)
 
-        label_resultados = Label(self, text="Resultados de la clasificación:", font='bold')
-        label_resultados.place(relx=0.05 , rely=0.25)
+        self.label_resultados = Label(self, text="Resultados de la clasificación:", font='bold')
+        self.label_resultados.place(relx=0.05 , rely=0.25)
 
-        label_resumen = Label(self, text="Resumen:", font='bold')
-        label_resumen.place(relx=0.7 , rely=0.25)
+        self.label_resumen = Label(self, text="Resumen:", font='bold')
+        self.label_resumen.place(relx=0.7 , rely=0.25)
 
-        label_guardar = Label(self, text="Guardar los resultados:", font='bold')
-        label_guardar.place(relx=0.05 , rely=0.861)
+        self.label_guardar = Label(self, text="Guardar los resultados:", font='bold')
+        self.label_guardar.place(relx=0.05 , rely=0.861)
+
+        # mensaje de error
+        self.label_error = Label(self, text="", fg="red")
+        self.label_error.place(relx=0.2, rely=0.035, relwidth=0.6)
+
+        self.label_error_2 = Label(self, text="", fg="red")
+        self.label_error_2.place(relx=0.25, rely=0.861, relwidth=0.55)
 
         # seleccionar noticias
-        label_noticias = Label(self, text="Noticias para clasificar:")
-        label_noticias.place(relx=0.05 , rely=0.091)
+        self.label_noticias = Label(self, text="Noticias para clasificar:")
+        self.label_noticias.place(relx=0.05 , rely=0.091)
 
-        texto_noticias = Text(self)
-        texto_noticias.place(relx=0.2, rely=0.09, relwidth=0.6, relheight=0.04)
+        self.texto_noticias = Text(self)
+        self.texto_noticias.place(relx=0.2, rely=0.09, relwidth=0.6, relheight=0.04)
 
-        boton_abrir_noticias = Button(self, text="Seleccionar carpeta")
-        boton_abrir_noticias.place(relx=0.82, rely=0.085, relwidth=0.13)
+        self.boton_abrir_noticias = Button(self, text="Seleccionar carpeta", command=partial(self.seleccionar_carpeta, "noticias"))
+        self.boton_abrir_noticias.place(relx=0.82, rely=0.085, relwidth=0.13)
 
         # seleccionar modelo
-        label_modelo = Label(self, text="Modelo clasificador:")
-        label_modelo.place(relx=0.05 , rely=0.14)
+        self.label_modelo = Label(self, text="Modelo clasificador:")
+        self.label_modelo.place(relx=0.05 , rely=0.14)
 
-        texto_modelo = Text(self)
-        texto_modelo.place(relx=0.2, rely=0.14, relwidth=0.6, relheight=0.04)
+        self.texto_modelo = Text(self)
+        self.texto_modelo.place(relx=0.2, rely=0.14, relwidth=0.6, relheight=0.04)
 
-        boton_abrir_modelo = Button(self, text="Seleccionar carpeta")
-        boton_abrir_modelo.place(relx=0.82, rely=0.14, relwidth=0.13)
+        self.boton_abrir_modelo = Button(self, text="Seleccionar carpeta", command=partial(self.seleccionar_carpeta, "modelo"))
+        self.boton_abrir_modelo.place(relx=0.82, rely=0.14, relwidth=0.13)
 
         # boton de ejecutar o entrenar
-        boton_clasificar = Button(self, text="Clasificar")
-        boton_clasificar.place(relx=0.45, rely=0.2, relwidth=0.13)
+        self.boton_clasificar = Button(self, text="Clasificar", command=self.clasificar_noticias)
+        self.boton_clasificar.place(relx=0.45, rely=0.2, relwidth=0.13)
 
         # tabla de noticias
         self.lista_noticias = ttk.Treeview(self, column=("tit", "odio", "ver"), show='headings', height=5, selectmode=BROWSE)
@@ -86,46 +98,113 @@ class Clasificador_frame(ttk.Frame):
         sb.config(command=self.lista_noticias.yview)
 
         # resumen
-        label_ejemplares_odio = Label(self, text='Noticias "Odio":')
-        label_ejemplares_odio.place(relx=0.7 , rely=0.306)
+        self.label_ejemplares_odio = Label(self, text='Noticias "Odio":')
+        self.label_ejemplares_odio.place(relx=0.7 , rely=0.306)
 
-        texto_ejemplares_odio = Text(self, state="disabled")
-        texto_ejemplares_odio.place(relx=0.85, rely=0.305, relwidth=0.1, relheight=0.04)
+        self.texto_ejemplares_odio = Text(self, state="disabled")
+        self.texto_ejemplares_odio.place(relx=0.85, rely=0.305, relwidth=0.1, relheight=0.04)
 
-        label_ejemplares_no_odio = Label(self, text='Noticias "No Odio":')
-        label_ejemplares_no_odio.place(relx=0.7, rely=0.355)
+        self.label_ejemplares_no_odio = Label(self, text='Noticias "No Odio":')
+        self.label_ejemplares_no_odio.place(relx=0.7, rely=0.355)
 
-        texto_ejemplares_no_odio = Text(self, state="disabled")
-        texto_ejemplares_no_odio.place(relx=0.85, rely=0.354, relwidth=0.1, relheight=0.04)
+        self.texto_ejemplares_no_odio = Text(self, state="disabled")
+        self.texto_ejemplares_no_odio.place(relx=0.85, rely=0.354, relwidth=0.1, relheight=0.04)
 
-        label_total = Label(self, text="Total:")
-        label_total.place(relx=0.7 , rely=0.404)
+        self.label_total = Label(self, text="Total:")
+        self.label_total.place(relx=0.7 , rely=0.404)
 
-        texto_total = Text(self, state="disabled")
-        texto_total.place(relx=0.85, rely=0.403, relwidth=0.1, relheight=0.04)
+        self.texto_total = Text(self, state="disabled")
+        self.texto_total.place(relx=0.85, rely=0.403, relwidth=0.1, relheight=0.04)
 
-        label_algoritmo_seleccionado = Label(self, text="Tiempo:")
-        label_algoritmo_seleccionado.place(relx=0.7 , rely=0.453)
+        self.label_tiempo = Label(self, text="Tiempo:")
+        self.label_tiempo.place(relx=0.7 , rely=0.453)
 
-        texto_algoritmo_seleccionado = Text(self, state="disabled")
-        texto_algoritmo_seleccionado.place(relx=0.85, rely=0.453, relwidth=0.1, relheight=0.04)
+        self.texto_tiempo = Text(self, state="disabled")
+        self.texto_tiempo.place(relx=0.85, rely=0.453, relwidth=0.1, relheight=0.04)
 
         # grafico de resumen
-        grafico = Frame(self, bg="white")
-        grafico.place(relx=0.7 , rely=0.51, relheight=0.33, relwidth=0.25)
+        self.grafico = Frame(self, bg="white")
+        self.grafico.place(relx=0.7 , rely=0.51, relheight=0.33, relwidth=0.25)
 
         # guardar resultados
-        label_guardar_resultados = Label(self, text="Ruta de guardado:")
-        label_guardar_resultados.place(relx=0.05 , rely=0.921)
+        self.label_guardar_resultados = Label(self, text="Ruta de guardado:")
+        self.label_guardar_resultados.place(relx=0.05 , rely=0.921)
 
-        texto_guardar_resultados = Text(self)
-        texto_guardar_resultados.place(relx=0.2, rely=0.92, relwidth=0.48, relheight=0.04)
+        self.texto_guardar_resultados = Text(self)
+        self.texto_guardar_resultados.place(relx=0.2, rely=0.92, relwidth=0.6, relheight=0.04)
 
-        boton_ruta_resultados = Button(self, text="Seleccionar carpeta")
-        boton_ruta_resultados.place(relx=0.7, rely=0.915, relwidth=0.13)
+        self.boton_guardar = Button(self, text="Guardar", command=self.guardar_resultados)
+        self.boton_guardar.place(relx=0.82, rely=0.915, relwidth=0.13)
 
-        boton_guardar = Button(self, text="Guardar")
-        boton_guardar.place(relx=0.85, rely=0.915, relwidth=0.1)
 
-    def borrar_contenido(self):
-        print("borrar contenido del frame")
+    def seleccionar_carpeta(self, origin):      
+        carpeta = filedialog.askdirectory(initialdir=self.path_inicial)
+        if origin=="odio" and carpeta != "":
+            self.texto_noticias_odio.delete(1.0, "end")
+            self.texto_noticias_odio.insert(1.0, carpeta)
+        elif origin=="noodio" and carpeta != "":
+            self.texto_noticias_no_odio.delete(1.0, "end")
+            self.texto_noticias_no_odio.insert(1.0, carpeta)
+
+
+    def clasificar_noticias(self):
+        # recogemos los datos
+        self.label_error.config(text="")
+        self.label_error_2.config(text="")
+        ruta_noticias = self.texto_noticias.get(1.0, "end-1c")
+        ruta_modelo = self.texto_modelo.get(1.0, "end-1c")
+
+        if ruta_noticias == "" or ruta_modelo == "" or not Path(ruta_noticias).exists() or not Path(ruta_modelo).exists():
+            self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
+            return
+
+        # TODO clasificamos
+        # lo suyo sería que devolviera un objeto que se guardase en resultados, para así luego poder guardarlo en la otra función
+        # lo inicializo arriba (init) con None solo para que se vea
+        # estaria bien que fuera un diccionario de clave valor, siendo el valor si es de odio o no, y la clave la ruta de la noticia
+        # importante guardar el tiempo que tarda el algoritmo en ejecutarse
+
+
+        # mostramos en vista previa
+        # TODO dividir los resultados en odio y no odio
+        # TODO se necesita el tiempo
+
+        #num_txt_odio = len()
+        #num_txt_no_odio = len()
+
+        self.texto_ejemplares_odio.config(state = 'normal')
+        self.texto_ejemplares_no_odio.config(state = 'normal')
+        self.texto_tiempo.config(state = 'normal')
+        self.texto_total.config(state = 'normal')
+
+        self.texto_ejemplares_odio.delete(1.0, "end")
+        self.texto_ejemplares_no_odio.delete(1.0, "end")
+        self.texto_tiempo.delete(1.0, "end")
+        self.texto_total.delete(1.0, "end")
+
+        #self.texto_ejemplares_odio.insert(1.0, num_txt_odio)
+        #self.texto_ejemplares_no_odio.insert(1.0, num_txt_no_odio)
+        #self.texto_tiempo.insert(1.0, tiempo)
+        #self.texto_total.insert(1.0, num_txt_odio + num_txt_no_odio)
+
+        self.texto_ejemplares_odio.config(state = 'disabled')
+        self.texto_ejemplares_no_odio.config(state = 'disabled')
+        self.texto_tiempo.config(state = 'disabled')
+        self.texto_total.config(state = 'disabled')
+
+        # rellenar el treeview
+
+        # TODO en base al objeto resultados
+
+
+    def guardar_resultados(self):
+        if self.resultados is not None:
+            # FIXME comprobar la extensión del archivo del resultado
+            f = filedialog.asksaveasfile(defaultextension=".txt", initialdir=self.path_inicial)
+            if f is None:
+                return
+            f.write(self.resultados)
+            f.close()
+        # si no, mensaje de error
+        else:
+            self.label_error_2.config(text = "No existen resultados que guardar.")
