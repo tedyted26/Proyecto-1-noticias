@@ -135,7 +135,7 @@ def generarMatriz(fichero: str):
         filas = f.read().split(";\n")
         matriz = []
         for fila in filas:
-            filaSp = fila.split(" ")
+            filaSp = fila.split("++")
             matriz.append([val for val in filaSp[0:2]] + [int(val) for val in filaSp[2:]])
 
         # matriz = [[int(val) for val in fila.split(" ")] for fila in filas]
@@ -162,7 +162,7 @@ def saveMatrizToFile(m, file):
     f = open(file, "w")
     for i,fila in enumerate(m):
         str_fila = [str(ele) for ele in fila]
-        res = " ".join(str_fila)
+        res = "++".join(str_fila)
         if i > 0:
             res = ";\n" + res
         f.write(res)
@@ -188,8 +188,11 @@ def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int):
 
     vectores = []
     for i in paths:
-        textoNoticia = leerFichero(i[0])
-        vectores.append(generarVectorDeTexto(textoNoticia, True, i[1], odio= odio))
+        try:
+            textoNoticia = leerFichero(i[0])
+            vectores.append(generarVectorDeTexto(textoNoticia, True, i[1], odio= odio))
+        except:
+            print(f"Error generando vector en archivo: {i[1]}")
 
     for v in vectores:
         m1 = addVectorToMatriz(m1, v)
