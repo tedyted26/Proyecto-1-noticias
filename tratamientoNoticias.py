@@ -5,6 +5,8 @@ import numpy
 from copy import deepcopy
 import TransformTFIDF as tfidf
 
+import pandas as pd
+
 rutaListaParada = "listaParada.txt"
 rutaWordList = "diccionario.txt"
 
@@ -64,6 +66,7 @@ def leerNoticia(rutaFichero):
 
 def leerFichero(rutaFichero):
     '''Lee el fichero y devuelve el texto segun la ruta'''
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n")
     f = open (rutaFichero,'r')
     texto = f.read()
     f.close()
@@ -105,7 +108,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
     vector += [odio, file]
 
     if os.path.isfile(rutaWordList):  # Compruebo si existe el fichero
-        wordlist = leerFichero(rutaWordList).splitlines()
+        wordlist = getWordList()
         vector += [0 for i in range(len(wordlist))]
     # Por cada palabra de la noticia, añadimos las nuevas al diccionario y al vector
     # correspondiente a la matriz
@@ -118,6 +121,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
                 if word == token:
                     vector[i+2] += 1
     if saveWordlist:
+        #TODO poner with open
         f = open(rutaWordList, "w")
         for elemento in wordlist:
             f.write(elemento + "\n")
@@ -125,6 +129,8 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
 
     return vector
 
+def getWordList():
+    return leerFichero(rutaWordList).splitlines()
 def generarMatriz(fichero: str):
     '''Genera y devuelve la matriz a partir del fichero seleccionado
     -fichero: ruta y nombre del archivo (ejemplo: "matriz.txt")'''
@@ -189,7 +195,7 @@ def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int):
     vectores = []
     for i in paths:
         try:
-            textoNoticia = leerFichero(i[0])
+            textoNoticia = leerNoticia(i[0])
             vectores.append(generarVectorDeTexto(textoNoticia, True, i[1], odio= odio))
         except:
             print(f"Error generando vector en archivo: {i[1]}")
@@ -198,5 +204,7 @@ def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int):
         m1 = addVectorToMatriz(m1, v)
     return m1
 
-
+def transformMatrizToPandasDataFrame(matriz: list):
+    df = pd.DataFrame( matriz, columns=["odio_", "nombre_"] + getWordList())
+    return df
 

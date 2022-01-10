@@ -15,7 +15,7 @@ def introducir_10_Noticias_odio_En_La_Matriz_y_guardar_forma_manual():
     vectores = []
     for i in paths:
         try:
-            textoNoticia = tn.leerFichero(i[0])
+            textoNoticia = tn.leerNoticia(i[0])
             vectores.append(tn.generarVectorDeTexto(textoNoticia, True, i[1], odio= -1))
         except:
             print(f"Error generando vector en archivo: {i[1]}")
