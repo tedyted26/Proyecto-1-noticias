@@ -147,14 +147,12 @@ def generarMatriz(fichero: str):
         # matriz = [[int(val) for val in fila.split(" ")] for fila in filas]
     return matriz
 
-def addVectorToMatriz(matriz, v):
+def addVectorToMatriz(m, v):
     '''Devuelve una matriz, producto de la suma de una copia de la matriz proporcionada y 
     de un vector "v".
     En caso del que el vector sea mayor que el tamaño de las filas de la matriz, amplia la matriz
     añadiendo tantos "0" a la derecha como diferencia haya.'''
-    m = deepcopy(matriz)
-    idma=id(matriz)
-    idm = id(m)
+
     if len(m) > 0:
         diffMatrizVector = len(v) - len(m[0])
         for row in m:
@@ -190,7 +188,7 @@ def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int):
     -m: la matriz inicial
     -odio: Si la noticia es de odio (1), no odio (-1) o desconocida (0)"'''
     paths = getAllNewsUrlList(path)
-    m1 = m
+    m1 = deepcopy(m)
 
     vectores = []
     for i in paths:

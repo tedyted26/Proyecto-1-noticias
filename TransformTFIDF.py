@@ -11,30 +11,39 @@ indexListToTFIDF: para transformar solo una fila de la matriz
 # Devuelve la matriz entera en TFIDF
 def matrixToTFIDF(matriz):
     new_m = []
+    listaIDF = getIDFlistOfMatriz(matriz)
     for i in range(len(matriz)):
-        new_m.append(indexListToTFIDF(matriz, i))
+        print("Posicion de lista operandose TFIDF:", i)
+        new_m.append(indexListToTFIDF(matriz, i, listaIDF))
     return new_m
 #Para transformar una fila de una matriz en TFIDF
-def indexListToTFIDF(matriz, index: int):
+def indexListToTFIDF(matriz, index: int, listaIDF: list):
     v = matriz[index][2:]
     new_list = matriz[index][:2]  # Lista a devolver, conteniendo odio y fichero de base
     if len(matriz[0]) - 2 == len(v):
         n_words = sum(v)
         for i, w in enumerate(v):
             tf = w / n_words
-
-            w_in_docs_counter = 0
-            for row in matriz:
-                r = row[2:]
-                if r[i] > 0:
-                    w_in_docs_counter += 1
-
-            oper = len(matriz)/w_in_docs_counter
-
-            idf = math.log10(oper)
+            idf = listaIDF[i]
             result = tf * idf
             new_list.append(result)
     return new_list
+
+def getIDFlistOfMatriz(matriz):
+    lista = []
+    for i in range(len(matriz[0][2:])):
+        print("    + Columna:", i)
+        w_in_docs_counter = 0
+        for row in matriz:
+            r = row[2:]
+            if r[i] > 0:
+                w_in_docs_counter += 1
+
+        oper = len(matriz) / w_in_docs_counter
+
+        idf = math.log10(oper)
+        lista.append(idf)
+    return lista
 
 # Devuelve una lista externa a la matriz en TFIDF
 def listToTFIDF(m, extVector: list):
@@ -59,21 +68,5 @@ def listToTFIDF(m, extVector: list):
             new_list.append(result)
 
     return new_list
-
-def testTransformations():
-    m = [[1, 0 ,0],
-         [0, 1, 0],
-         [3, 1, 1]]
-    m2 = m.copy()
-    for i in range(len(m)):
-        print(f"indexList:{indexListToTFIDF(m2, i)}")
-
-    n = [[1, 0 ,0],
-         [0, 1, 0]]
-    v = [3, 1, 1]
-    print(f"list:{listToTFIDF(n, v)}")
-
-    print(f"matrix:{matrixToTFIDF(m2)}")
-
 
 
