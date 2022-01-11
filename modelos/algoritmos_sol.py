@@ -7,6 +7,8 @@ import tratamientoNoticias as tn
 
 m1 = tn.generarMatriz("matriz2.txt")
 df = tn.transformMatrizToPandasDataFrame(m1)
+'''m1 = tn.generarMatriz("matrizTFIDF2.txt")
+df = tn.transformMatrizToPandasDataFrame(m1)'''
 df.fillna(0, inplace=True)
 
 df2 = df.drop("nombre_", axis=1)

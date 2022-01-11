@@ -11,7 +11,7 @@ def introducir_Noticias_unlabeled_En_La_Matriz_y_guardar():
 def introducir_10_Noticias_odio_En_La_Matriz_y_guardar_forma_manual():
     m1 = tn.generarMatriz("matriz2.txt")
 
-    paths = tn.getAllNewsUrlList("/Noticias/NoOdio")[20:30]
+    paths = tn.getAllNewsUrlList("/Noticias/NoOdio")[:10]
 
     vectores = []
     for n, i in enumerate(paths):
@@ -26,7 +26,7 @@ def introducir_10_Noticias_odio_En_La_Matriz_y_guardar_forma_manual():
         print(n)
         m2 = tn.addVectorToMatriz(m2, v)
 
-    paths = tn.getAllNewsUrlList("/Noticias/Odio")[20:30]
+    paths = tn.getAllNewsUrlList("/Noticias/Odio")[:10]
 
     for i in paths:
         try:
@@ -49,5 +49,5 @@ def transformar_y_mostrar_matriz_en_TFIDF():
     print(m1_tf)
     tn.saveMatrizToFile(m1_tf, "matrizTFIDF2.txt")
 
-# introducir_10_Noticias_odio_En_La_Matriz_y_guardar_forma_manual()
+#introducir_10_Noticias_odio_En_La_Matriz_y_guardar_forma_manual()
 transformar_y_mostrar_matriz_en_TFIDF()
