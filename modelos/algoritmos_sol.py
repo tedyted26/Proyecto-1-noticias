@@ -1,9 +1,10 @@
-import pandas as pd
-import numpy as np
+import tratamientoNoticias as tn
+import matplotlib.pyplot as plt
+from sklearn.model_selection import KFold
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import confusion_matrix
-import tratamientoNoticias as tn
+
 
 m1 = tn.generarMatriz("matriz2.txt")
 df = tn.transformMatrizToPandasDataFrame(m1)
@@ -15,17 +16,33 @@ df2 = df.drop("nombre_", axis=1)
 X = df2.drop("odio_", axis=1)
 y = df2['odio_']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=0)
 gnb = GaussianNB()
 
-# Ajustamos el modelo con fit
+# Cross-validation  
+kf = KFold(n_splits = 10, shuffle = True)
+kf.get_n_splits(X)
+resultados = 0.0
+for train_index, test_index in kf.split(X):
+    X_train, X_test = X.loc[train_index,], X.loc[test_index,]
+    y_train, y_test = y[train_index], y[test_index]
+    gnb.fit(X_train, y_train)
+    predicciones = gnb.predict(X_test)
+    score = gnb.score(X_test, y_test)
+    resultados += score
+    print(score)
+
+print('Average Accuracy: ', (resultados/10))
+
+
+# Graficar la matriz
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size =.5)
 gnb.fit(X_train, y_train)
-# Obtenemos las predicciones
-Y_pred = gnb.predict(X_test)
+predictions = gnb.predict(X_test)
+cm = confusion_matrix(y_test, predictions, labels=gnb.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=gnb.classes_)
+disp.plot()
 
-# 95,59% de las predicciones es correcta. Vemos en qué caso nuestras predicciones coinciden con el valor real.
-print(np.mean(Y_pred == y_test))
+print('Informe de clasificación:\n\n', classification_report(y_true=y_test, y_pred=predictions, target_names=['No odio', 'Odio'])) 
 
-confusion_matrix = confusion_matrix(y_test, Y_pred)
-print(confusion_matrix)
+plt.show()
 
