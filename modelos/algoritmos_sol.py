@@ -1,9 +1,26 @@
-import tratamientoNoticias as tn
 import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
+import os
+import sys
+
+# código copiado de GeeksforGeeks.org para conseguir importar archivos fuera de la carpeta
+  
+# getting the name of the directory
+# where the this file is present.
+current = os.path.dirname(os.path.realpath(__file__))
+  
+# Getting the parent directory name
+# where the current directory is present.
+parent = os.path.dirname(current)
+  
+# adding the parent directory to 
+# the sys.path.
+sys.path.append(parent)
+
+import tratamientoNoticias as tn
 
 
 m1 = tn.generarMatriz("matriz2.txt")
