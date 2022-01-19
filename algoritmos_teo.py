@@ -39,6 +39,8 @@ def funcion_de_antes(ruta1, ruta2, algoritmo):
     df.fillna(0, inplace=True)
 
     cm, modelo = reg_log(df)
+
+    return cm, modelo
     # comprobar lo de la matriz
     # crear un dataframe a partir de la matriz: dataframe = matriz_to_df()
     # segun algoritmo llamar a una funcion u otra: matriz_confusion, modelo = k_nn(dataframe)
@@ -61,7 +63,8 @@ def k_nn(dataframe):
 
     # Matriz de confusión
     cm = confusion_matrix(y_test, predictions, labels=nbrs.classes_)
-    print(cm)
+    
+    print(np.mean(predictions == y_test))
 
     return cm, nbrs
 
@@ -81,7 +84,8 @@ def reg_log(dataframe):
 
     # Matriz de confusión
     cm = confusion_matrix(y_test, predictions, labels=logreg.classes_)
-    print(cm)
+
+    print(np.mean(predictions == y_test))
 
     return cm, logreg
 
