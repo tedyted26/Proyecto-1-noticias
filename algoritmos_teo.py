@@ -7,3 +7,6 @@ from tratamientoNoticias import transformMatrizToPandasDataFrame as df_from_matr
 
 def k_nn():
     print()
+
+def reg_log():
+    print()
