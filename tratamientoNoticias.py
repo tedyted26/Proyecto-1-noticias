@@ -5,7 +5,6 @@ import numpy
 from copy import deepcopy
 import TransformTFIDF as tfidf
 
-
 import pandas as pd
 
 rutaListaParada = "listaParada.txt"
