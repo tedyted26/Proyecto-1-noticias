@@ -5,6 +5,7 @@ import numpy
 from copy import deepcopy
 import TransformTFIDF as tfidf
 
+
 import pandas as pd
 
 rutaListaParada = "listaParada.txt"
@@ -55,7 +56,7 @@ def lematizacion(tokens):
     return lemmas
 def leerNoticia(rutaFichero):
     '''Lee un archivo de noticia, devolviendo el texto al completo'''
-    f = open(rutaFichero, 'r')
+    f = open(rutaFichero, 'r', encoding="ISO-8859-1")
     texto = f.read()
     if ";-;" in texto:
         texto = texto.replace("titulo;-;url;-;url_completa;-;autor;-;fecha;-;hora;-;subtitulo;-;texto", "")
@@ -66,8 +67,7 @@ def leerNoticia(rutaFichero):
 
 def leerFichero(rutaFichero):
     '''Lee el fichero y devuelve el texto segun la ruta'''
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n")
-    f = open (rutaFichero,'r')
+    f = open (rutaFichero,'r', encoding="ISO-8859-1")
     texto = f.read()
     f.close()
     return texto
@@ -122,7 +122,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
                     vector[i+2] += 1
     if saveWordlist:
         #TODO poner with open
-        f = open(rutaWordList, "w")
+        f = open(rutaWordList, "w", encoding="ISO-8859-1")
         for elemento in wordlist:
             f.write(elemento + "\n")
         f.close()
@@ -137,7 +137,7 @@ def generarMatriz(fichero: str):
     rutaMatriz = fichero
     matriz = []
     if os.path.isfile(rutaMatriz):  # Compruebo si existe el fichero
-        f = open(rutaMatriz)
+        f = open(rutaMatriz, encoding="ISO-8859-1")
         filas = f.read().split(";\n")
         matriz = []
         for fila in filas:
@@ -147,14 +147,12 @@ def generarMatriz(fichero: str):
         # matriz = [[int(val) for val in fila.split(" ")] for fila in filas]
     return matriz
 
-def addVectorToMatriz(matriz, v):
+def addVectorToMatriz(m, v):
     '''Devuelve una matriz, producto de la suma de una copia de la matriz proporcionada y 
     de un vector "v".
     En caso del que el vector sea mayor que el tamaño de las filas de la matriz, amplia la matriz
     añadiendo tantos "0" a la derecha como diferencia haya.'''
-    m = deepcopy(matriz)
-    idma=id(matriz)
-    idm = id(m)
+
     if len(m) > 0:
         diffMatrizVector = len(v) - len(m[0])
         for row in m:
@@ -165,7 +163,7 @@ def addVectorToMatriz(matriz, v):
 def saveMatrizToFile(m, file):
     '''Guarda la matriz en un archivo, separando los valores de cada fila con
     espacios y las filas con ";\n"'''
-    f = open(file, "w")
+    f = open(file, "w", encoding="ISO-8859-1")
     for i,fila in enumerate(m):
         str_fila = [str(ele) for ele in fila]
         res = "++".join(str_fila)
@@ -190,7 +188,7 @@ def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int):
     -m: la matriz inicial
     -odio: Si la noticia es de odio (1), no odio (-1) o desconocida (0)"'''
     paths = getAllNewsUrlList(path)
-    m1 = m
+    m1 = deepcopy(m)
 
     vectores = []
     for i in paths:
