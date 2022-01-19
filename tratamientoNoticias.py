@@ -76,13 +76,13 @@ def tratarTexto(t):
     '''Aplica un tratamiento al texto, segmentandolo en una lista de palabras con la que poder
     despues añadir el texto a una matriz.'''
     tokens = tokenizacion(t)
-    print(f"TOKENS:{tokens}\n")
+    #print(f"TOKENS:{tokens}\n")
     tBasico = tratamientoBasico(tokens)
-    print(f"TRAT BASICO:{tBasico}\n")
+    #print(f"TRAT BASICO:{tBasico}\n")
     t_postListaParada = listaParada(tBasico)
-    print(f"LISTA:{t_postListaParada}\n")
+    #print(f"LISTA:{t_postListaParada}\n")
     lemas = lematizacion(t_postListaParada)
-    print(f"LEMAS:{lemas}\n")
+    #print(f"LEMAS:{lemas}\n")
     return lemas
 
 def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
