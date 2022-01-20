@@ -1,6 +1,8 @@
 import tratamientoNoticias as tn
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
@@ -143,8 +145,8 @@ class Training:
 
 
 # Ejemplo
-training = Training()
+'''training = Training()
 model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
-training.graphConfusionMatrix(cm)
+training.graphConfusionMatrix(cm)'''
 
 
