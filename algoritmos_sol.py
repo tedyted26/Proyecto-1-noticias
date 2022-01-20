@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
+from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 import os
@@ -25,8 +25,9 @@ sys.path.append(parent)
 import tratamientoNoticias as tn
 
 
-m1 = tn.generarMatriz("matriz2.txt")
-df = tn.transformMatrizToPandasDataFrame(m1)
+m1 = tn.generarMatriz("matriz.txt")
+m1_tf = tn.tfidf.matrixToTFIDF(m1)
+df = tn.transformMatrizToPandasDataFrame(m1_tf)
 '''m1 = tn.generarMatriz("matrizTFIDF2.txt")
 df = tn.transformMatrizToPandasDataFrame(m1)'''
 df.fillna(0, inplace=True)
@@ -58,10 +59,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size =.5)
 gnb.fit(X_train, y_train)
 predictions = gnb.predict(X_test)
 cm = confusion_matrix(y_test, predictions, labels=gnb.classes_)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=gnb.classes_)
-disp.plot()
 
-print('Informe de clasificación:\n\n', classification_report(y_true=y_test, y_pred=predictions, target_names=['No odio', 'Odio'])) 
+import seaborn as sns
+import numpy as np
+
+categories = ['No Odio', 'Odio']
+group_names = ['True Neg','False Pos','False Neg','True Pos']
+group_counts = ['{0:0.0f}'.format(value) for value in cm.flatten()]
+group_percentages = ['{0:.2%}'.format(value) for value in cm.flatten()/np.sum(cm)]
+labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names,group_counts,group_percentages)]
+labels = np.asarray(labels).reshape(2,2)
+sns.heatmap(cm, annot=labels, fmt='', cmap='Blues', xticklabels=categories, yticklabels=categories)
 
 plt.show()
-

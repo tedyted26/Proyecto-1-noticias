@@ -1,8 +1,9 @@
 import os
 import re
 import spacy
-
+import numpy
 from copy import deepcopy
+import TransformTFIDF as tfidf
 
 
 import pandas as pd
@@ -23,15 +24,6 @@ def tokenizacion(texto):
     return tokens
 
 
-# def tratamientoBasico2(tokens):
-#     caracteres = "0123456789ºª!·$%&/()=|@#~€¬'?¡¿`+^*[]´¨}{,.-;:_<>\n \""
-#     listaTratada = []
-#     for token in tokens:
-#         for i in range(len(caracteres)):
-#             token = token.replace(caracteres[i], "")
-#         if (token != ""):
-#             listaTratada.append(token.lower())
-#     return listaTratada
 def tratamientoBasico(tokens):
     caracteres = "0123456789ºª!·$%&/()=|@#~€¬'?¡¿`+^*[]´¨}{,.-;:_<>\n \""
 
