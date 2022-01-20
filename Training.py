@@ -102,8 +102,8 @@ class Training:
         
         return model, cm
 
-    def saveModel(self, path:str, modelname:str, model):
-        with open(path+'\\'+modelname+'.pickle', 'wb') as f:
+    def saveModel(self, file, model):
+        with open(file, 'wb') as f:
             pickle.dump(model, f)
 
     def graphConfusionMatrix(self, cm): 

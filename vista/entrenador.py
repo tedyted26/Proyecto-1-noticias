@@ -174,6 +174,10 @@ class Entrenador_frame(ttk.Frame):
         if ruta_odio == "" or ruta_no_odio == "" or not Path(ruta_odio).exists() or not Path(ruta_no_odio).exists():
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
             return
+        
+        if ruta_odio == ruta_no_odio:
+            self.label_error.config(text = "No puede elegir el mismo directorio para las dos categorías.")
+            return
 
         # mostramos en vista previa
         lista_files_odio = os.listdir(ruta_odio)
@@ -181,6 +185,14 @@ class Entrenador_frame(ttk.Frame):
 
         num_txt_odio = len([x for x in lista_files_odio if x.endswith(".txt") or x.endswith(".TXT")])
         num_txt_no_odio = len([x for x in lista_files_no_odio if x.endswith(".txt") or x.endswith(".TXT")])
+
+        if num_txt_odio == 0:
+            self.label_error.config(text = "Noticias de odio no proporcionadas.")
+            return
+
+        if num_txt_no_odio == 0:
+            self.label_error.config(text = "Noticias de no odio no proporcionadas.")
+            return
 
         self.texto_ejemplares_odio.config(state = 'normal')
         self.texto_ejemplares_no_odio.config(state = 'normal')
@@ -255,13 +267,10 @@ class Entrenador_frame(ttk.Frame):
     def guardar_modelo(self):
         # si se ha entrenado un modelo intentar guardarlo
         if self.modelo_entrenado is not None:
-            # FIXME comprobar la extensión del archivo del modelo
-            f = filedialog.asksaveasfile(defaultextension=".txt", initialdir=self.path_inicial)
-            # Training.save_model(path, name, model)
+            f = filedialog.asksaveasfile(defaultextension=".pickle", initialdir=self.path_inicial, filetypes=[("Pickle file", "*.pickle")])
             if f is None:
                 return
-            f.write(self.modelo_entrenado)
-            f.close()
+            self.tr_o.saveModel(f.name, self.modelo_entrenado)
         # si no, mensaje de error
         else:
             self.label_error.config(text = "No existe modelo que guardar.")
