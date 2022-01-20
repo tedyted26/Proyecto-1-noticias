@@ -20,6 +20,8 @@ parent = os.path.dirname(current)
 # the sys.path.
 sys.path.append(parent)
 
+# os.chdir("D:\\David\\Documentos\\UNI\\UNI 3\\SIyRC\\proyecto1\\repoGit\\Proyecto-1-noticias")
+# print(os.getcwd())
 import tratamientoNoticias as tn
 
 
