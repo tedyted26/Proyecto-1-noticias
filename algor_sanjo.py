@@ -2,6 +2,7 @@
 import tratamientoNoticias as tn
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
+from sklearn import tree
 from sklearn import preprocessing
 from sklearn.metrics import confusion_matrix
 import numpy as np
@@ -22,7 +23,7 @@ def train_SVM(dframe: pandas.DataFrame):
     X_test = preprocessing.scale(df_test.drop(["nombre_", "odio_"], axis=1))
     y_test = df_test['odio_'] == 1
 
-    clf = SVC(kernel="linear")  # Probad con los distintos kernels: kernel = "linear"; kernel = "poly"; kernel = "rbf"; kernel = "sigmoid"
+    clf = tree.DecisionTreeClassifier()
     clf = clf.fit(X, y)
     Y_pred_test = clf.predict(X_test)
 
@@ -47,4 +48,4 @@ def test_train_SVM():
     df = tn.transformMatrizToPandasDataFrame(m1_tfidf)
     print(train_SVM(df))
 
-
+test_train_SVM()

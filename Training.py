@@ -10,6 +10,8 @@ from sklearn.model_selection import train_test_split
 # Algoritmos de ML
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import Perceptron
+from sklearn.svm import SVC
+from sklearn import tree
 import os
 import sys
 from copy import deepcopy
@@ -77,7 +79,7 @@ class Training:
         model = None 
         cm = None
         if algorithm == 'arbol':
-            pass
+            model = tree.DecisionTreeClassifier()
         elif algorithm == 'knn':
             pass
         elif algorithm == 'nb':
@@ -87,7 +89,8 @@ class Training:
         elif algorithm == 'reglog':
             pass
         elif algorithm == 'svm':
-            pass
+            model = SVC(kernel="linear")
+
         
         if model != None:
             X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size =.3)
