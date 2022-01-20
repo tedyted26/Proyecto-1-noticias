@@ -220,6 +220,10 @@ class Entrenador_frame(ttk.Frame):
         self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
         print(cm)
 
+        if self.modelo_entrenado is None:
+            self.label_error.config(text = "Se ha producido un error al generar el modelo.")
+            return
+
         # teniendo ya la matriz de confusion y el modelo, mostrar la gráfica y hacer los cálculos para rellenar los resultados:
         self.texto_precision.config(state = 'normal')
         self.texto_recall.config(state = 'normal')
