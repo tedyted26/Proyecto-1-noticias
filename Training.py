@@ -28,7 +28,7 @@ class Training:
 
     def checkPaths(self, pathNoOdio, pathOdio):
         # If we haven't created a matrix with these paths
-        if (pathNoOdio != self.pathNoOdio or pathOdio == self.pathOdio ):
+        if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio ):
             self.pathNoOdio = pathNoOdio
             self.pathOdio = pathOdio
             # Create the matrix with the new news

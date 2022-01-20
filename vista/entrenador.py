@@ -28,12 +28,14 @@ import tratamientoNoticias as tn
 import algoritmos_teo
 import Training as tr
 
+
 class Entrenador_frame(ttk.Frame):
     def __init__(self, parent):
         Frame.__init__(self, parent)
         self.pack()
         self.path_inicial = os.getcwd()
         self.modelo_entrenado = None
+        self.tr_o = tr.Training()
 
     def set_controller(self, controller):
         self.controller = controller
@@ -218,8 +220,8 @@ class Entrenador_frame(ttk.Frame):
                                   'nb', 'perceptron',
                                   'reglog', 'svm']
         algortimo_elegido = algoritmos_disponibles[indice_algoritmo]
-        tr_o = tr.Training()
-        self.modelo_entrenado, cm = tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
+
+        self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
         # cm, self.modelo_entrenado = algoritmos_teo.funcion_de_antes("a", "a", "a") # para probar
         print(cm)
 
