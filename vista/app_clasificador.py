@@ -3,7 +3,6 @@ from tkinter import ttk
 from entrenador import Entrenador_frame
 from clasificador import Clasificador_frame
 
-
 class App_clasificador(Tk):
     def __init__(self, *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)

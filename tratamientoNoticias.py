@@ -191,7 +191,9 @@ def getAllNewsUrlList(newsFolderPath):
     '''Devuelve una lista rellena de tuplas: (pathcompleto, nombre)
     Esta lista contiene todos los archivos encontrados en la carpeta proporcionada,
     la cual debe ser una carpeta en la que se almacenen las noticias'''
-    r = os.getcwd() + newsFolderPath
+    r = newsFolderPath
+    if ":" not in newsFolderPath:
+        r = os.getcwd() + newsFolderPath
     return [(r+"/"+i, i) for i in os.listdir(r)]
 
 def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int, max_noticias = -1):
