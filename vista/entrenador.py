@@ -26,6 +26,7 @@ sys.path.append(parent)
 import tratamientoNoticias as tn
 
 import algoritmos_teo
+import Training as tr
 
 class Entrenador_frame(ttk.Frame):
     def __init__(self, parent):
@@ -199,6 +200,7 @@ class Entrenador_frame(ttk.Frame):
         # lo suyo sería que devolviera un objeto que se guardase en modelo_entrenado, para así luego poder guardarlo en la otra función
         # lo inicializo arriba (init) con None solo para que se vea
 
+
         if indice_algoritmo==0: 
             print("Arbol de clasificacion")
         elif indice_algoritmo==1:
@@ -210,9 +212,15 @@ class Entrenador_frame(ttk.Frame):
         elif indice_algoritmo==4:
             print("Regresión Logística")
         elif indice_algoritmo==5:
-            print("SVM")  
+            print("SVM")
 
-        cm, self.modelo_entrenado = algoritmos_teo.funcion_de_antes("a", "a", "a") # para probar
+        algoritmos_disponibles = ["arbol", "knn",
+                                  'nb', 'perceptron',
+                                  'reglog', 'svm']
+        algortimo_elegido = algoritmos_disponibles[indice_algoritmo]
+        tr_o = tr.Training()
+        self.modelo_entrenado, cm = tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
+        # cm, self.modelo_entrenado = algoritmos_teo.funcion_de_antes("a", "a", "a") # para probar
         print(cm)
 
         # teniendo ya la matriz de confusion y el modelo, mostrar la gráfica y hacer los cálculos para rellenar los resultados:

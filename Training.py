@@ -33,7 +33,7 @@ class Training:
             self.pathOdio = pathOdio
             # Create the matrix with the new news
             vectores = []
-            paths = tn.getAllNewsUrlList(pathNoOdio)[:10]
+            paths = tn.getAllNewsUrlList(pathNoOdio)
             for n, i in enumerate(paths):
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
@@ -41,7 +41,7 @@ class Training:
                 except:
                     print(f"Error generando vector en archivo: {i[1]}")
             
-            paths = tn.getAllNewsUrlList(pathOdio)[:10]
+            paths = tn.getAllNewsUrlList(pathOdio)
             for i in paths:
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
@@ -132,8 +132,8 @@ class Training:
 
 
 # Ejemplo
-training = Training()
-model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
-training.graphConfusionMatrix(cm)
+# training = Training()
+# model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
+# training.graphConfusionMatrix(cm)
 
 

@@ -41,6 +41,7 @@ def test_train_SVM():
     t_med = time.time()
     m2 = tn.addVectoresToMatrizByFolderPath("/Noticias/NoOdio", m2, -1, max_noticias=40)
     t_fin = time.time()
+    tn.saveMatrizToFile(m2,"matriz2.txt")
     print(f"Tiempo 50 primeras: {t_med-t_ini}\n"
           f"Tiempo 50 restantes: {t_fin-t_med}\n"
           f"Tiempo total: {t_fin-t_ini}\n")
@@ -48,4 +49,4 @@ def test_train_SVM():
     df = tn.transformMatrizToPandasDataFrame(m1_tfidf)
     print(train_SVM(df))
 
-test_train_SVM()
+# test_train_SVM()

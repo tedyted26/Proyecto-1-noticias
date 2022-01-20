@@ -89,4 +89,4 @@ def reg_log(dataframe):
 
     return cm, logreg
 
-funcion_de_antes("a","a","a")
+# funcion_de_antes("a","a","a")
