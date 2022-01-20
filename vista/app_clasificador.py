@@ -1,3 +1,4 @@
+import sys
 from tkinter import *
 from tkinter import ttk
 from entrenador import Entrenador_frame
@@ -54,6 +55,12 @@ class App_clasificador(Tk):
 
 #insertar menú en la ventana
 app = App_clasificador()
+
+def on_closing():
+    app.destroy()
+    sys.exit()
+
+app.protocol("WM_DELETE_WINDOW", on_closing)
 
 #visualizar
 app.mainloop()

@@ -4,9 +4,6 @@ from tkinter import ttk
 from tkinter import filedialog
 import os
 from pathlib import Path
-from matplotlib.pyplot import figure
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import sys
 # código copiado de GeeksforGeeks.org para conseguir importar archivos fuera de la carpeta
@@ -25,7 +22,6 @@ sys.path.append(parent)
 
 import tratamientoNoticias as tn
 
-import algoritmos_teo
 import Training as tr
 
 
@@ -119,20 +115,26 @@ class Entrenador_frame(ttk.Frame):
 
         # mensaje de error
         self.label_error = Label(self, text="", fg="red")
-        self.label_error.place(relx=0.05, rely=0.8)
+        self.label_error.place(relx=0.25 , rely=0.035, relwidth=0.55)
 
         # resultado
-        self.label_precision = Label(self, text="Precisión: ")
-        self.label_precision.place(relx=0.05 , rely=0.661)
+        self.label_precision = Label(self, text="Precisión Odio: ")
+        self.label_precision.place(relx=0.05 , rely=0.666)
 
         self.texto_precision = Text(self, state="disabled")
-        self.texto_precision.place(relx=0.2, rely=0.66, relwidth=0.2, relheight=0.04)
+        self.texto_precision.place(relx=0.2, rely=0.665, relwidth=0.2, relheight=0.04)
 
-        self.label_recall = Label(self, text="Recall o exhaustividad:")
-        self.label_recall.place(relx=0.05 , rely=0.721)
+        self.label_recall = Label(self, text="Recall Odio:")
+        self.label_recall.place(relx=0.05 , rely=0.726)
 
         self.texto_recall = Text(self, state="disabled")
-        self.texto_recall.place(relx=0.2, rely=0.72, relwidth=0.2, relheight=0.04)
+        self.texto_recall.place(relx=0.2, rely=0.725, relwidth=0.2, relheight=0.04)
+
+        self.label_precision_algoritmo = Label(self, text="Precisión del algoritmo:")
+        self.label_precision_algoritmo.place(relx=0.05 , rely=0.786)
+
+        self.texto_precision_algoritmo = Text(self, state="disabled")
+        self.texto_precision_algoritmo.place(relx=0.2, rely=0.785, relwidth=0.2, relheight=0.04)
 
         # grafico
         self.frame_resultado = Frame(self, bg="white")
@@ -143,10 +145,7 @@ class Entrenador_frame(ttk.Frame):
         self.label_guardar_modelo.place(relx=0.05 , rely=0.921)
 
         self.texto_guardar_modelo = Text(self)
-        self.texto_guardar_modelo.place(relx=0.2, rely=0.92, relwidth=0.45, relheight=0.04)
-
-        self.boton_seleccionar_ruta_guardado = Button(self, text="Seleccionar ruta", command=self.guardar_modelo)
-        self.boton_seleccionar_ruta_guardado.place(relx=0.67, rely=0.915, relwidth=0.13)
+        self.texto_guardar_modelo.place(relx=0.2, rely=0.92, relwidth=0.6, relheight=0.04)
 
         self.boton_guardar = Button(self, text="Guardar", command=self.guardar_modelo)
         self.boton_guardar.place(relx=0.82, rely=0.915, relwidth=0.13)
@@ -172,6 +171,10 @@ class Entrenador_frame(ttk.Frame):
         if ruta_odio == "" or ruta_no_odio == "" or not Path(ruta_odio).exists() or not Path(ruta_no_odio).exists():
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
             return
+        
+        if ruta_odio == ruta_no_odio:
+            self.label_error.config(text = "No puede elegir el mismo directorio para las dos categorías.")
+            return
 
         # mostramos en vista previa
         lista_files_odio = os.listdir(ruta_odio)
@@ -179,6 +182,14 @@ class Entrenador_frame(ttk.Frame):
 
         num_txt_odio = len([x for x in lista_files_odio if x.endswith(".txt") or x.endswith(".TXT")])
         num_txt_no_odio = len([x for x in lista_files_no_odio if x.endswith(".txt") or x.endswith(".TXT")])
+
+        if num_txt_odio == 0:
+            self.label_error.config(text = "Noticias de odio no proporcionadas.")
+            return
+
+        if num_txt_no_odio == 0:
+            self.label_error.config(text = "Noticias de no odio no proporcionadas.")
+            return
 
         self.texto_ejemplares_odio.config(state = 'normal')
         self.texto_ejemplares_no_odio.config(state = 'normal')
@@ -200,77 +211,67 @@ class Entrenador_frame(ttk.Frame):
         self.texto_algoritmo_seleccionado.config(state = 'disabled')
         self.texto_total.config(state = 'disabled')
 
-        # entrenar segun el modelo elegido
-        # TODO quitar los prints y poner en cada if el algoritmo
-        # lo suyo sería que devolviera un objeto que se guardase en modelo_entrenado, para así luego poder guardarlo en la otra función
-        # lo inicializo arriba (init) con None solo para que se vea
-
-
-        if indice_algoritmo==0: 
-            print("Arbol de clasificacion")
-        elif indice_algoritmo==1:
-            print("K-NN")
-        elif indice_algoritmo==2:
-            print("Naive Bayes")
-        elif indice_algoritmo==3:
-            print("Redes Neuronales")
-        elif indice_algoritmo==4:
-            print("Regresión Logística")
-        elif indice_algoritmo==5:
-            print("SVM")
-
+        # entrenamiento del modelo
         algoritmos_disponibles = ["arbol", "knn",
                                   'nb', 'perceptron',
                                   'reglog', 'svm']
         algortimo_elegido = algoritmos_disponibles[indice_algoritmo]
 
         self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
-        # cm, self.modelo_entrenado = algoritmos_teo.funcion_de_antes("a", "a", "a") # para probar
         print(cm)
 
-        # teniendo ya la matriz de confusion y el modelo, mostrar la gráfica y hacer los cálculos para rellenar los resultados:
+        if self.modelo_entrenado is None:
+            self.label_error.config(text = "Se ha producido un error al generar el modelo.")
+            return
 
+        # teniendo ya la matriz de confusion y el modelo, mostrar la gráfica y hacer los cálculos para rellenar los resultados:
         self.texto_precision.config(state = 'normal')
         self.texto_recall.config(state = 'normal')
+        self.texto_precision_algoritmo.config(state = 'normal')
 
         self.texto_precision.delete(1.0, "end")
         self.texto_recall.delete(1.0, "end")
+        self.texto_precision_algoritmo.delete(1.0, "end")
 
-        precision_odio = cm[1,1]/(cm[1,1]+cm[0,1]) # true odio clasificados como odio / total clasificados como odio
-        recall_odio = cm[1,1]/(cm[1,1]+cm[1,0]) # true odio clasificados como odio / total true odio
+        precision_odio = 0
+        recall_odio = 0
 
-        precision_no_odio = cm[0,0]/(cm[0,0]+cm[1,0]) # true no odio clasificados como no odio / total clasificados como no odio
-        recall_no_odio = cm[0,0]/(cm[0,0]+cm[0,1]) # true no odio clasificados como no odio / total true no odio
+        if cm[1,1]+cm[0,1] != 0:
+            precision_odio = cm[1,1]/(cm[1,1]+cm[0,1]) # true odio clasificados como odio / total clasificados como odio
+        
+        if cm[1,1]+cm[1,0] != 0:
+            recall_odio = cm[1,1]/(cm[1,1]+cm[1,0]) # true odio clasificados como odio / total true odio
 
-        self.texto_precision.insert(1.0, round((precision_odio+precision_no_odio)*50, 2)) # media y pasado a porcentajes con 2 decimales
-        self.texto_recall.insert(1.0, round((recall_odio+recall_no_odio)*50, 2))
+        matriz_principal = cm[1,1]+cm[0,0]
+        precision_algoritmo = matriz_principal/(matriz_principal+cm[1,0]+cm[0,1])
+
+        self.texto_precision.insert(1.0, round(precision_odio*100, 2))
+        self.texto_recall.insert(1.0, round(recall_odio*100,2))
+        self.texto_precision_algoritmo.insert(1.0, round(precision_algoritmo*100,2))
 
         self.texto_precision.config(state = 'disabled')
         self.texto_recall.config(state = 'disabled')
+        self.texto_precision_algoritmo.config(state = 'disabled')
 
-        fig = Figure(figsize = (7,5), dpi = 70)
-        ax1 = fig.add_subplot(111)
-        ax1.set_title('Matriz de confusión')
+        figure = self.tr_o.graphConfusionMatrix(cm)
 
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["No Odio", "Odio"])
+        self.frame_resultado.destroy()
+
+        self.frame_resultado = Frame(self, bg="white")
+        self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.52)
         
-        canvas = FigureCanvasTkAgg(fig, master = self.frame_resultado)
+        canvas = FigureCanvasTkAgg(figure, master = self.frame_resultado)
+        canvas.draw()
         canvas.get_tk_widget().pack(side=RIGHT, fill=BOTH)
-
-        disp.plot(ax=ax1)
-        
 
 
     def guardar_modelo(self):
         # si se ha entrenado un modelo intentar guardarlo
         if self.modelo_entrenado is not None:
-            # FIXME comprobar la extensión del archivo del modelo
-            f = filedialog.asksaveasfile(defaultextension=".txt", initialdir=self.path_inicial)
-            # Training.save_model(path, name, model)
+            f = filedialog.asksaveasfile(defaultextension=".pickle", initialdir=self.path_inicial, filetypes=[("Pickle file", "*.pickle")])
             if f is None:
                 return
-            f.write(self.modelo_entrenado)
-            f.close()
+            self.tr_o.saveModel(f.name, self.modelo_entrenado)
         # si no, mensaje de error
         else:
             self.label_error.config(text = "No existe modelo que guardar.")

@@ -5,6 +5,7 @@ import os
 from tkinter import filedialog
 from pathlib import Path
 from functools import partial
+from Classify import Classify
 
 # código copiado de GeeksforGeeks.org para conseguir importar archivos fuera de la carpeta
   
@@ -26,6 +27,7 @@ class Clasificador_frame(ttk.Frame):
         self.pack()
         self.path_inicial = os.getcwd()
         self.resultados = None
+        self.cfy = Classify()
 
     def set_controller(self, controller):
         self.controller = controller     
@@ -158,20 +160,36 @@ class Clasificador_frame(ttk.Frame):
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
             return
 
-        # TODO clasificamos
-        # lo suyo sería que devolviera un objeto que se guardase en resultados, para así luego poder guardarlo en la otra función
-        # lo inicializo arriba (init) con None solo para que se vea
-        # estaria bien que fuera un diccionario de clave valor, siendo el valor si es de odio o no, y la clave la ruta de la noticia
-        # importante guardar el tiempo que tarda el algoritmo en ejecutarse
+        lista_noticias = os.listdir(ruta_noticias)
+        num_noticias = len([x for x in lista_noticias if x.endswith(".txt") or x.endswith(".TXT")])
 
+        if num_noticias == 0:
+            self.label_error.config(text = "Noticias no proporcionadas.")
+            return
 
+        modelo = self.cfy.openModel(ruta_modelo)
+
+        if modelo is None:
+            self.label_error.config(text = "Error en la carga del modelo. Compruebe su extensión.")
+            return
+
+        self.resultados, tiempo = self.cfy.classifyNews(ruta_noticias, modelo)  
+
+        if self.resultados is None:
+            self.label_error.config(text = "Se ha producido un error al clasificar.")
+            return      
+
+        # dividir los resultados en odio y no odio
+        num_odio = 0
+        num_no_odio = 0
+        
+        for key in self.resultados:
+            if key[1] == 1:
+                num_odio +=1
+            elif key[1] == -1:
+                num_no_odio +=1
+       
         # mostramos en vista previa
-        # TODO dividir los resultados en odio y no odio
-        # TODO se necesita el tiempo
-
-        #num_txt_odio = len()
-        #num_txt_no_odio = len()
-
         self.texto_ejemplares_odio.config(state = 'normal')
         self.texto_ejemplares_no_odio.config(state = 'normal')
         self.texto_tiempo.config(state = 'normal')
@@ -182,10 +200,10 @@ class Clasificador_frame(ttk.Frame):
         self.texto_tiempo.delete(1.0, "end")
         self.texto_total.delete(1.0, "end")
 
-        #self.texto_ejemplares_odio.insert(1.0, num_txt_odio)
-        #self.texto_ejemplares_no_odio.insert(1.0, num_txt_no_odio)
-        #self.texto_tiempo.insert(1.0, tiempo)
-        #self.texto_total.insert(1.0, num_txt_odio + num_txt_no_odio)
+        self.texto_ejemplares_odio.insert(1.0, num_odio)
+        self.texto_ejemplares_no_odio.insert(1.0, num_no_odio)
+        self.texto_tiempo.insert(1.0, tiempo)
+        self.texto_total.insert(1.0, num_noticias)
 
         self.texto_ejemplares_odio.config(state = 'disabled')
         self.texto_ejemplares_no_odio.config(state = 'disabled')
@@ -200,7 +218,7 @@ class Clasificador_frame(ttk.Frame):
     def guardar_resultados(self):
         if self.resultados is not None:
             # FIXME comprobar la extensión del archivo del resultado
-            f = filedialog.asksaveasfile(defaultextension=".txt", initialdir=self.path_inicial)
+            f = filedialog.asksaveasfile(defaultextension=".csv", initialdir=self.path_inicial, filetypes=[("Comma separated value", "*.csv")])
             if f is None:
                 return
             f.write(self.resultados)
