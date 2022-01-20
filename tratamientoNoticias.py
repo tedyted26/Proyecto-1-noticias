@@ -220,5 +220,6 @@ def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int, max_noticias 
 def transformMatrizToPandasDataFrame(matriz: list):
     wlist = getWordList()
     df = pd.DataFrame( matriz, columns=["odio_", "nombre_"] + getWordList())
+    print(df.dtypes)
     return df
 
