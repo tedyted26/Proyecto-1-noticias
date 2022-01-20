@@ -140,7 +140,10 @@ class Entrenador_frame(ttk.Frame):
         self.label_guardar_modelo.place(relx=0.05 , rely=0.921)
 
         self.texto_guardar_modelo = Text(self)
-        self.texto_guardar_modelo.place(relx=0.2, rely=0.92, relwidth=0.6, relheight=0.04)
+        self.texto_guardar_modelo.place(relx=0.2, rely=0.92, relwidth=0.45, relheight=0.04)
+
+        self.boton_seleccionar_ruta_guardado = Button(self, text="Seleccionar ruta", command=self.guardar_modelo)
+        self.boton_seleccionar_ruta_guardado.place(relx=0.67, rely=0.915, relwidth=0.13)
 
         self.boton_guardar = Button(self, text="Guardar", command=self.guardar_modelo)
         self.boton_guardar.place(relx=0.82, rely=0.915, relwidth=0.13)
@@ -253,6 +256,7 @@ class Entrenador_frame(ttk.Frame):
         if self.modelo_entrenado is not None:
             # FIXME comprobar la extensión del archivo del modelo
             f = filedialog.asksaveasfile(defaultextension=".txt", initialdir=self.path_inicial)
+            # Training.save_model(path, name, model)
             if f is None:
                 return
             f.write(self.modelo_entrenado)
