@@ -8,13 +8,17 @@ import TransformTFIDF as tfidf
 
 import pandas as pd
 
+import time
+
 rutaListaParada = "listaParada.txt"
 rutaWordList = "diccionario.txt"
+nlp = spacy.load('es_core_news_sm')
 
 # Metodos de Tratamiento de ficheros
 def tokenizacion(texto):
-    nlp = spacy.load('es_core_news_sm')
-
+    # nlp = spacy.load('es_core_news_sm')
+    texto = texto.replace("\u2018", "").replace("\u2019", "")
+    texto = re.sub("(\u2018|\u2019)", "", texto)
     doc = nlp(texto)  # Crea un objeto de spacy tipo nlp
     tokens = [t.orth_ for t in doc]  # Crea una lista con las palabras del texto
     return tokens
@@ -22,14 +26,15 @@ def tokenizacion(texto):
 
 def tratamientoBasico(tokens):
     caracteres = "0123456789ºª!·$%&/()=|@#~€¬'?¡¿`+^*[]´¨}{,.-;:_<>\n \""
+
     listaTratada = []
     for token in tokens:
-        for i in range(len(caracteres)):
-            token = token.replace(caracteres[i], "")
-        if (token != ""):
-            listaTratada.append(token.lower())
+        a = re.sub(r"[^a-zA-Zá-úÁ-Ú_]", "", token)
+        if a != "" and a is not None:
+            a = re.match(r"[a-zA-Zá-úÁ-Ú_]+", a)
+            listaTratada.append(a[0].lower())
+        # listaTratada.append(re.sub(r"[^a-zA-Zá-úÁ-Ú]", "", token).lower())
     return listaTratada
-
 
 def listaParada(tokens):
     listaParada = tratamientoBasico(tokenizacion(rutaListaParada))
@@ -45,9 +50,13 @@ def listaParada(tokens):
             listaDepurada.append(token)
     return listaDepurada
 
+# def listaParada(tokens):
+#     listaParada = tratamientoBasico(tokenizacion(rutaListaParada))
+#     listaDepurada = [w for w in tokens if not w.lower() in listaParada]
+#
+#     return listaDepurada
 
 def lematizacion(tokens):
-    nlp = spacy.load('es_core_news_sm')
     texto = ""
     for token in tokens:
         texto += token + " "
@@ -75,14 +84,19 @@ def leerFichero(rutaFichero):
 def tratarTexto(t):
     '''Aplica un tratamiento al texto, segmentandolo en una lista de palabras con la que poder
     despues añadir el texto a una matriz.'''
+    t0 = time.time()
     tokens = tokenizacion(t)
-    print(f"TOKENS:{tokens}\n")
+    t1 = time.time()
+    print(f"TOKENS:{tokens}\n{t1-t0}\n")
     tBasico = tratamientoBasico(tokens)
-    print(f"TRAT BASICO:{tBasico}\n")
+    t2 = time.time()
+    print(f"TRAT BASICO:{tBasico}\n{t2-t1}\n")
     t_postListaParada = listaParada(tBasico)
-    print(f"LISTA:{t_postListaParada}\n")
+    t3 = time.time()
+    print(f"LISTA:{t_postListaParada}\n{t3-t2}\n")
     lemas = lematizacion(t_postListaParada)
-    print(f"LEMAS:{lemas}\n")
+    t4 = time.time()
+    print(f"LEMAS:{lemas}\n{t4-t3}\n")
     return lemas
 
 def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
@@ -101,7 +115,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
     - odio: determina si la noticia es de odio (1), no odio (-1) o desconocida (0), almacenandose
     en la 1ª posicion del vector'''
     t2 = tratarTexto(t)
-
+    t5 = time.time()
     wordlist = []
     vector = []
     '''Añade al vector si es de odio, no odio o desconocido y el nombre del archivo'''
@@ -126,7 +140,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
         for elemento in wordlist:
             f.write(elemento + "\n")
         f.close()
-
+    print(time.time() - t5)
     return vector
 
 def getWordList():
@@ -180,29 +194,32 @@ def getAllNewsUrlList(newsFolderPath):
     r = os.getcwd() + newsFolderPath
     return [(r+"/"+i, i) for i in os.listdir(r)]
 
-def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int):
+def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int, max_noticias = -1):
     '''Devuelve una nueva matriz con las noticias proporcionadas a traves la carpeta en la que
     se encuentran.
     
     -path: la carpeta donde se encuentran las noticias (ej:"/Noticias/NoOdio)
     -m: la matriz inicial
     -odio: Si la noticia es de odio (1), no odio (-1) o desconocida (0)"'''
-    paths = getAllNewsUrlList(path)
+    paths = getAllNewsUrlList(path)[:max_noticias]
     m1 = deepcopy(m)
 
     vectores = []
-    for i in paths:
+    for i, x in enumerate(paths):
+        print(f"Añadiendo noticia {i} de {len(paths)}")
         try:
-            textoNoticia = leerNoticia(i[0])
-            vectores.append(generarVectorDeTexto(textoNoticia, True, i[1], odio= odio))
+            textoNoticia = leerNoticia(x[0])
+            vectores.append(generarVectorDeTexto(textoNoticia, True, x[1], odio= odio))
         except:
-            print(f"Error generando vector en archivo: {i[1]}")
+            print(f"Error generando vector en archivo: {x[1]}")
 
     for v in vectores:
         m1 = addVectorToMatriz(m1, v)
     return m1
 
 def transformMatrizToPandasDataFrame(matriz: list):
+    wlist = getWordList()
     df = pd.DataFrame( matriz, columns=["odio_", "nombre_"] + getWordList())
+    print(df.dtypes)
     return df
 
