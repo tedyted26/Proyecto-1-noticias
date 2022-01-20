@@ -63,8 +63,6 @@ def k_nn(dataframe):
 
     # Matriz de confusión
     cm = confusion_matrix(y_test, predictions, labels=nbrs.classes_)
-    
-    print(np.mean(predictions == y_test))
 
     return cm, nbrs
 
@@ -84,8 +82,6 @@ def reg_log(dataframe):
 
     # Matriz de confusión
     cm = confusion_matrix(y_test, predictions, labels=logreg.classes_)
-
-    print(np.mean(predictions == y_test))
 
     return cm, logreg
 
