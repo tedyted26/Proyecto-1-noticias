@@ -29,11 +29,14 @@ class Training:
     def checkPaths(self, pathNoOdio, pathOdio):
         # If we haven't created a matrix with these paths
         if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio ):
+            if os.path.exists("diccionario.txt"):
+                os.remove("diccionario.txt")
+
             self.pathNoOdio = pathNoOdio
             self.pathOdio = pathOdio
             # Create the matrix with the new news
             vectores = []
-            paths = tn.getAllNewsUrlList(pathNoOdio)
+            paths = tn.getAllNewsUrlList(pathNoOdio)[:20]
             for n, i in enumerate(paths):
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
@@ -41,7 +44,7 @@ class Training:
                 except:
                     print(f"Error generando vector en archivo: {i[1]}")
             
-            paths = tn.getAllNewsUrlList(pathOdio)
+            paths = tn.getAllNewsUrlList(pathOdio)[:20]
             for i in paths:
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
@@ -132,8 +135,8 @@ class Training:
 
 
 # Ejemplo
-# training = Training()
-# model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
-# training.graphConfusionMatrix(cm)
+training = Training()
+model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
+training.graphConfusionMatrix(cm)
 
 
