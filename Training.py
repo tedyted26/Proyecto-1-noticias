@@ -118,7 +118,7 @@ class Training:
 
         plot, ax = plt.subplots(figsize = (7,5), dpi = 70)
 
-        sns.heatmap(cm, annot=labels, fmt='', cmap='Blues', xticklabels=categories,yticklabels=categories)
+        sns.heatmap(cm, annot=labels, fmt='', cmap='Blues', xticklabels=['pred. NoOdio', 'pred. Odio'],yticklabels=['True NoOdio', 'True Odio'])
         
         return plot
     
