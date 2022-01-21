@@ -145,7 +145,7 @@ class Clasificador_frame(ttk.Frame):
             self.texto_noticias.delete(1.0, "end")
             self.texto_noticias.insert(1.0, carpeta)
         elif origin=="modelo":
-            pathmodelo = filedialog.askopenfile(initialdir=self.path_inicial)
+            pathmodelo = filedialog.askopenfile(initialdir=self.path_inicial).name
             self.texto_modelo.delete(1.0, "end")
             self.texto_modelo.insert(1.0, pathmodelo)
 

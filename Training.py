@@ -43,8 +43,9 @@ class Training:
             self.pathOdio = pathOdio
             
             # Create the matrix with the new news
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1)
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, 10)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1, 10)
+
             tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
             m1_tf = tn.tfidf.matrixToTFIDF(self.matriz)
@@ -117,7 +118,7 @@ class Training:
 
         plot, ax = plt.subplots(figsize = (7,5), dpi = 70)
 
-        sns.heatmap(cm, annot=labels, fmt='', cmap='Blues', xticklabels=categories,yticklabels=categories)
+        sns.heatmap(cm, annot=labels, fmt='', cmap='Blues', xticklabels=['pred. NoOdio', 'pred. Odio'],yticklabels=['True NoOdio', 'True Odio'])
         
         return plot
     
@@ -135,6 +136,11 @@ class Training:
             print(score)
 
         print('Average Accuracy: ', (resultados/10))
+
+    def countProcessedNews(self):
+        noodio = self.df[(self.df['odio_']==-1)].count()
+        odio = self.df[(self.df['odio_']==1)].count()
+        return noodio, odio
 
 
 # Ejemplo
