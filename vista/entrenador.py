@@ -138,11 +138,11 @@ class Entrenador_frame(ttk.Frame):
 
         # grafico
         self.frame_resultado = Frame(self, bg="white")
-        self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.52)
+        self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.6)
 
         # guardar modelo
-        self.boton_guardar = Button(self, text="Guardar", command=self.guardar_modelo)
-        self.boton_guardar.place(relx=0.45, rely=0.915, relwidth=0.1)
+        self.boton_guardar = Button(self, text="Guardar en...", command=self.guardar_modelo)
+        self.boton_guardar.place(relx=0.17, rely=0.915, relwidth=0.13)
 
 
     def seleccionar_carpeta(self, origin):      
@@ -199,7 +199,7 @@ class Entrenador_frame(ttk.Frame):
         self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
         print(cm)
 
-        num_txt_odio, num_txt_no_odio = self.tr_o.countProcessedNews()
+        num_txt_no_odio, num_txt_odio = self.tr_o.countProcessedNews()
 
         self.texto_ejemplares_odio.config(state = 'normal')
         self.texto_ejemplares_no_odio.config(state = 'normal')
