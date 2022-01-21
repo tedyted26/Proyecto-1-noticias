@@ -138,17 +138,11 @@ class Entrenador_frame(ttk.Frame):
 
         # grafico
         self.frame_resultado = Frame(self, bg="white")
-        self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.52)
+        self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.6)
 
         # guardar modelo
-        self.label_guardar_modelo = Label(self, text="Ruta de guardado:")
-        self.label_guardar_modelo.place(relx=0.05 , rely=0.921)
-
-        self.texto_guardar_modelo = Text(self, state="disabled")
-        self.texto_guardar_modelo.place(relx=0.2, rely=0.92, relwidth=0.6, relheight=0.04)
-
-        self.boton_guardar = Button(self, text="Guardar", command=self.guardar_modelo)
-        self.boton_guardar.place(relx=0.82, rely=0.915, relwidth=0.13)
+        self.boton_guardar = Button(self, text="Guardar como...", command=self.guardar_modelo)
+        self.boton_guardar.place(relx=0.17, rely=0.915, relwidth=0.13)
 
 
     def seleccionar_carpeta(self, origin):      
@@ -191,25 +185,10 @@ class Entrenador_frame(ttk.Frame):
             self.label_error.config(text = "Noticias de no odio no proporcionadas.")
             return
 
-        self.texto_ejemplares_odio.config(state = 'normal')
-        self.texto_ejemplares_no_odio.config(state = 'normal')
         self.texto_algoritmo_seleccionado.config(state = 'normal')
-        self.texto_total.config(state = 'normal')
-
-        self.texto_ejemplares_odio.delete(1.0, "end")
-        self.texto_ejemplares_no_odio.delete(1.0, "end")
         self.texto_algoritmo_seleccionado.delete(1.0, "end")
-        self.texto_total.delete(1.0, "end")
-
-        self.texto_ejemplares_odio.insert(1.0, num_txt_odio)
-        self.texto_ejemplares_no_odio.insert(1.0, num_txt_no_odio)
         self.texto_algoritmo_seleccionado.insert(1.0, self.algoritmos[indice_algoritmo])
-        self.texto_total.insert(1.0, num_txt_odio + num_txt_no_odio)
-
-        self.texto_ejemplares_odio.config(state = 'disabled')
-        self.texto_ejemplares_no_odio.config(state = 'disabled')
         self.texto_algoritmo_seleccionado.config(state = 'disabled')
-        self.texto_total.config(state = 'disabled')
 
         # entrenamiento del modelo
         algoritmos_disponibles = ["arbol", "knn",
@@ -219,6 +198,24 @@ class Entrenador_frame(ttk.Frame):
 
         self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
         print(cm)
+
+        num_txt_no_odio, num_txt_odio = self.tr_o.countProcessedNews()
+
+        self.texto_ejemplares_odio.config(state = 'normal')
+        self.texto_ejemplares_no_odio.config(state = 'normal')
+        self.texto_total.config(state = 'normal')
+
+        self.texto_ejemplares_odio.delete(1.0, "end")
+        self.texto_ejemplares_no_odio.delete(1.0, "end")
+        self.texto_total.delete(1.0, "end")
+
+        self.texto_ejemplares_odio.insert(1.0, num_txt_odio)
+        self.texto_ejemplares_no_odio.insert(1.0, num_txt_no_odio)
+        self.texto_total.insert(1.0, num_txt_odio + num_txt_no_odio)
+
+        self.texto_ejemplares_odio.config(state = 'disabled')
+        self.texto_ejemplares_no_odio.config(state = 'disabled')
+        self.texto_total.config(state = 'disabled')
 
         if self.modelo_entrenado is None:
             self.label_error.config(text = "Se ha producido un error al generar el modelo.")
@@ -261,7 +258,6 @@ class Entrenador_frame(ttk.Frame):
         self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.52)
         
         canvas = FigureCanvasTkAgg(figure, master = self.frame_resultado)
-        canvas.draw()
         canvas.get_tk_widget().pack(side=RIGHT, fill=BOTH)
 
 
@@ -272,11 +268,6 @@ class Entrenador_frame(ttk.Frame):
             if f is None:
                 return
             self.tr_o.saveModel(f.name, self.modelo_entrenado)
-
-            self.texto_guardar_modelo.config(state = 'normal')
-            self.texto_guardar_modelo.delete(1.0, "end")
-            self.texto_guardar_modelo.insert(1.0, f.name)
-            self.texto_guardar_modelo.config(state = 'disabled')
 
         # si no, mensaje de error
         else:
