@@ -191,25 +191,10 @@ class Entrenador_frame(ttk.Frame):
             self.label_error.config(text = "Noticias de no odio no proporcionadas.")
             return
 
-        self.texto_ejemplares_odio.config(state = 'normal')
-        self.texto_ejemplares_no_odio.config(state = 'normal')
         self.texto_algoritmo_seleccionado.config(state = 'normal')
-        self.texto_total.config(state = 'normal')
-
-        self.texto_ejemplares_odio.delete(1.0, "end")
-        self.texto_ejemplares_no_odio.delete(1.0, "end")
         self.texto_algoritmo_seleccionado.delete(1.0, "end")
-        self.texto_total.delete(1.0, "end")
-
-        self.texto_ejemplares_odio.insert(1.0, num_txt_odio)
-        self.texto_ejemplares_no_odio.insert(1.0, num_txt_no_odio)
         self.texto_algoritmo_seleccionado.insert(1.0, self.algoritmos[indice_algoritmo])
-        self.texto_total.insert(1.0, num_txt_odio + num_txt_no_odio)
-
-        self.texto_ejemplares_odio.config(state = 'disabled')
-        self.texto_ejemplares_no_odio.config(state = 'disabled')
         self.texto_algoritmo_seleccionado.config(state = 'disabled')
-        self.texto_total.config(state = 'disabled')
 
         # entrenamiento del modelo
         algoritmos_disponibles = ["arbol", "knn",
@@ -219,6 +204,24 @@ class Entrenador_frame(ttk.Frame):
 
         self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
         print(cm)
+
+        num_txt_odio, num_txt_no_odio = self.tr_o.countProcessedNews()
+
+        self.texto_ejemplares_odio.config(state = 'normal')
+        self.texto_ejemplares_no_odio.config(state = 'normal')
+        self.texto_total.config(state = 'normal')
+
+        self.texto_ejemplares_odio.delete(1.0, "end")
+        self.texto_ejemplares_no_odio.delete(1.0, "end")
+        self.texto_total.delete(1.0, "end")
+
+        self.texto_ejemplares_odio.insert(1.0, num_txt_odio)
+        self.texto_ejemplares_no_odio.insert(1.0, num_txt_no_odio)
+        self.texto_total.insert(1.0, num_txt_odio + num_txt_no_odio)
+
+        self.texto_ejemplares_odio.config(state = 'disabled')
+        self.texto_ejemplares_no_odio.config(state = 'disabled')
+        self.texto_total.config(state = 'disabled')
 
         if self.modelo_entrenado is None:
             self.label_error.config(text = "Se ha producido un error al generar el modelo.")

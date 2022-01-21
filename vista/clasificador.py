@@ -185,9 +185,9 @@ class Clasificador_frame(ttk.Frame):
         num_no_odio = 0
         
         for key in self.resultados:
-            if key[1] == 1:
+            if key == '1':
                 num_odio +=1
-            elif key[1] == -1:
+            elif key == '-1':
                 num_no_odio +=1
        
         # mostramos en vista previa
