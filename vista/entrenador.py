@@ -141,14 +141,8 @@ class Entrenador_frame(ttk.Frame):
         self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.52)
 
         # guardar modelo
-        self.label_guardar_modelo = Label(self, text="Ruta de guardado:")
-        self.label_guardar_modelo.place(relx=0.05 , rely=0.921)
-
-        self.texto_guardar_modelo = Text(self, state="disabled")
-        self.texto_guardar_modelo.place(relx=0.2, rely=0.92, relwidth=0.6, relheight=0.04)
-
         self.boton_guardar = Button(self, text="Guardar", command=self.guardar_modelo)
-        self.boton_guardar.place(relx=0.82, rely=0.915, relwidth=0.13)
+        self.boton_guardar.place(relx=0.45, rely=0.915, relwidth=0.1)
 
 
     def seleccionar_carpeta(self, origin):      
@@ -275,11 +269,6 @@ class Entrenador_frame(ttk.Frame):
             if f is None:
                 return
             self.tr_o.saveModel(f.name, self.modelo_entrenado)
-
-            self.texto_guardar_modelo.config(state = 'normal')
-            self.texto_guardar_modelo.delete(1.0, "end")
-            self.texto_guardar_modelo.insert(1.0, f.name)
-            self.texto_guardar_modelo.config(state = 'disabled')
 
         # si no, mensaje de error
         else:

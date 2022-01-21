@@ -41,6 +41,9 @@ class Clasificador_frame(ttk.Frame):
         self.label_resultados = Label(self, text="Resultados de la clasificación:", font='bold')
         self.label_resultados.place(relx=0.05 , rely=0.25)
 
+        self.label_ver = Label(self, text="Doble click para ver", font=12)
+        self.label_ver.place(relx=0.05 , rely=0.25)
+
         self.label_resumen = Label(self, text="Resumen:", font='bold')
         self.label_resumen.place(relx=0.7 , rely=0.25)
 
@@ -79,19 +82,17 @@ class Clasificador_frame(ttk.Frame):
         self.boton_clasificar.place(relx=0.45, rely=0.2, relwidth=0.13)
 
         # tabla de noticias
-        self.lista_noticias = ttk.Treeview(self, column=("tit", "odio", "ver"), show='headings', height=5, selectmode=BROWSE)
+        self.lista_noticias = ttk.Treeview(self, column=("tit", "res"), show='headings', height=5, selectmode=BROWSE)
 
         self.lista_noticias.column('#0', width=0, stretch=NO)
         self.lista_noticias.column('tit', width=200, anchor=W)
-        self.lista_noticias.column('odio', width=1, anchor=CENTER)
-        self.lista_noticias.column('ver', width=1, anchor=CENTER)
+        self.lista_noticias.column('res', width=1, anchor=CENTER)
 
-        self.lista_noticias.heading("tit", text="Noticia", anchor=CENTER)
-        self.lista_noticias.heading("odio", text="Odio", anchor=CENTER)   
-        self.lista_noticias.heading("ver", text="Ver", anchor=CENTER)
+        self.lista_noticias.heading("tit", text="Archivo", anchor=CENTER)
+        self.lista_noticias.heading("res", text="Tipo", anchor=CENTER)
 
         self.lista_noticias.place(relx=0.05, rely= 0.31, relheight=0.53, relwidth=0.61)
-        #self.lista_noticias.bind("<<TreeviewSelect>>", self.mostrar_texto)
+        self.lista_noticias.bind("<<Double-Button-1>>", self.mostrar_archivo())
 
         sb = Scrollbar(self)
         sb.place(relx=0.66, rely= 0.31, relheight=0.53, relwidth=0.02)
@@ -185,9 +186,9 @@ class Clasificador_frame(ttk.Frame):
         num_no_odio = 0
         
         for key in self.resultados:
-            if key == '1':
+            if self.resultados[key] == 1:
                 num_odio +=1
-            elif key == '-1':
+            elif self.resultados[key] == -1:
                 num_no_odio +=1
        
         # mostramos en vista previa
@@ -212,8 +213,20 @@ class Clasificador_frame(ttk.Frame):
         self.texto_total.config(state = 'disabled')
 
         # rellenar el treeview
+        i = 0
+        for key in self.resultados:            
+            if self.resultados[key] == 1:
+                res = "Odio"
+            elif self.resultados[key] == -1:
+                res = "No odio"
+            self.lista_noticias.insert(parent="", index="end", iid = i, values=(key, res))
+            i = i+1
 
-        # TODO en base al objeto resultados
+        # crear grafica
+
+    
+    def mostrar_archivo(self):
+        print("muestro")
 
 
     def guardar_resultados(self):
