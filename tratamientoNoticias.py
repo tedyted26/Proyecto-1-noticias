@@ -193,7 +193,8 @@ def getAllNewsUrlList(newsFolderPath):
     la cual debe ser una carpeta en la que se almacenen las noticias'''
     r = newsFolderPath
     if ":" not in newsFolderPath:
-        r = os.getcwd() + newsFolderPath
+        #r = os.getcwd() + newsFolderPath
+        r = newsFolderPath
     return [(r+"/"+i, i) for i in os.listdir(r)]
 
 def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int, max_noticias = -1):

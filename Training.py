@@ -1,6 +1,8 @@
 import tratamientoNoticias as tn
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
@@ -31,10 +33,14 @@ class Training:
     def checkPaths(self, pathNoOdio, pathOdio):
         # If we haven't created a matrix with these paths
         if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio ):
+            if os.path.exists("diccionario.txt"):
+                os.remove("diccionario.txt")
+
             self.pathNoOdio = pathNoOdio
             self.pathOdio = pathOdio
             # Create the matrix with the new news
             vectores = []
+
             paths = tn.getAllNewsUrlList(pathNoOdio)[:10]
             for n, i in enumerate(paths):
                 try:
@@ -139,8 +145,8 @@ class Training:
 
 
 # Ejemplo
-# training = Training()
-# model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
-# training.graphConfusionMatrix(cm)
+'''training = Training()
+model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
+training.graphConfusionMatrix(cm)'''
 
 
