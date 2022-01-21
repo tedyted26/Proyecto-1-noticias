@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import Perceptron
 from sklearn.svm import SVC
+from sklearn import preprocessing # Preprocesado para SVM
 from sklearn import tree
 import os
 import sys
@@ -93,7 +94,15 @@ class Training:
 
         
         if model != None:
-            X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size =.3)
+            # Crea una copia del dataframe X, para poder escalarlo
+            # en caso de usar SVM
+            X_local = self.X
+            if algorithm == "svm":
+                X_local = self.X.copy(deep=True)
+                X_local = preprocessing.scale(X_local)
+
+            X_train, X_test, y_train, y_test = train_test_split(X_local, self.y, test_size =.3)
+
             model.fit(X_train, y_train)
             predictions = model.predict(X_test)
             cm = confusion_matrix(y_test, predictions, labels=model.classes_)
