@@ -1,6 +1,8 @@
 import tratamientoNoticias as tn
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
@@ -10,6 +12,8 @@ from sklearn.model_selection import train_test_split
 # Algoritmos de ML
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import Perceptron
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn import preprocessing # Preprocesado para SVM
 from sklearn import tree
@@ -30,11 +34,15 @@ class Training:
     def checkPaths(self, pathNoOdio, pathOdio):
         # If we haven't created a matrix with these paths
         if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio ):
+            if os.path.exists("diccionario.txt"):
+                os.remove("diccionario.txt")
+
             self.pathNoOdio = pathNoOdio
             self.pathOdio = pathOdio
             # Create the matrix with the new news
             vectores = []
-            paths = tn.getAllNewsUrlList(pathNoOdio)
+
+            paths = tn.getAllNewsUrlList(pathNoOdio)[:10]
             for n, i in enumerate(paths):
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
@@ -42,7 +50,7 @@ class Training:
                 except:
                     print(f"Error generando vector en archivo: {i[1]}")
             
-            paths = tn.getAllNewsUrlList(pathOdio)
+            paths = tn.getAllNewsUrlList(pathOdio)[:10]
             for i in paths:
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
@@ -82,13 +90,13 @@ class Training:
         if algorithm == 'arbol':
             model = tree.DecisionTreeClassifier()
         elif algorithm == 'knn':
-            pass
+            model = KNeighborsClassifier(n_neighbors = 3, n_jobs = -1)
         elif algorithm == 'nb':
             model = GaussianNB()
         elif algorithm == 'perceptron':
             model = Perceptron(tol=1e-3, random_state=0)
         elif algorithm == 'reglog':
-            pass
+            model = LogisticRegression()
         elif algorithm == 'svm':
             model = SVC(kernel="linear")
 
@@ -109,20 +117,25 @@ class Training:
         
         return model, cm
 
-    def saveModel(self, path:str, modelname:str, model):
-        with open(path+'\\'+modelname+'.pickle', 'wb') as f:
+    def saveModel(self, file, model):
+        with open(file, 'wb') as f:
             pickle.dump(model, f)
 
     def graphConfusionMatrix(self, cm): 
+        plt.close("all")
+
         categories = ['No Odio', 'Odio']
         group_names = ['True Neg','False Pos','False Neg','True Pos']
         group_counts = ['{0:0.0f}'.format(value) for value in cm.flatten()]
         group_percentages = ['{0:.2%}'.format(value) for value in cm.flatten()/np.sum(cm)]
         labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names,group_counts,group_percentages)]
         labels = np.asarray(labels).reshape(2,2)
-        sns.heatmap(cm, annot=labels, fmt='', cmap='Blues', xticklabels=categories,yticklabels=categories)
 
-        plt.show()
+        plot, ax = plt.subplots(figsize = (7,5), dpi = 70)
+
+        sns.heatmap(cm, annot=labels, fmt='', cmap='Blues', xticklabels=categories,yticklabels=categories)
+        
+        return plot
     
     def crossValidation(self, model):
         kf = KFold(n_splits = 10, shuffle = True)
@@ -141,8 +154,8 @@ class Training:
 
 
 # Ejemplo
-# training = Training()
-# model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
-# training.graphConfusionMatrix(cm)
+'''training = Training()
+model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
+training.graphConfusionMatrix(cm)'''
 
 
