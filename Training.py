@@ -35,31 +35,15 @@ class Training:
         if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio ):
             if os.path.exists("diccionario.txt"):
                 os.remove("diccionario.txt")
+            if os.path.exists("TDFlist.txt"):
+                os.remove("TDFlist.txt")
 
             self.pathNoOdio = pathNoOdio
             self.pathOdio = pathOdio
+            
             # Create the matrix with the new news
-            vectores = []
-
-            paths = tn.getAllNewsUrlList(pathNoOdio)[:10]
-            for n, i in enumerate(paths):
-                try:
-                    textoNoticia = tn.leerNoticia(i[0])
-                    vectores.append(tn.generarVectorDeTexto(textoNoticia, True, i[1], odio= -1))
-                except:
-                    print(f"Error generando vector en archivo: {i[1]}")
-            
-            paths = tn.getAllNewsUrlList(pathOdio)[:10]
-            for i in paths:
-                try:
-                    textoNoticia = tn.leerNoticia(i[0])
-                    vectores.append(tn.generarVectorDeTexto(textoNoticia, True, i[1], odio= 1))
-                except:
-                    print(f"Error generando vector en archivo: {i[1]}")
-
-            for v in vectores:
-                self.matriz = tn.addVectorToMatriz(self.matriz, v)
-            
+            tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, 10)
+            tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, 1, 10)
             tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
             m1_tf = tn.tfidf.matrixToTFIDF(self.matriz)
