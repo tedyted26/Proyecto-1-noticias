@@ -36,15 +36,15 @@ class Training:
         if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio ):
             if os.path.exists("diccionario.txt"):
                 os.remove("diccionario.txt")
-            if os.path.exists("TDFlist.txt"):
-                os.remove("TDFlist.txt")
+            if os.path.exists("IDFlist.txt"):
+                os.remove("IDFlist.txt")
 
             self.pathNoOdio = pathNoOdio
             self.pathOdio = pathOdio
             
             # Create the matrix with the new news
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, 10)
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, 1, 10)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1)
             tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
             m1_tf = tn.tfidf.matrixToTFIDF(self.matriz)
@@ -89,7 +89,7 @@ class Training:
             # Crea una copia del dataframe X, para poder escalarlo
             # en caso de usar SVM
             X_local = self.X
-            if algorithm == "svm":
+            if algorithm in ["svm", "reglog", "knn"]:
                 X_local = self.X.copy(deep=True)
                 X_local = preprocessing.scale(X_local)
 
