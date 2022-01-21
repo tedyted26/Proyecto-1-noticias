@@ -141,7 +141,7 @@ class Entrenador_frame(ttk.Frame):
         self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.6)
 
         # guardar modelo
-        self.boton_guardar = Button(self, text="Guardar en...", command=self.guardar_modelo)
+        self.boton_guardar = Button(self, text="Guardar como...", command=self.guardar_modelo)
         self.boton_guardar.place(relx=0.17, rely=0.915, relwidth=0.13)
 
 
@@ -258,7 +258,6 @@ class Entrenador_frame(ttk.Frame):
         self.frame_resultado.place(relx=0.5 , rely=0.345, relwidth=0.45, relheight=0.52)
         
         canvas = FigureCanvasTkAgg(figure, master = self.frame_resultado)
-        canvas.draw()
         canvas.get_tk_widget().pack(side=RIGHT, fill=BOTH)
 
 
