@@ -138,7 +138,9 @@ class Training:
         print('Average Accuracy: ', (resultados/10))
 
     def countProcessedNews(self):
-        return self.X.shape[0]
+        noodio = self.df[(self.df['odio_']==-1)].count()
+        odio = self.df[(self.df['odio_']==1)].count()
+        return noodio, odio
 
 
 # Ejemplo
