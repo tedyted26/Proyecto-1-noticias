@@ -2,13 +2,14 @@ import math
 import pandas as pd
 import tratamientoNoticias as tn
 import numpy
+import os
 # LEER PARA USAR:
 '''
 matrixToTFIDF: para transformar la matriz
 listToTFIDF: para transformar una lista externa
 indexListToTFIDF: para transformar solo una fila de la matriz
 '''
-
+IDF_FILE_RPATH = "IDFlist.txt"
 
 # Devuelve la matriz entera en TFIDF
 def matrixToTFIDF(m):
@@ -17,7 +18,14 @@ def matrixToTFIDF(m):
     if type(m) == list:
         df = tn.transformMatrizToPandasDataFrame(m)
 
-    listaIDF = getIDFlistOfMatriz(df)
+    IDFlist = None
+    if os.path.isfile(IDF_FILE_RPATH):
+        print("holi")
+        listaIDF = numpy.loadtxt(IDF_FILE_RPATH)
+    else:
+        listaIDF = getIDFlistOfMatriz(df)
+        numpy.savetxt(IDF_FILE_RPATH, listaIDF)
+
     for i in range(len(df)):
         print("Posicion de lista operandose TFIDF:", i)
         new_m.append(indexListToTFIDF(df, i, listaIDF))
@@ -39,20 +47,6 @@ def indexListToTFIDF(matriz, index: int, listaIDF: list):
     return new_list
 
 def getIDFlistOfMatriz(matriz: pd.DataFrame):
-    # lista = []
-    # for i in range(2, len(matriz.columns)):
-    #     print("    + Columna:", i)
-    #     w_in_docs_counter = 0
-    #     for j in range(len(matriz)):
-    #
-    #         if matriz.iloc[j, i] > 0:
-    #             w_in_docs_counter += 1
-    #
-    #     oper = len(matriz) / w_in_docs_counter
-    #
-    #     idf = math.log10(oper)
-    #     lista.append(idf)
-    # return lista
     lista = list(matriz.iloc[:, 2:].gt(0).sum())
     n_lista = []
     for w_counter in lista:
