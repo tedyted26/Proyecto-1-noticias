@@ -1,6 +1,7 @@
 import pickle
 import tratamientoNoticias as tn
 import os
+import numpy
 
 class Classify():
     def __init__(self):
@@ -16,10 +17,15 @@ class Classify():
             if os.path.exists("diccionario.txt"):
                 diccionario = tn.getWordList()
             else:
-                print("Error abriendo el diccionario. Archivo inexistente.") 
+                print("Error abriendo el diccionario. Archivo inexistente. Prueba a entrenar otra vez.") 
                 return   
 
             # Open IDFList from training matrix
+            if os.path.exists("IDFList.txt"):
+                listaIDF = numpy.loadtxt("IDFList.txt")
+            else:
+                print("Error abriendo la lista IDF. Archivo inexistente. Prueba a entrenar otra vez.") 
+                return
 
             # Create the matrix with the new news
             vectores = []
