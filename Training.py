@@ -44,7 +44,7 @@ class Training:
             
             # Create the matrix with the new news
             self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, 10)
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, 1, 10)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1, 10)
             tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
             m1_tf = tn.tfidf.matrixToTFIDF(self.matriz)
@@ -135,6 +135,9 @@ class Training:
             print(score)
 
         print('Average Accuracy: ', (resultados/10))
+
+    def countProcessedNews(self):
+        return self.X.shape[0]
 
 
 # Ejemplo
