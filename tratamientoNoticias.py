@@ -83,19 +83,19 @@ def leerFichero(rutaFichero):
 def tratarTexto(t):
     '''Aplica un tratamiento al texto, segmentandolo en una lista de palabras con la que poder
     despues añadir el texto a una matriz.'''
-    t0 = time.time()
+    # t0 = time.time()
     tokens = tokenizacion(t)
-    t1 = time.time()
-    print(f"TOKENS:{tokens}\n{t1-t0}\n")
+    # t1 = time.time()
+    # print(f"TOKENS:{tokens}\n{t1-t0}\n")
     tBasico = tratamientoBasico(tokens)
-    t2 = time.time()
-    print(f"TRAT BASICO:{tBasico}\n{t2-t1}\n")
+    # t2 = time.time()
+    # print(f"TRAT BASICO:{tBasico}\n{t2-t1}\n")
     t_postListaParada = listaParada(tBasico)
-    t3 = time.time()
-    print(f"LISTA:{t_postListaParada}\n{t3-t2}\n")
+    # t3 = time.time()
+    # print(f"LISTA:{t_postListaParada}\n{t3-t2}\n")
     lemas = lematizacion(t_postListaParada)
-    t4 = time.time()
-    print(f"LEMAS:{lemas}\n{t4-t3}\n")
+    # t4 = time.time()
+    # print(f"LEMAS:{lemas}\n{t4-t3}\n")
     return lemas
 
 def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0, rutaWordList= "diccionario.txt"):
@@ -115,14 +115,16 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0, ru
     en la 1ª posicion del vector'''
     t2 = tratarTexto(t)
     t5 = time.time()
+    # tiempos = []
     wordlist = []
     vector = []
     '''Añade al vector si es de odio, no odio o desconocido y el nombre del archivo'''
     vector += [odio, file]
-
+    # tiempos.append(time.time())
     if os.path.isfile(rutaWordList):  # Compruebo si existe el fichero
         wordlist = getWordList(rutaWordList)
         vector += [0 for i in range(len(wordlist))]
+    # tiempos.append(time.time())
     # Por cada palabra de la noticia, añadimos las nuevas al diccionario y al vector
     # correspondiente a la matriz
     for token in t2:
@@ -133,6 +135,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0, ru
             for i, word in enumerate(wordlist):
                 if word == token:
                     vector[i+2] += 1
+    # tiempos.append(time.time())
     if saveWordlist:
         #TODO poner with open
         f = open(rutaWordList, "w", encoding="ISO-8859-1")
@@ -140,6 +143,10 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0, ru
             f.write(elemento + "\n")
         f.close()
     print(time.time() - t5)
+    # tiempos.append(time.time())
+
+    # for i in range(len(tiempos)-1):
+    #     print(f"{i+1} - {i}-> {tiempos[i+1]-tiempos[i]}")
     return vector
 
 def getWordList(rutaWordList= "diccionario.txt"):

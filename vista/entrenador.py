@@ -270,6 +270,7 @@ class Entrenador_frame(ttk.Frame):
             if f is None:
                 return
             carpeta_destino = Path(f.name).parent.absolute()
+
             self.tr_o.saveModel(f.name, self.modelo_entrenado)
             shutil.copy("IDFlist.txt", carpeta_destino)
             shutil.copy("diccionario.txt", carpeta_destino)

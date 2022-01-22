@@ -10,6 +10,8 @@ from matplotlib.figure import Figure
 from Classify import Classify
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
+import shutil # Para gestion de copias de archivos
+
 # código copiado de GeeksforGeeks.org para conseguir importar archivos fuera de la carpeta
   
 # getting the name of the directory
@@ -147,6 +149,15 @@ class Clasificador_frame(ttk.Frame):
             self.texto_modelo.delete(1.0, "end")
             self.texto_modelo.insert(1.0, pathmodelo)
 
+    def guardar_noticias_clasificadas_por_carpetas(self, dic_resultados: dict, ruta_antigua):
+        carpeta = str(filedialog.askdirectory(initialdir=self.path_inicial))
+        for key, value in dic_resultados.items():
+            tipo = "Pred_Odio" if value == 1 else "Pred_No_Odio"
+            archivo_a_copiar = str(ruta_antigua)+"/"+key
+            nueva_carpeta = carpeta+"/"+ tipo
+            if not Path(nueva_carpeta).exists():
+                os.mkdir(nueva_carpeta)
+            shutil.copy(archivo_a_copiar, nueva_carpeta)
 
     def clasificar_noticias(self):
         # recogemos los datos
@@ -242,6 +253,7 @@ class Clasificador_frame(ttk.Frame):
         canvas = FigureCanvasTkAgg(fig, self.grafico)
         canvas.get_tk_widget().pack(side=RIGHT, fill=BOTH)
 
+        self.guardar_noticias_clasificadas_por_carpetas(self.resultados, ruta_noticias)
     
     def mostrar_archivo(self):
         if self.lista_noticias.focus():
