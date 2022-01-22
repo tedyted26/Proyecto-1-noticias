@@ -5,7 +5,10 @@ import os
 from tkinter import filedialog
 from pathlib import Path
 from functools import partial
+
+from matplotlib.figure import Figure
 from Classify import Classify
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 # código copiado de GeeksforGeeks.org para conseguir importar archivos fuera de la carpeta
   
@@ -44,15 +47,9 @@ class Clasificador_frame(ttk.Frame):
         self.label_resumen = Label(self, text="Resumen:", font='bold')
         self.label_resumen.place(relx=0.7 , rely=0.25)
 
-        self.label_guardar = Label(self, text="Guardar los resultados:", font='bold')
-        self.label_guardar.place(relx=0.05 , rely=0.861)
-
         # mensaje de error
         self.label_error = Label(self, text="", fg="red")
         self.label_error.place(relx=0.2, rely=0.035, relwidth=0.6)
-
-        self.label_error_2 = Label(self, text="", fg="red")
-        self.label_error_2.place(relx=0.25, rely=0.861, relwidth=0.55)
 
         # seleccionar noticias
         self.label_noticias = Label(self, text="Noticias para clasificar:")
@@ -79,25 +76,28 @@ class Clasificador_frame(ttk.Frame):
         self.boton_clasificar.place(relx=0.45, rely=0.2, relwidth=0.13)
 
         # tabla de noticias
-        self.lista_noticias = ttk.Treeview(self, column=("tit", "odio", "ver"), show='headings', height=5, selectmode=BROWSE)
+        self.lista_noticias = ttk.Treeview(self, column=("tit", "res"), show='headings', height=5, selectmode=BROWSE)
 
         self.lista_noticias.column('#0', width=0, stretch=NO)
         self.lista_noticias.column('tit', width=200, anchor=W)
-        self.lista_noticias.column('odio', width=1, anchor=CENTER)
-        self.lista_noticias.column('ver', width=1, anchor=CENTER)
+        self.lista_noticias.column('res', width=1, anchor=CENTER)
 
-        self.lista_noticias.heading("tit", text="Noticia", anchor=CENTER)
-        self.lista_noticias.heading("odio", text="Odio", anchor=CENTER)   
-        self.lista_noticias.heading("ver", text="Ver", anchor=CENTER)
+        self.lista_noticias.heading("tit", text="Archivo", anchor=CENTER)
+        self.lista_noticias.heading("res", text="Tipo", anchor=CENTER)
 
-        self.lista_noticias.place(relx=0.05, rely= 0.31, relheight=0.53, relwidth=0.61)
-        #self.lista_noticias.bind("<<TreeviewSelect>>", self.mostrar_texto)
+        self.lista_noticias.place(relx=0.05, rely= 0.31, relheight=0.54, relwidth=0.61)
 
         sb = Scrollbar(self)
-        sb.place(relx=0.66, rely= 0.31, relheight=0.53, relwidth=0.02)
+        sb.place(relx=0.66, rely= 0.31, relheight=0.57, relwidth=0.02)
 
         self.lista_noticias.config(yscrollcommand=sb.set)
         sb.config(command=self.lista_noticias.yview)
+
+        sb_x = Scrollbar(self, orient="horizontal")
+        sb_x.place(relx=0.05, rely= 0.85, relheight=0.03, relwidth=0.61)
+
+        self.lista_noticias.config(xscrollcommand=sb_x.set)
+        sb_x.config(command=self.lista_noticias.xview)
 
         # resumen
         self.label_ejemplares_odio = Label(self, text='Noticias "Odio":')
@@ -126,17 +126,15 @@ class Clasificador_frame(ttk.Frame):
 
         # grafico de resumen
         self.grafico = Frame(self, bg="white")
-        self.grafico.place(relx=0.7 , rely=0.51, relheight=0.33, relwidth=0.25)
+        self.grafico.place(relx=0.7 , rely=0.51, relheight=0.37, relwidth=0.25)
+
+        # ver noticia
+        self.boton_guardar = Button(self, text="Ver archivo seleccionado", command=self.mostrar_archivo)
+        self.boton_guardar.place(relx=0.25, rely=0.915, relwidth=0.2)
 
         # guardar resultados
-        self.label_guardar_resultados = Label(self, text="Ruta de guardado:")
-        self.label_guardar_resultados.place(relx=0.05 , rely=0.921)
-
-        self.texto_guardar_resultados = Text(self)
-        self.texto_guardar_resultados.place(relx=0.2, rely=0.92, relwidth=0.6, relheight=0.04)
-
-        self.boton_guardar = Button(self, text="Guardar", command=self.guardar_resultados)
-        self.boton_guardar.place(relx=0.82, rely=0.915, relwidth=0.13)
+        self.boton_guardar = Button(self, text="Guardar resultados como...", command=self.guardar_resultados)
+        self.boton_guardar.place(relx=0.725, rely=0.915, relwidth=0.2)
 
 
     def seleccionar_carpeta(self, origin):      
@@ -153,9 +151,10 @@ class Clasificador_frame(ttk.Frame):
     def clasificar_noticias(self):
         # recogemos los datos
         self.label_error.config(text="")
-        self.label_error_2.config(text="")
         ruta_noticias = self.texto_noticias.get(1.0, "end-1c")
         ruta_modelo = self.texto_modelo.get(1.0, "end-1c")
+        self.lista_noticias.delete(*self.lista_noticias.get_children())
+        self.lista_noticias.focus(None)
 
         if ruta_noticias == "" or ruta_modelo == "" or not Path(ruta_noticias).exists() or not Path(ruta_modelo).exists():
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
@@ -185,9 +184,9 @@ class Clasificador_frame(ttk.Frame):
         num_no_odio = 0
         
         for key in self.resultados:
-            if key[1] == 1:
+            if self.resultados[key] == 1:
                 num_odio +=1
-            elif key[1] == -1:
+            elif self.resultados[key] == -1:
                 num_no_odio +=1
        
         # mostramos en vista previa
@@ -212,8 +211,42 @@ class Clasificador_frame(ttk.Frame):
         self.texto_total.config(state = 'disabled')
 
         # rellenar el treeview
+        i = 0
+        for key in self.resultados:            
+            if self.resultados[key] == 1:
+                res = "Odio"
+            elif self.resultados[key] == -1:
+                res = "No odio"
+            self.lista_noticias.insert(parent="", index="end", iid = i, values=(key, res))
+            i = i+1
 
-        # TODO en base al objeto resultados
+        # crear grafica
+        self.grafico.destroy()
+
+        self.grafico = Frame(self, bg="white")
+        self.grafico.place(relx=0.7 , rely=0.51, relheight=0.37, relwidth=0.25)
+
+        fig = Figure(figsize=(4,4), dpi=70) # create a figure object
+        ax = fig.add_subplot(111) # add an Axes to the figure
+
+        ax.pie([num_no_odio, num_odio], radius=1, labels=["No odio", "Odio"], colors = ["#57a8ef", "#13426c"])
+
+        canvas = FigureCanvasTkAgg(fig, self.grafico)
+        canvas.get_tk_widget().pack(side=RIGHT, fill=BOTH)
+
+    
+    def mostrar_archivo(self):
+        if self.lista_noticias.focus():
+            # get archivo
+            index_archivo = int(self.lista_noticias.focus())
+            nombre_archivo_seleccionado = list(self.resultados)[index_archivo]
+            path_archivo_seleccionado = self.texto_noticias.get(1.0, "end-1c") + "/" + nombre_archivo_seleccionado
+            print(path_archivo_seleccionado)
+
+            # abrir pop up (unico) con el archivo ya abierto
+        
+        else:
+            self.label_error.config(text = "No hay ningún archivo seleccionado.")
 
 
     def guardar_resultados(self):
@@ -226,4 +259,4 @@ class Clasificador_frame(ttk.Frame):
             f.close()
         # si no, mensaje de error
         else:
-            self.label_error_2.config(text = "No existen resultados que guardar.")
+            self.label_error.config(text = "No existen resultados que guardar.")

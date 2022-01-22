@@ -46,8 +46,6 @@ class App_clasificador(Tk):
         
         tabControl.pack(expand=1, fill="both")
 
-        #self.show_frame("Menu_frame")
-
     #mostrar las paginas
     def show_frame(self, page_name):
         frame = self.frames[page_name]

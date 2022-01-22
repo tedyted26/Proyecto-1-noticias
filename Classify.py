@@ -83,7 +83,7 @@ class Classify():
             resultados[res_name] = res
             fila += 1
 
-        tiempo = round(t1-t0, 4)
+        tiempo = round(t1-t0, 5)
         
         return resultados, tiempo
     
