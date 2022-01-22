@@ -86,7 +86,6 @@ class Training:
         elif algorithm == 'svm':
             model = SVC(kernel="linear")
 
-        
         if model != None:
             # Crea una copia del dataframe X, para poder escalarlo
             # en caso de usar SVM
@@ -139,8 +138,8 @@ class Training:
         print('Average Accuracy: ', (resultados/10))
 
     def countProcessedNews(self):
-        noodio = (self.df.odio_ == '-1').sum()
-        odio = (self.df.odio_ == '1').sum()
+        noodio = (self.df.odio_ == -1).sum()
+        odio = (self.df.odio_ == 1).sum()
         return noodio, odio
 
 
