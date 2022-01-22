@@ -12,16 +12,16 @@ indexListToTFIDF: para transformar solo una fila de la matriz
 IDF_FILE_RPATH = "IDFlist.txt"
 
 # Devuelve la matriz entera en TFIDF
-def matrixToTFIDF(m):
+def matrixToTFIDF(m, pathIDFlist= "IDFList.txt", pathWordlist= "diccionario.txt"):
     new_m = []
     df = m
     if type(m) == list:
-        df = tn.transformMatrizToPandasDataFrame(m)
+        df = tn.transformMatrizToPandasDataFrame(m, pathWordlist)
 
     IDFlist = None
-    if os.path.isfile(IDF_FILE_RPATH):
+    if os.path.isfile(pathIDFlist):
         print("holi")
-        listaIDF = numpy.loadtxt(IDF_FILE_RPATH)
+        listaIDF = numpy.loadtxt(pathIDFlist)
     else:
         listaIDF = getIDFlistOfMatriz(df)
         numpy.savetxt(IDF_FILE_RPATH, listaIDF)

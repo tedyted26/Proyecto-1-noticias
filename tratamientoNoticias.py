@@ -11,7 +11,6 @@ import pandas as pd
 import time
 
 rutaListaParada = "listaParada.txt"
-rutaWordList = "diccionario.txt"
 nlp = spacy.load('es_core_news_sm')
 
 # Metodos de Tratamiento de ficheros
@@ -99,7 +98,7 @@ def tratarTexto(t):
     print(f"LEMAS:{lemas}\n{t4-t3}\n")
     return lemas
 
-def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
+def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0, rutaWordList= "diccionario.txt"):
     '''Genera un vector de texto a partir del texto/string "t" proporcionado, tratandolo
     en el proceso y elminando terminos superfluos.
     Los argumentos son los siguientes:
@@ -122,7 +121,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
     vector += [odio, file]
 
     if os.path.isfile(rutaWordList):  # Compruebo si existe el fichero
-        wordlist = getWordList()
+        wordlist = getWordList(rutaWordList)
         vector += [0 for i in range(len(wordlist))]
     # Por cada palabra de la noticia, añadimos las nuevas al diccionario y al vector
     # correspondiente a la matriz
@@ -143,7 +142,7 @@ def generarVectorDeTexto(t: str, saveWordlist: bool, file: str,odio: int = 0):
     print(time.time() - t5)
     return vector
 
-def getWordList():
+def getWordList(rutaWordList= "diccionario.txt"):
     return leerFichero(rutaWordList).splitlines()
 def generarMatriz(fichero: str):
     '''Genera y devuelve la matriz a partir del fichero seleccionado
@@ -220,9 +219,8 @@ def addVectoresToMatrizByFolderPath(path: str, m: list, odio: int, max_noticias 
         m1 = addVectorToMatriz(m1, v)
     return m1
 
-def transformMatrizToPandasDataFrame(matriz: list):
-    wlist = getWordList()
-    df = pd.DataFrame( matriz, columns=["odio_", "nombre_"] + getWordList())
+def transformMatrizToPandasDataFrame(matriz: list, rutaWordList= "diccionario.txt"):
+    df = pd.DataFrame( matriz, columns=["odio_", "nombre_"] + getWordList(rutaWordList))
     print(df.dtypes)
     return df
 

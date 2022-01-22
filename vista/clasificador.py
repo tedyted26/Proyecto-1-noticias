@@ -156,6 +156,13 @@ class Clasificador_frame(ttk.Frame):
         self.lista_noticias.delete(*self.lista_noticias.get_children())
         self.lista_noticias.focus(None)
 
+        ruta_complementariaIDF_Wordlist = str(Path(ruta_modelo).parent.absolute())
+        ruta_IDFlist = ruta_complementariaIDF_Wordlist + "\\IDFlist.txt"
+        ruta_Wordlist = ruta_complementariaIDF_Wordlist + "\\diccionario.txt"
+
+        if not Path(ruta_IDFlist).exists() or not Path(ruta_Wordlist).exists():
+            self.label_error.config(text="El archivo IDFlist.txt y diccionario.txt deben encontrarse en la carpeta del modelo.")
+            return
         if ruta_noticias == "" or ruta_modelo == "" or not Path(ruta_noticias).exists() or not Path(ruta_modelo).exists():
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
             return
@@ -167,13 +174,14 @@ class Clasificador_frame(ttk.Frame):
             self.label_error.config(text = "Noticias no proporcionadas.")
             return
 
+
         modelo = self.cfy.openModel(ruta_modelo)
 
         if modelo is None:
             self.label_error.config(text = "Error en la carga del modelo. Compruebe su extensión.")
             return
 
-        self.resultados, tiempo = self.cfy.classifyNews(ruta_noticias, modelo)  
+        self.resultados, tiempo = self.cfy.classifyNews(ruta_noticias, modelo, ruta_IDFlist, ruta_Wordlist)
 
         if self.resultados is None:
             self.label_error.config(text = "Error al clasificar. Si el error persiste entrene de nuevo.")

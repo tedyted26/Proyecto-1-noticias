@@ -9,14 +9,15 @@ class Classify():
         self.matriz = []
         self.df_with_name = None
 
-    def checkPaths(self, pathNoticias, pathModelo):
+    def checkPaths(self, pathNoticias, pathModelo,
+                   pathIDFlist= "IDFList.txt", pathWordlist= "diccionario.txt"):
         # If we haven't created a matrix with the results of TF-IDF with these paths
-        if (pathNoticias != self.pathNoticias and os.path.exists("IDFList.txt")):
+        if (pathNoticias != self.pathNoticias and os.path.exists(pathIDFlist)):
             self.pathNoticias = pathNoticias
 
             # Open dictionary 
-            if os.path.exists("diccionario.txt"):
-                diccionario = tn.getWordList()
+            if os.path.exists(pathWordlist):
+                diccionario = tn.getWordList(pathWordlist)
                 dic_length = len(diccionario)
             else:
                 print("Error abriendo el diccionario. Archivo inexistente. Prueba a entrenar otra vez.") 
@@ -30,7 +31,7 @@ class Classify():
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
 
-                    vectorNoticia = tn.generarVectorDeTexto(textoNoticia, False, i[1], odio= 0)
+                    vectorNoticia = tn.generarVectorDeTexto(textoNoticia, False, i[1], odio= 0, rutaWordList=pathWordlist)
                     
                     if len(vectorNoticia) > dic_length:
                         vectorNoticia = vectorNoticia[:dic_length+2]
@@ -45,10 +46,10 @@ class Classify():
                 self.matriz = tn.addVectorToMatriz(self.matriz, v)
             
             # create matrix tf idf with news
-            matriz_tfidf = tn.tfidf.matrixToTFIDF(self.matriz)
+            matriz_tfidf = tn.tfidf.matrixToTFIDF(self.matriz, pathIDFlist, pathWordlist)
 
             # convert it into datafame
-            self.df_with_name = tn.transformMatrizToPandasDataFrame(matriz_tfidf)
+            self.df_with_name = tn.transformMatrizToPandasDataFrame(matriz_tfidf, pathWordlist)
             self.df_with_name.fillna(0, inplace=True)
 
             # save the original matrix for later
@@ -65,10 +66,11 @@ class Classify():
             self.df_with_name.fillna(0, inplace=True)
 
 
-    def classifyNews(self, pathNoticias, model):
+    def classifyNews(self, pathNoticias, model,
+                   pathIDFlist= "IDFList.txt", pathWordlist= "diccionario.txt"):
         # estaria bien que fuera un diccionario de clave valor, siendo el valor si es de odio o no, y la clave la ruta de la noticia
         # importante guardar el tiempo que tarda el algoritmo en ejecutarse
-        self.checkPaths(pathNoticias, model) 
+        self.checkPaths(pathNoticias, model, pathIDFlist, pathWordlist)
         resultados = {}
         tiempo = 0
         
