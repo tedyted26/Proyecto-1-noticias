@@ -85,6 +85,13 @@ class Entrenador_frame(ttk.Frame):
         self.combobox_algoritmos = ttk.Combobox(self, values=self.algoritmos, state="readonly")
         self.combobox_algoritmos.current(0)
         self.combobox_algoritmos.place(relx=0.2, rely=0.22)
+        
+        # seleccionar maximo de noticias
+        self.label_maximo = Label(self, text="Número de cada tipo a entrenar:")
+        self.label_maximo.place(relx=0.4 , rely=0.22)
+        
+        self.texto_maximo = Text(self)
+        self.texto_maximo.place(relx=0.6, rely=0.22, relwidth=0.1, relheight=0.03)
 
         # boton de ejecutar o entrenar
         self.boton_entrenar = Button(self, text="Entrenar", command=self.entrenar_modelo)
@@ -163,6 +170,14 @@ class Entrenador_frame(ttk.Frame):
         ruta_odio = self.texto_noticias_odio.get(1.0, "end-1c")
         ruta_no_odio = self.texto_noticias_no_odio.get(1.0, "end-1c")
         indice_algoritmo = self.combobox_algoritmos.current()
+        num_max = self.texto_maximo.get(1.0, "end-1c")
+
+        if type(num_max) is not int:
+            try:
+                num_max = int(num_max)
+            except:
+                self.label_error.config(text = "Valor no válido.")
+                return
 
         if ruta_odio == "" or ruta_no_odio == "" or not Path(ruta_odio).exists() or not Path(ruta_no_odio).exists():
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
@@ -198,7 +213,7 @@ class Entrenador_frame(ttk.Frame):
                                   'reglog', 'svm']
         algortimo_elegido = algoritmos_disponibles[indice_algoritmo]
 
-        self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
+        self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio, num_max)
         print(cm)
 
         num_txt_no_odio, num_txt_odio = self.tr_o.countProcessedNews()
