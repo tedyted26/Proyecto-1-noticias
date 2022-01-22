@@ -2,7 +2,6 @@ import pickle
 import time
 import tratamientoNoticias as tn
 import os
-import numpy
 
 class Classify():
     def __init__(self):
@@ -75,17 +74,26 @@ class Classify():
         
         df = self.df_with_name.drop(["odio_", "nombre_"], axis=1)
 
-        t0 = time.time()
-        raw_resultados = model.predict(df)
-        t1 = time.time()
+        n_features = 0
+        try:
+            n_features = model.n_features_in_
+        except:
+            n_features = model.coef_.shape[-1]
 
-        fila = 0
-        for res in raw_resultados:
-            res_name = self.df_with_name.at[fila, 'nombre_']
-            resultados[res_name] = res
-            fila += 1
+        if n_features == len(df.columns):
+            t0 = time.time()
+            raw_resultados = model.predict(df)
+            t1 = time.time()
 
-        tiempo = round(t1-t0, 5)
+            fila = 0
+            for res in raw_resultados:
+                res_name = self.df_with_name.at[fila, 'nombre_']
+                resultados[res_name] = res
+                fila += 1
+
+            tiempo = round(t1-t0, 5)
+        else:
+            resultados = None      
         
         return resultados, tiempo
     
@@ -98,4 +106,12 @@ class Classify():
             return None
     
     def saveResult(self, filepath, result):
-        print("guardo como csv")
+        with open(filepath, "w") as f:   
+            for row in result:
+                if result[row] == -1:
+                    res = 'No odio'
+                elif result[row] == 1:
+                    res = 'Odio'
+                f.write(res + ";" + row + "\n")
+        
+            

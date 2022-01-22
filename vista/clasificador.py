@@ -176,7 +176,7 @@ class Clasificador_frame(ttk.Frame):
         self.resultados, tiempo = self.cfy.classifyNews(ruta_noticias, modelo)  
 
         if self.resultados is None:
-            self.label_error.config(text = "Se ha producido un error al clasificar.")
+            self.label_error.config(text = "Error al clasificar. Si el error persiste entrene de nuevo.")
             return      
 
         # dividir los resultados en odio y no odio
@@ -244,20 +244,46 @@ class Clasificador_frame(ttk.Frame):
             print(path_archivo_seleccionado)
 
             # abrir pop up (unico) con el archivo ya abierto
-        
+            top = Toplevel(self)
+            top.geometry("750x850")
+            top.title("Visualizar noticia")
+            
+            top_label_path_archivo = Label(top, text="Ruta de la noticia:")
+            top_label_path_archivo.place(relx=0.05, rely=0.05, relwidth=0.9)
+
+            top_path_archivo = Text(top)
+            top_path_archivo.place(relx=0.05, rely=0.1, relwidth=0.9, relheight=0.1)
+            top_path_archivo.insert(1.0, path_archivo_seleccionado)
+            top_path_archivo.config(state="disabled")
+
+            with open(path_archivo_seleccionado, "r") as f:
+                texto_archivo_seleccionado = f.read()
+
+            top_label_path_archivo = Label(top, text="Texto de la noticia:")
+            top_label_path_archivo.place(relx=0.05, rely=0.25, relwidth=0.9)
+
+            top_text_archivo = Text(top)
+            top_text_archivo.place(relx=0.05, rely=0.3, relwidth=0.85, relheight=0.65)
+            top_text_archivo.insert(1.0, texto_archivo_seleccionado)
+            top_text_archivo.config(state="disabled")
+
+            sb = Scrollbar(top)
+            sb.place(relx=0.9, rely= 0.3, relheight=0.65, relwidth=0.05)
+
+            top_text_archivo.config(yscrollcommand=sb.set)
+            sb.config(command=top_text_archivo.yview)
+
         else:
             self.label_error.config(text = "No hay ningún archivo seleccionado.")
 
 
     def guardar_resultados(self):
         if self.resultados is not None:
-            # FIXME comprobar la extensión del archivo del resultado
             f = filedialog.asksaveasfile(defaultextension=".csv", initialdir=self.path_inicial, filetypes=[("Comma separated value", "*.csv")])
             if f is None:
                 return
-            f.write(self.resultados)
-            f.close()
-            self.label_error.config(text = "Resultados guardados correctamente.")
+            self.cfy.saveResult(f.name, self.resultados)
+            self.label_error.config(text = "Resultados guardados.")
         # si no, mensaje de error
         else:
             self.label_error.config(text = "No existen resultados que guardar.")

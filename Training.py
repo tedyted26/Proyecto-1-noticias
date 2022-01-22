@@ -86,7 +86,6 @@ class Training:
         elif algorithm == 'svm':
             model = SVC(kernel="linear")
 
-        
         if model != None:
             # Crea una copia del dataframe X, para poder escalarlo
             # en caso de usar SVM
