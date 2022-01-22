@@ -71,7 +71,7 @@ class Clasificador_frame(ttk.Frame):
         self.texto_modelo = Text(self)
         self.texto_modelo.place(relx=0.2, rely=0.14, relwidth=0.6, relheight=0.04)
 
-        self.boton_abrir_modelo = Button(self, text="Seleccionar carpeta", command=partial(self.seleccionar_carpeta, "modelo"))
+        self.boton_abrir_modelo = Button(self, text="Seleccionar modelo", command=partial(self.seleccionar_carpeta, "modelo"))
         self.boton_abrir_modelo.place(relx=0.82, rely=0.14, relwidth=0.13)
 
         # boton de ejecutar o entrenar
@@ -308,15 +308,17 @@ class Clasificador_frame(ttk.Frame):
             top_label_path_archivo.place(relx=0.05, rely=0.25, relwidth=0.9)
 
             top_text_archivo = Text(top)
-            top_text_archivo.place(relx=0.05, rely=0.3, relwidth=0.85, relheight=0.65)
+            top_text_archivo.place(relx=0.05, rely=0.3, relwidth=0.87, relheight=0.65)
             top_text_archivo.insert(1.0, texto_archivo_seleccionado)
             top_text_archivo.config(state="disabled")
 
             sb = Scrollbar(top)
-            sb.place(relx=0.9, rely= 0.3, relheight=0.65, relwidth=0.05)
+            sb.place(relx=0.92, rely= 0.3, relheight=0.65, relwidth=0.03)
 
             top_text_archivo.config(yscrollcommand=sb.set)
             sb.config(command=top_text_archivo.yview)
+
+            self.label_error.config(text = "")
 
         else:
             self.label_error.config(text = "No hay ningún archivo seleccionado.")
