@@ -268,6 +268,7 @@ class Entrenador_frame(ttk.Frame):
             if f is None:
                 return
             self.tr_o.saveModel(f.name, self.modelo_entrenado)
+            self.label_error.config(text = "Modelo guardado correctamente.")
 
         # si no, mensaje de error
         else:
