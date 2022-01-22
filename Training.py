@@ -43,10 +43,10 @@ class Training:
             self.pathOdio = pathOdio
             
             # Create the matrix with the new news
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, 40)
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1, 40)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1)
 
-            tn.saveMatrizToFile(self.matriz, "matriz.txt")
+            # tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
             m1_tf = tn.tfidf.matrixToTFIDF(self.matriz)
             self.df = tn.transformMatrizToPandasDataFrame(m1_tf)

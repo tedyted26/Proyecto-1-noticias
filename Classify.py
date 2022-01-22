@@ -26,7 +26,7 @@ class Classify():
             # Create the matrix with the new news
             vectores = []
 
-            paths = tn.getAllNewsUrlList(pathNoticias)[:10]
+            paths = tn.getAllNewsUrlList(pathNoticias)[:50]
             for n, i in enumerate(paths):
                 try:
                     textoNoticia = tn.leerNoticia(i[0])
