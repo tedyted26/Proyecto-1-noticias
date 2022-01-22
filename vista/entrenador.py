@@ -6,6 +6,8 @@ import os
 from pathlib import Path
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import sys
+
+import shutil # Para gestion de copias de archivos
 # código copiado de GeeksforGeeks.org para conseguir importar archivos fuera de la carpeta
   
 # getting the name of the directory
@@ -267,7 +269,10 @@ class Entrenador_frame(ttk.Frame):
             f = filedialog.asksaveasfile(defaultextension=".pickle", initialdir=self.path_inicial, filetypes=[("Pickle file", "*.pickle")])
             if f is None:
                 return
+            carpeta_destino = Path(f.name).parent.absolute()
             self.tr_o.saveModel(f.name, self.modelo_entrenado)
+            shutil.copy("IDFlist.txt", carpeta_destino)
+            shutil.copy("diccionario.txt", carpeta_destino)
             self.label_error.config(text = "Modelo guardado correctamente.")
 
         # si no, mensaje de error
