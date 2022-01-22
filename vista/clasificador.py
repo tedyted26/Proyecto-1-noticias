@@ -203,7 +203,7 @@ class Clasificador_frame(ttk.Frame):
         self.texto_ejemplares_odio.insert(1.0, num_odio)
         self.texto_ejemplares_no_odio.insert(1.0, num_no_odio)
         self.texto_tiempo.insert(1.0, tiempo)
-        self.texto_total.insert(1.0, num_noticias)
+        self.texto_total.insert(1.0, num_odio + num_no_odio)
 
         self.texto_ejemplares_odio.config(state = 'disabled')
         self.texto_ejemplares_no_odio.config(state = 'disabled')
@@ -257,6 +257,7 @@ class Clasificador_frame(ttk.Frame):
                 return
             f.write(self.resultados)
             f.close()
+            self.label_error.config(text = "Resultados guardados correctamente.")
         # si no, mensaje de error
         else:
             self.label_error.config(text = "No existen resultados que guardar.")

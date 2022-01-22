@@ -39,6 +39,8 @@ class Classify():
                     vectores.append(vectorNoticia)
                 except:
                     print(f"Error generando vector en archivo: {i[1]}")
+            
+            self.matriz = []
 
             for v in vectores:
                 self.matriz = tn.addVectorToMatriz(self.matriz, v)
