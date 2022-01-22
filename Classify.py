@@ -4,18 +4,23 @@ import tratamientoNoticias as tn
 import os
 
 from sklearn import preprocessing
+from pathlib import Path
 
 class Classify():
     def __init__(self):
         self.pathNoticias = ''
+        self.carpeta_pathModelo = ''
+        self.carpeta_pathModeloNueva = ""
         self.matriz = []
         self.df_with_name = None
 
-    def checkPaths(self, pathNoticias, pathModelo,
+    def checkPaths(self, pathNoticias,
                    pathIDFlist= "IDFList.txt", pathWordlist= "diccionario.txt"):
         # If we haven't created a matrix with the results of TF-IDF with these paths
-        if (pathNoticias != self.pathNoticias and os.path.exists(pathIDFlist)):
+
+        if ((pathNoticias != self.pathNoticias or self.carpeta_pathModelo != self.carpeta_pathModeloNueva) and os.path.exists(pathIDFlist)):
             self.pathNoticias = pathNoticias
+
 
             # Open dictionary 
             if os.path.exists(pathWordlist):
@@ -66,13 +71,13 @@ class Classify():
             # convert into dataframe
             self.df_with_name = tn.transformMatrizToPandasDataFrame(m1_tf)
             self.df_with_name.fillna(0, inplace=True)
-
+        self.carpeta_pathModelo = self.carpeta_pathModeloNueva
 
     def classifyNews(self, pathNoticias, model,
                    pathIDFlist= "IDFList.txt", pathWordlist= "diccionario.txt"):
         # estaria bien que fuera un diccionario de clave valor, siendo el valor si es de odio o no, y la clave la ruta de la noticia
         # importante guardar el tiempo que tarda el algoritmo en ejecutarse
-        self.checkPaths(pathNoticias, model, pathIDFlist, pathWordlist)
+        self.checkPaths(pathNoticias, pathIDFlist, pathWordlist)
         resultados = {}
         tiempo = 0
         

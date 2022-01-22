@@ -216,7 +216,7 @@ class Clasificador_frame(ttk.Frame):
         if modelo is None:
             self.label_error.config(text = "Error en la carga del modelo. Compruebe su extensión.")
             return
-
+        self.cfy.carpeta_pathModeloNueva = Path(ruta_modelo).parent.absolute()
         self.resultados, tiempo = self.cfy.classifyNews(ruta_noticias, modelo, ruta_IDFlist, ruta_Wordlist)
 
         if self.resultados is None:
