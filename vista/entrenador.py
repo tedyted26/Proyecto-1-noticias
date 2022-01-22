@@ -86,6 +86,13 @@ class Entrenador_frame(ttk.Frame):
         self.combobox_algoritmos.current(0)
         self.combobox_algoritmos.place(relx=0.2, rely=0.22)
 
+        # seleccionar maximo de noticias
+        self.label_maximo = Label(self, text="Número de cada tipo a entrenar:")
+        self.label_maximo.place(relx=0.4 , rely=0.22)
+
+        self.texto_maximo = Text(self)
+        self.texto_maximo.place(relx=0.6, rely=0.22, relwidth=0.1, relheight=0.03)
+
         # boton de ejecutar o entrenar
         self.boton_entrenar = Button(self, text="Entrenar", command=self.entrenar_modelo)
         self.boton_entrenar.place(relx=0.82, rely=0.21, relwidth=0.13)        
@@ -163,6 +170,14 @@ class Entrenador_frame(ttk.Frame):
         ruta_odio = self.texto_noticias_odio.get(1.0, "end-1c")
         ruta_no_odio = self.texto_noticias_no_odio.get(1.0, "end-1c")
         indice_algoritmo = self.combobox_algoritmos.current()
+        num_max = self.texto_maximo.get(1.0, "end-1c")
+
+        if type(num_max) is not int:
+            try:
+                num_max = int(num_max)
+            except:
+                self.label_error.config(text = "Valor no válido.")
+                return
 
         if ruta_odio == "" or ruta_no_odio == "" or not Path(ruta_odio).exists() or not Path(ruta_no_odio).exists():
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
@@ -198,7 +213,7 @@ class Entrenador_frame(ttk.Frame):
                                   'reglog', 'svm']
         algortimo_elegido = algoritmos_disponibles[indice_algoritmo]
 
-        self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio)
+        self.modelo_entrenado, cm = self.tr_o.train(algortimo_elegido, ruta_no_odio, ruta_odio, num_max)
         print(cm)
 
         num_txt_no_odio, num_txt_odio = self.tr_o.countProcessedNews()
@@ -270,10 +285,14 @@ class Entrenador_frame(ttk.Frame):
             if f is None:
                 return
             carpeta_destino = Path(f.name).parent.absolute()
-
-            self.tr_o.saveModel(f.name, self.modelo_entrenado)
+            nombre_fichero = Path(f.name).name
+            carpeta_destino = Path.joinpath(carpeta_destino, nombre_fichero.replace(".pickle", ""))
+            os.mkdir(carpeta_destino)
+            self.tr_o.saveModel(Path.joinpath(carpeta_destino, nombre_fichero), self.modelo_entrenado)
             shutil.copy("IDFlist.txt", carpeta_destino)
             shutil.copy("diccionario.txt", carpeta_destino)
+            f.close()
+            os.remove(f.name)
             self.label_error.config(text = "Modelo guardado correctamente.")
 
         # si no, mensaje de error

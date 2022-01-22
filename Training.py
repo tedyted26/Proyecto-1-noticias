@@ -26,14 +26,17 @@ class Training:
     def __init__(self):
         self.pathNoOdio = ''
         self.pathOdio = ''
+        self.num_max = 0
         self.matriz = []
         self.df = None
         self.X = None
         self.y = None
 
-    def checkPaths(self, pathNoOdio, pathOdio):
+    def checkPaths(self, pathNoOdio, pathOdio, num_max):
         # If we haven't created a matrix with these paths
-        if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio ):
+        if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio or num_max != self.num_max):
+            self.matriz = []
+            
             if os.path.exists("diccionario.txt"):
                 os.remove("diccionario.txt")
             if os.path.exists("IDFlist.txt"):
@@ -41,10 +44,11 @@ class Training:
 
             self.pathNoOdio = pathNoOdio
             self.pathOdio = pathOdio
+            self.num_max = num_max
             
             # Create the matrix with the new news
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1)
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, max_noticias=num_max)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1, max_noticias=num_max)
 
             # tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
@@ -69,14 +73,14 @@ class Training:
         
 
 
-    def train(self, algorithm: str, pathNoOdio: str, pathOdio: str):
-        self.checkPaths(pathNoOdio, pathOdio)
+    def train(self, algorithm: str, pathNoOdio: str, pathOdio: str, num_max: int):
+        self.checkPaths(pathNoOdio, pathOdio, num_max)
         model = None 
         cm = None
         if algorithm == 'arbol':
             model = tree.DecisionTreeClassifier()
         elif algorithm == 'knn':
-            model = KNeighborsClassifier(n_neighbors = 3, n_jobs = -1)
+            model = KNeighborsClassifier(n_neighbors = 2, n_jobs = -1)
         elif algorithm == 'nb':
             model = GaussianNB()
         elif algorithm == 'perceptron':

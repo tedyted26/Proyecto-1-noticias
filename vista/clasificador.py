@@ -132,7 +132,15 @@ class Clasificador_frame(ttk.Frame):
 
         # ver noticia
         self.boton_guardar = Button(self, text="Ver archivo seleccionado", command=self.mostrar_archivo)
-        self.boton_guardar.place(relx=0.25, rely=0.915, relwidth=0.2)
+        self.boton_guardar.place(relx=0.05, rely=0.915, relwidth=0.2)
+
+        # copiar/mover noticias en otro lado
+        self.boton_copiar = Button(self, text="Copiar noticias a...", command=self.guardar_noticias_clasificadas_por_carpetas)
+        self.boton_copiar.place(relx=0.34, rely=0.915, relwidth=0.15)
+
+        self.isMover = IntVar()
+        self.check_mover = Checkbutton(self, text='Mover en vez de copiar', variable=self.isMover, onvalue=True, offvalue=0)
+        self.check_mover.place(relx=0.5, rely=0.92)
 
         # guardar resultados
         self.boton_guardar = Button(self, text="Guardar resultados como...", command=self.guardar_resultados)
@@ -142,12 +150,14 @@ class Clasificador_frame(ttk.Frame):
     def seleccionar_carpeta(self, origin):      
         if origin=="noticias":
             carpeta = filedialog.askdirectory(initialdir=self.path_inicial)
-            self.texto_noticias.delete(1.0, "end")
-            self.texto_noticias.insert(1.0, carpeta)
+            if carpeta != "":
+                self.texto_noticias.delete(1.0, "end")
+                self.texto_noticias.insert(1.0, carpeta)
         elif origin=="modelo":
             pathmodelo = filedialog.askopenfile(initialdir=self.path_inicial).name
-            self.texto_modelo.delete(1.0, "end")
-            self.texto_modelo.insert(1.0, pathmodelo)
+            if pathmodelo != "":
+                self.texto_modelo.delete(1.0, "end")
+                self.texto_modelo.insert(1.0, pathmodelo)
 
     def guardar_noticias_clasificadas_por_carpetas(self, dic_resultados: dict, ruta_antigua):
         carpeta = str(filedialog.askdirectory(initialdir=self.path_inicial))
@@ -166,6 +176,7 @@ class Clasificador_frame(ttk.Frame):
         ruta_modelo = self.texto_modelo.get(1.0, "end-1c")
         self.lista_noticias.delete(*self.lista_noticias.get_children())
         self.lista_noticias.focus(None)
+        self.resultados = None
 
         ruta_complementariaIDF_Wordlist = str(Path(ruta_modelo).parent.absolute())
         ruta_IDFlist = ruta_complementariaIDF_Wordlist + "\\IDFlist.txt"
@@ -254,7 +265,7 @@ class Clasificador_frame(ttk.Frame):
         canvas.get_tk_widget().pack(side=RIGHT, fill=BOTH)
 
         self.guardar_noticias_clasificadas_por_carpetas(self.resultados, ruta_noticias)
-    
+
     def mostrar_archivo(self):
         if self.lista_noticias.focus():
             # get archivo

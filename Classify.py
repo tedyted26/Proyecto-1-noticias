@@ -25,7 +25,7 @@ class Classify():
 
             # Create the matrix with the new news
             vectores = []
-            cl1 = time.time()
+
             paths = tn.getAllNewsUrlList(pathNoticias)[:50]
             for n, i in enumerate(paths):
                 try:
@@ -39,33 +39,26 @@ class Classify():
                     vectores.append(vectorNoticia)
                 except:
                     print(f"Error generando vector en archivo: {i[1]}")
-            cl2 = time.time()
+            
             self.matriz = []
 
             for v in vectores:
                 self.matriz = tn.addVectorToMatriz(self.matriz, v)
-            cl3 = time.time()
+            
             # create matrix tf idf with news
             matriz_tfidf = tn.tfidf.matrixToTFIDF(self.matriz, pathIDFlist, pathWordlist)
-            cl4 = time.time()
+
             # convert it into datafame
             self.df_with_name = tn.transformMatrizToPandasDataFrame(matriz_tfidf, pathWordlist)
             self.df_with_name.fillna(0, inplace=True)
-            cl5 = time.time()
+
             # save the original matrix for later
-            tn.saveMatrizToFile(self.matriz, "matrizUnkwnNews.txt")
-            cl6 = time.time()
-
-            print("1-2:", cl2-cl1)
-            print("3:", cl3 - cl2)
-            print("4:", cl4 - cl3)
-            print("5:", cl5 - cl4)
-            print("6:", cl6 - cl5)
-
+            # tn.saveMatrizToFile(self.matriz, "matrizUnkwnNews.txt")
+            
         # If we have a saved matrix but hasn't been imported
         elif len(self.matriz) == 0:
             # Import the saved matrix
-            self.matriz = tn.generarMatriz("matrizUnkwnNews.txt")
+            # self.matriz = tn.generarMatriz("matrizUnkwnNews.txt")
             # transform to tfidf
             m1_tf = tn.tfidf.matrixToTFIDF(self.matriz)
             # convert into dataframe
@@ -83,13 +76,7 @@ class Classify():
         
         df = self.df_with_name.drop(["odio_", "nombre_"], axis=1)
 
-        n_features = 0
         try:
-            n_features = model.n_features_in_
-        except:
-            n_features = model.coef_.shape[-1]
-
-        if n_features == len(df.columns):
             t0 = time.time()
             raw_resultados = model.predict(df)
             t1 = time.time()
@@ -101,7 +88,7 @@ class Classify():
                 fila += 1
 
             tiempo = round(t1-t0, 5)
-        else:
+        except:
             resultados = None      
         
         return resultados, tiempo
