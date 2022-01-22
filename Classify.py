@@ -53,12 +53,12 @@ class Classify():
             self.df_with_name.fillna(0, inplace=True)
 
             # save the original matrix for later
-            tn.saveMatrizToFile(self.matriz, "matrizUnkwnNews.txt")        
+            # tn.saveMatrizToFile(self.matriz, "matrizUnkwnNews.txt")        
             
         # If we have a saved matrix but hasn't been imported
         elif len(self.matriz) == 0:
             # Import the saved matrix
-            self.matriz = tn.generarMatriz("matrizUnkwnNews.txt")
+            # self.matriz = tn.generarMatriz("matrizUnkwnNews.txt")
             # transform to tfidf
             m1_tf = tn.tfidf.matrixToTFIDF(self.matriz)
             # convert into dataframe

@@ -130,7 +130,15 @@ class Clasificador_frame(ttk.Frame):
 
         # ver noticia
         self.boton_guardar = Button(self, text="Ver archivo seleccionado", command=self.mostrar_archivo)
-        self.boton_guardar.place(relx=0.25, rely=0.915, relwidth=0.2)
+        self.boton_guardar.place(relx=0.05, rely=0.915, relwidth=0.2)
+
+        # copiar/mover noticias en otro lado
+        self.boton_copiar = Button(self, text="Copiar noticias a...", command=self.guardar_noticias_clasificadas_por_carpetas)
+        self.boton_copiar.place(relx=0.34, rely=0.915, relwidth=0.15)
+
+        self.isMover = IntVar()
+        self.check_mover = Checkbutton(self, text='Mover en vez de copiar', variable=self.isMover, onvalue=True, offvalue=0)
+        self.check_mover.place(relx=0.5, rely=0.92)  
 
         # guardar resultados
         self.boton_guardar = Button(self, text="Guardar resultados como...", command=self.guardar_resultados)
@@ -149,6 +157,11 @@ class Clasificador_frame(ttk.Frame):
                 self.texto_modelo.delete(1.0, "end")
                 self.texto_modelo.insert(1.0, pathmodelo)
 
+    def guardar_noticias_clasificadas_por_carpetas(self):
+        if self.isMover.get():
+            print("mover")
+        else:
+            print("copiar")
 
     def clasificar_noticias(self):
         # recogemos los datos
