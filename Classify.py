@@ -3,6 +3,8 @@ import time
 import tratamientoNoticias as tn
 import os
 
+from sklearn import preprocessing
+
 class Classify():
     def __init__(self):
         self.pathNoticias = ''
@@ -75,7 +77,9 @@ class Classify():
         tiempo = 0
         
         df = self.df_with_name.drop(["odio_", "nombre_"], axis=1)
-
+        modelos_escalados = ["KNeighborsClassifier", "LogisticRegression", "SVC"]
+        if str(type(model).__name__) in modelos_escalados:
+            df = preprocessing.scale(df)
         try:
             t0 = time.time()
             raw_resultados = model.predict(df)
