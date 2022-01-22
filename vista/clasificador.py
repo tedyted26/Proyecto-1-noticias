@@ -154,6 +154,7 @@ class Clasificador_frame(ttk.Frame):
         ruta_noticias = self.texto_noticias.get(1.0, "end-1c")
         ruta_modelo = self.texto_modelo.get(1.0, "end-1c")
         self.lista_noticias.delete(*self.lista_noticias.get_children())
+        self.lista_noticias.focus(None)
 
         if ruta_noticias == "" or ruta_modelo == "" or not Path(ruta_noticias).exists() or not Path(ruta_modelo).exists():
             self.label_error.config(text = "Comprueba los campos. No se ha proporcionado una ruta correcta.")
