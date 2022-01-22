@@ -139,8 +139,8 @@ class Training:
         print('Average Accuracy: ', (resultados/10))
 
     def countProcessedNews(self):
-        noodio = (self.df.odio_ == '-1').sum()
-        odio = (self.df.odio_ == '1').sum()
+        noodio = (self.df.odio_ == -1).sum()
+        odio = (self.df.odio_ == 1).sum()
         return noodio, odio
 
 
