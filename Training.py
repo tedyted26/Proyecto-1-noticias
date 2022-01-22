@@ -43,8 +43,8 @@ class Training:
             self.pathOdio = pathOdio
             
             # Create the matrix with the new news
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1)
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, max_noticias=20)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1, max_noticias=20)
 
             # tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
@@ -76,7 +76,7 @@ class Training:
         if algorithm == 'arbol':
             model = tree.DecisionTreeClassifier()
         elif algorithm == 'knn':
-            model = KNeighborsClassifier(n_neighbors = 3, n_jobs = -1)
+            model = KNeighborsClassifier(n_neighbors = 2, n_jobs = -1)
         elif algorithm == 'nb':
             model = GaussianNB()
         elif algorithm == 'perceptron':

@@ -76,13 +76,7 @@ class Classify():
         
         df = self.df_with_name.drop(["odio_", "nombre_"], axis=1)
 
-        n_features = 0
         try:
-            n_features = model.n_features_in_
-        except:
-            n_features = model.coef_.shape[-1]
-
-        if n_features == len(df.columns):
             t0 = time.time()
             raw_resultados = model.predict(df)
             t1 = time.time()
@@ -94,7 +88,7 @@ class Classify():
                 fila += 1
 
             tiempo = round(t1-t0, 5)
-        else:
+        except:
             resultados = None      
         
         return resultados, tiempo

@@ -270,9 +270,14 @@ class Entrenador_frame(ttk.Frame):
             if f is None:
                 return
             carpeta_destino = Path(f.name).parent.absolute()
-            self.tr_o.saveModel(f.name, self.modelo_entrenado)
+            nombre_fichero = Path(f.name).name
+            carpeta_destino = Path.joinpath(carpeta_destino, nombre_fichero.replace(".pickle", ""))
+            os.mkdir(carpeta_destino)
+            self.tr_o.saveModel(Path.joinpath(carpeta_destino, nombre_fichero), self.modelo_entrenado)
             shutil.copy("IDFlist.txt", carpeta_destino)
             shutil.copy("diccionario.txt", carpeta_destino)
+            f.close()
+            os.remove(f.name)
             self.label_error.config(text = "Modelo guardado correctamente.")
 
         # si no, mensaje de error

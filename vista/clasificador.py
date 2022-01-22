@@ -140,12 +140,14 @@ class Clasificador_frame(ttk.Frame):
     def seleccionar_carpeta(self, origin):      
         if origin=="noticias":
             carpeta = filedialog.askdirectory(initialdir=self.path_inicial)
-            self.texto_noticias.delete(1.0, "end")
-            self.texto_noticias.insert(1.0, carpeta)
+            if carpeta != "":
+                self.texto_noticias.delete(1.0, "end")
+                self.texto_noticias.insert(1.0, carpeta)
         elif origin=="modelo":
             pathmodelo = filedialog.askopenfile(initialdir=self.path_inicial).name
-            self.texto_modelo.delete(1.0, "end")
-            self.texto_modelo.insert(1.0, pathmodelo)
+            if pathmodelo != "":
+                self.texto_modelo.delete(1.0, "end")
+                self.texto_modelo.insert(1.0, pathmodelo)
 
 
     def clasificar_noticias(self):
@@ -155,6 +157,7 @@ class Clasificador_frame(ttk.Frame):
         ruta_modelo = self.texto_modelo.get(1.0, "end-1c")
         self.lista_noticias.delete(*self.lista_noticias.get_children())
         self.lista_noticias.focus(None)
+        self.resultados = None
 
         ruta_complementariaIDF_Wordlist = str(Path(ruta_modelo).parent.absolute())
         ruta_IDFlist = ruta_complementariaIDF_Wordlist + "\\IDFlist.txt"
