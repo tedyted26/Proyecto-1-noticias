@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import sys
 import os
+from datetime import datetime
 from tkinter import filedialog
 from pathlib import Path
 from functools import partial
@@ -135,10 +136,11 @@ class Clasificador_frame(ttk.Frame):
         self.boton_guardar.place(relx=0.05, rely=0.915, relwidth=0.2)
 
         # copiar/mover noticias en otro lado
+
         self.boton_copiar = Button(self, text="Copiar noticias a...", command=self.guardar_noticias_clasificadas_por_carpetas)
         self.boton_copiar.place(relx=0.34, rely=0.915, relwidth=0.15)
 
-        self.isMover = IntVar()
+        self.isMover = BooleanVar()
         self.check_mover = Checkbutton(self, text='Mover en vez de copiar', variable=self.isMover, onvalue=True, offvalue=0)
         self.check_mover.place(relx=0.5, rely=0.92)
 
@@ -159,15 +161,27 @@ class Clasificador_frame(ttk.Frame):
                 self.texto_modelo.delete(1.0, "end")
                 self.texto_modelo.insert(1.0, pathmodelo)
 
-    def guardar_noticias_clasificadas_por_carpetas(self, dic_resultados: dict, ruta_antigua):
+    def guardar_noticias_clasificadas_por_carpetas(self):
+        now = datetime.now()
+        current_time = now.strftime("%d-%m-%Y_%H_%M_%S")
+
+        dic_resultados = self.resultados
         carpeta = str(filedialog.askdirectory(initialdir=self.path_inicial))
+        nueva_carpeta = carpeta + "/" + current_time
+        if not Path(nueva_carpeta).exists():
+            os.mkdir(nueva_carpeta)
+        ruta_antigua = self.texto_noticias.get(1.0, "end-1c")
         for key, value in dic_resultados.items():
             tipo = "Pred_Odio" if value == 1 else "Pred_No_Odio"
             archivo_a_copiar = str(ruta_antigua)+"/"+key
-            nueva_carpeta = carpeta+"/"+ tipo
-            if not Path(nueva_carpeta).exists():
-                os.mkdir(nueva_carpeta)
-            shutil.copy(archivo_a_copiar, nueva_carpeta)
+
+            carpeta_tipo = nueva_carpeta + "/" + tipo
+            if not Path(carpeta_tipo).exists():
+                os.mkdir(carpeta_tipo)
+            if self.isMover.get():
+                shutil.move(archivo_a_copiar, carpeta_tipo)
+            else:
+                shutil.copy(archivo_a_copiar, carpeta_tipo)
 
     def clasificar_noticias(self):
         # recogemos los datos
@@ -264,7 +278,7 @@ class Clasificador_frame(ttk.Frame):
         canvas = FigureCanvasTkAgg(fig, self.grafico)
         canvas.get_tk_widget().pack(side=RIGHT, fill=BOTH)
 
-        self.guardar_noticias_clasificadas_por_carpetas(self.resultados, ruta_noticias)
+        # self.guardar_noticias_clasificadas_por_carpetas(self.resultados, ruta_noticias)
 
     def mostrar_archivo(self):
         if self.lista_noticias.focus():
