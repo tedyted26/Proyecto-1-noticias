@@ -1,8 +1,7 @@
-import sys
 from tkinter import *
 from tkinter import ttk
-from entrenador import Entrenador_frame
-from clasificador import Clasificador_frame
+from vista.entrenador import Entrenador_frame
+from vista.clasificador import Clasificador_frame
 
 class App_clasificador(Tk):
     def __init__(self, *args, **kwargs):
@@ -50,15 +49,3 @@ class App_clasificador(Tk):
     def show_frame(self, page_name):
         frame = self.frames[page_name]
         frame.tkraise() 
-
-#insertar menú en la ventana
-app = App_clasificador()
-
-def on_closing():
-    app.destroy()
-    sys.exit()
-
-app.protocol("WM_DELETE_WINDOW", on_closing)
-
-#visualizar
-app.mainloop()
