@@ -43,8 +43,8 @@ class Training:
             self.pathOdio = pathOdio
             
             # Create the matrix with the new news
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, 10)
-            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1, 10)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathNoOdio, self.matriz, -1, 40)
+            self.matriz = tn.addVectoresToMatrizByFolderPath(pathOdio, self.matriz, 1, 40)
 
             tn.saveMatrizToFile(self.matriz, "matriz.txt")
             
@@ -64,8 +64,9 @@ class Training:
             self.df = tn.transformMatrizToPandasDataFrame(m1_tf)
             self.df.fillna(0, inplace=True)
             df2 = self.df.drop("nombre_", axis=1)
-            self.X = self.df2.drop("odio_", axis=1)
-            self.y = self.df2['odio_']
+            self.X = df2.drop("odio_", axis=1)
+            self.y = df2['odio_']
+        
 
 
     def train(self, algorithm: str, pathNoOdio: str, pathOdio: str):
@@ -138,14 +139,17 @@ class Training:
         print('Average Accuracy: ', (resultados/10))
 
     def countProcessedNews(self):
-        noodio = self.df[(self.df['odio_']==-1)].count()
-        odio = self.df[(self.df['odio_']==1)].count()
+        noodio = (self.df.odio_ == '-1').sum()
+        odio = (self.df.odio_ == '1').sum()
         return noodio, odio
 
 
 # Ejemplo
 '''training = Training()
-model, cm = training.train('nb', '/Noticias/NoOdio', '/Noticias/Odio')
-training.graphConfusionMatrix(cm)'''
+training.pathNoOdio = '/Users/sol/Documents/UEM_3ero/ProyectoI/Proyecto-1-noticias/Noticias/NoOdio'
+training.pathOdio = '/Users/sol/Documents/UEM_3ero/ProyectoI/Proyecto-1-noticias/Noticias/Odio'
+model, cm = training.train('nb', '/Users/sol/Documents/UEM_3ero/ProyectoI/Proyecto-1-noticias/Noticias/NoOdio', '/Users/sol/Documents/UEM_3ero/ProyectoI/Proyecto-1-noticias/Noticias/Odio')
+#training.graphConfusionMatrix(cm)
+print(training.countProcessedNews())'''
 
 
