@@ -34,6 +34,8 @@ class Training:
 
     def checkPaths(self, pathNoOdio, pathOdio, num_max):
         # If we haven't created a matrix with these paths
+        if num_max == "" or num_max == 0:
+            num_max = -1
         if (pathNoOdio != self.pathNoOdio or pathOdio != self.pathOdio or num_max != self.num_max):
             self.matriz = []
             

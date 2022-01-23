@@ -172,7 +172,7 @@ class Entrenador_frame(ttk.Frame):
         indice_algoritmo = self.combobox_algoritmos.current()
         num_max = self.texto_maximo.get(1.0, "end-1c")
 
-        if type(num_max) is not int:
+        if type(num_max) is not int and num_max != "":
             try:
                 num_max = int(num_max)
             except:
