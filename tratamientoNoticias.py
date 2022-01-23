@@ -10,7 +10,7 @@ import pandas as pd
 
 import time
 
-rutaListaParada = "listaParada.txt"
+rutaListaParada = "lista1.txt"
 nlp = spacy.load('es_core_news_sm')
 
 # Metodos de Tratamiento de ficheros
@@ -24,8 +24,6 @@ def tokenizacion(texto):
 
 
 def tratamientoBasico(tokens):
-    caracteres = "0123456789ºª!·$%&/()=|@#~€¬'?¡¿`+^*[]´¨}{,.-;:_<>\n \""
-
     listaTratada = []
     for token in tokens:
         a = re.sub(r"[^a-zA-Zá-úÁ-Ú_]", "", token)
@@ -36,7 +34,7 @@ def tratamientoBasico(tokens):
     return listaTratada
 
 def listaParada(tokens):
-    listaParada = tratamientoBasico(tokenizacion(rutaListaParada))
+    listaParada = tratamientoBasico(tokenizacion(leerFichero(rutaListaParada)))
     listaDepurada = []
     for token in tokens:
         encontrado = False
